@@ -76,7 +76,7 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <div class="viewcode-block" id="excitation"><a class="viewcode-back" href="../../../generated/src.measure.segmentation.html#src.measure.segmentation.excitation">[docs]</a><span class="nd">@return_dict</span>
-<span class="k">def</span> <span class="nf">excitation</span><span class="p">(</span><span class="n">save</span><span class="p">,</span><span class="n">DIFF</span><span class="p">,</span><span class="n">outline</span><span class="p">,</span><span class="n">THRESH</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">excitation</span><span class="p">(</span><span class="n">savedir</span><span class="p">,</span><span class="n">DIFF</span><span class="p">,</span><span class="n">outline</span><span class="p">,</span><span class="n">THRESH</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    pixels in DIFF above THRESH is EXC, the first frame to cross the threshold is NEWEXC</span>
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -91,7 +91,7 @@
     <span class="n">NEWEXC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">EXC</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="nb">bool</span><span class="p">)</span>
     <span class="n">NEWEXC</span><span class="p">[</span><span class="n">nzzs</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">EXC</span><span class="p">[</span><span class="n">nzzs</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span>
     
-    <span class="k">return</span> <span class="n">save</span><span class="p">,</span><span class="n">EXC</span><span class="p">,</span><span class="n">NEWEXC</span><span class="p">,</span><span class="n">outline</span></div>
+    <span class="k">return</span> <span class="n">savedir</span><span class="p">,</span><span class="n">EXC</span><span class="p">,</span><span class="n">NEWEXC</span><span class="p">,</span><span class="n">outline</span></div>
 
 <div class="viewcode-block" id="group_diff"><a class="viewcode-back" href="../../../generated/src.measure.segmentation.html#src.measure.segmentation.group_diff">[docs]</a><span class="nd">@return_dict</span>
 <span class="k">def</span> <span class="nf">group_diff</span><span class="p">(</span><span class="n">bc</span><span class="p">,</span><span class="n">outline</span><span class="p">,</span><span class="n">tRes</span><span class="p">):</span>
@@ -100,7 +100,7 @@
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bc</span><span class="p">)</span>
     <span class="kn">from</span> <span class="nn">measure.preprocess</span> <span class="kn">import</span> <span class="n">divide</span>
-    <span class="n">groupsize</span> <span class="o">=</span> <span class="n">divide</span><span class="p">(</span><span class="mf">1.2</span><span class="p">,</span><span class="n">tRes</span><span class="p">)</span><span class="c1"># group consecutive frames so that each group is 1.2 sconds</span>
+    <span class="n">groupsize</span> <span class="o">=</span> <span class="mf">1.2</span> <span class="o">//</span> <span class="n">tRes</span><span class="c1"># group consecutive frames so that each group is 1.2 sconds</span>
     <span class="n">RAW</span><span class="p">,</span><span class="n">zgroups</span> <span class="o">=</span> <span class="n">grouped_avg</span><span class="p">(</span><span class="n">bc</span><span class="p">,</span><span class="n">groupsize</span><span class="p">)</span>
     <span class="n">RAW</span> <span class="o">=</span> <span class="n">RAW</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">)</span>
 

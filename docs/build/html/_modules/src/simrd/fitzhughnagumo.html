@@ -76,10 +76,18 @@
 
 <div class="viewcode-block" id="FitzhughNagumo"><a class="viewcode-back" href="../../../generated/src.simrd.fitzhughnagumo.html#src.simrd.fitzhughnagumo.FitzhughNagumo">[docs]</a><span class="k">class</span> <span class="nc">FitzhughNagumo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Fitzhugh-Nagumo neural model</span>
+
 <span class="sd">    .. math::</span>
 
 <span class="sd">        \frac{du}{dt} = u-\frac{u^{3}}{3}-v+I\\</span>
 <span class="sd">        \frac{dv}{dt} = \frac{1}{\tau}(u+a-b \cdot v)</span>
+
+<span class="sd">    [u,v]: [Membrane potential, Recovery variable]</span>
+<span class="sd">    a, b (float): Parameters.</span>
+<span class="sd">    tau (float): Time scale.</span>
+<span class="sd">    t (float): Time (Not used: autonomous system)</span>
+<span class="sd">    I (float): Constant stimulus current. </span>
 
 <span class="sd">    Example::</span>
 
@@ -125,6 +133,8 @@
 <span class="sd">        calculate temporal derivative of v at (u,v)</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">u</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">*</span><span class="n">v</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">tau</span></div></div>
+
+
 </pre></div>
 
            </div>

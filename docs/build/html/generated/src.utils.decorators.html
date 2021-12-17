@@ -96,21 +96,47 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="src.utils.decorators.iterate">
 <span class="sig-prename descclassname"><span class="pre">src.utils.decorators.</span></span><span class="sig-name descname"><span class="pre">iterate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embryos</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/utils/decorators.html#iterate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.utils.decorators.iterate" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.utils.decorators.repeat">
-<span class="sig-prename descclassname"><span class="pre">src.utils.decorators.</span></span><span class="sig-name descname"><span class="pre">repeat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">embryos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/utils/decorators.html#repeat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.utils.decorators.repeat" title="Permalink to this definition"></a></dt>
-<dd><p>use as decorator (nested decorator)
-run the decorated function “func” for each value in IDs and save the return of “func” in “result” as a dictionary</p>
+<dd><p>apply func to each embryo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> (<em>function</em>) – a function that takes <code class="docutils literal notranslate"><span class="pre">phenotype</span></code> and <code class="docutils literal notranslate"><span class="pre">ID</span></code> as the first two arguments with additional positional and/or keyword arguments</p></li>
+<li><p><strong>embryos</strong> (<em>pandas.DataFrame</em>) – each line specifies the <code class="docutils literal notranslate"><span class="pre">phenotype</span></code> , <code class="docutils literal notranslate"><span class="pre">ID</span></code> and other information about an embryo</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">{ID:func(phenotype,ID,*args,**kwargs)}</span></code></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.utils.decorators.return_dict">
 <span class="sig-prename descclassname"><span class="pre">src.utils.decorators.</span></span><span class="sig-name descname"><span class="pre">return_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/utils/decorators.html#return_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.utils.decorators.return_dict" title="Permalink to this definition"></a></dt>
-<dd><p>use as decorator for “func”
-return variables as dictionary
-save dictionary as .npy if func returns “save”</p>
+<dd><p>convert (save) returned variables to a dictionary, when used as a decorator for <code class="docutils literal notranslate"><span class="pre">func</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>func</strong> (<em>function</em>) – the function to decorate</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">{'var0':var0,</span> <span class="pre">'var1':var1}</span></code></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>When decorated, the following function returns and saves <code class="docutils literal notranslate"><span class="pre">{'img':img,</span> <span class="pre">'imr':imr}</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@return_dict</span>
+<span class="k">def</span> <span class="nf">read_raw</span><span class="p">(</span><span class="n">savedir</span><span class="p">,</span> <span class="n">dir_raw</span><span class="p">,</span> <span class="n">ID</span><span class="p">,</span> <span class="n">LabelR</span><span class="p">,</span> <span class="n">tRes</span><span class="p">,</span> <span class="n">nEnd</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="k">return</span> <span class="n">img</span><span class="p">,</span> <span class="n">imr</span>
+</pre></div>
+</div>
+<p>If func also returns <code class="docutils literal notranslate"><span class="pre">savedir</span></code>, the function returns <code class="docutils literal notranslate"><span class="pre">{'savedir':savedir,</span> <span class="pre">'img':img,</span> <span class="pre">'imr':imr}</span></code>, which is then saved the dictionary as <code class="docutils literal notranslate"><span class="pre">ID.npy</span></code> at savedir. The last level folder has the same name as <code class="docutils literal notranslate"><span class="pre">func</span></code>.</p>
 </dd></dl>
 
 </section>

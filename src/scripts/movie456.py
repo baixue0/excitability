@@ -1,8 +1,8 @@
-import sys
-sys.path.insert(0, "..")# Adds higher directory to python modules path.
+import sys,os
+sys.path.insert(0, os.path.abspath(os.path.join(".")))
 
 from utils.path_io import *
-from utils.decorators import repeat
+from utils.decorators import iterate
 global result
 
 def colorbar5(fig,cbar):
@@ -50,43 +50,41 @@ def fademask(stk,msk,N=5):
         zs = np.arange(z-N,z+1)
         for zz in zs:
             stk[z,msk[zz]] = linearinterpcolor(zz-zs[0],0,zs[-1]-zs[0],tuple([200/255]*3),tuple([0.3]*3))
+def movie456(phenotype,ID):
+    dir_thresh = str(0.4)
+    result_excitation = load_dict(pjoin([dir_out,dir_thresh,'excitation',ID]))
+    NMAX = 100
+    EXC,NEWEXC = result_excitation['EXC'][:NMAX],result_excitation['NEWEXC'][:NMAX]
+    from measure.contour import findContours
+    blobs = findContours(EXC,minarea=2**2)
+    from measure.link import connected_components
+    blobs, graph, cc, area = connected_components(blobs,example=True)
+    
+    stk456,title456,cbar456 = {},{},{}
+    for i,(drawstkfunc,colorbarfunc) in enumerate([(drawstk4,colorbar4),(drawstk5,colorbar5),(drawstk6,colorbar6)]):#
+        if i==2:
+            input = load_dict(pjoin([dir_out,'stepGroupDiff',ID]))
+            DIFF = input['imr']['DIFF'][:100]
+            stk,cbar = drawstkfunc(DIFF,blobs,EXC.shape)
+            fademask(stk,NEWEXC,N=3)
+            stk = stk[4:]
+        else:
+            stk,cbar = drawstkfunc(blobs,EXC.shape)
+            stk = stk[:-5]
+        from movie import rotate
+        stk = rotate(pjoin([dir_data,directories['outline'],'poly-'+ID+'.tif']),stk)
+        from movie import create_title
+        from plot import legends
+        title = create_title(stk.shape,legends[phenotype][0])
+        stk456[i+4],title456[i+4] = stk,title
+        if ID=='20190524_7':
+            from plot import figure
+            cbar456[i+4] = figure(pjoin([dir_out,'temp']),func=colorbarfunc,funcdata=[cbar],figsize=(1.4,1.7),imformat='.png')
+    return stk456,title456,cbar456
 
 if __name__ == "__main__":
     embryos_example = embryos.loc[['20190524_7','20190803_19','20190729_12']]
-    result = {}
-    @repeat(embryos_example,result,shuffle=False)
-    def movie456(phenotype,ID):
-        dir_thresh = str(0.4)
-        result_excitation = load_dict(pjoin([dir_out,dir_thresh,'excitation',ID]))
-        NMAX = 100
-        EXC,NEWEXC = result_excitation['EXC'][:NMAX],result_excitation['NEWEXC'][:NMAX]
-        from measure.contour import findContours
-        blobs = findContours(EXC,minarea=2**2)
-        from measure.link import connected_components
-        blobs, graph, cc, area = connected_components(blobs,example=True)
-        
-        stk456,title456,cbar456 = {},{},{}
-        for i,(drawstkfunc,colorbarfunc) in enumerate([(drawstk4,colorbar4),(drawstk5,colorbar5),(drawstk6,colorbar6)]):#
-            if i==2:
-                input = load_dict(pjoin([dir_out,'stepGroupDiff',ID]))
-                DIFF = input['imr']['DIFF'][:100]
-                stk,cbar = drawstkfunc(DIFF,blobs,EXC.shape)
-                fademask(stk,NEWEXC,N=3)
-                stk = stk[4:]
-            else:
-                stk,cbar = drawstkfunc(blobs,EXC.shape)
-                stk = stk[:-5]
-            from movie import rotate
-            stk = rotate(pjoin([dir_data,directories['outline'],'poly-'+ID+'.tif']),stk)
-            from movie import create_title
-            from plot import legends
-            title = create_title(stk.shape,legends[phenotype][0])
-            stk456[i+4],title456[i+4] = stk,title
-            if ID=='20190524_7':
-                from plot import figure
-                cbar456[i+4] = figure(pjoin([dir_out,'temp']),func=colorbarfunc,funcdata=[cbar],figsize=(1.4,1.7),imformat='.png')
-        return stk456,title456,cbar456
-    movie456()
+    result = iterate(movie456,embryos_example,result=result,shuffle=False)
     from movie import boarder
     for movieid in [4,5,6]:
         bottom = np.dstack([boarder(result[ID][0][movieid],(0,0,2,2),padcolor=(255,255,255)) for ID in embryos_example.index])
@@ -110,3 +108,4 @@ if __name__ == "__main__":
         tosave = np.dstack([left,right])
         tosave = stk_upsizexy(tosave,2)
         saveMP4(pjoin([dir_out,'images',['movie',str(movieid)]]), tosave, 20)
+

@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def findContours(exc,minarea):
     '''
     detect contour of connected pixels whose area is larger than minarea

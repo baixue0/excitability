@@ -2,7 +2,7 @@ from utils.decorators import return_dict
 import numpy as np
 
 @return_dict
-def excitation(save,DIFF,outline,THRESH):
+def excitation(savedir,DIFF,outline,THRESH):
     '''
     pixels in DIFF above THRESH is EXC, the first frame to cross the threshold is NEWEXC
     '''
@@ -17,7 +17,7 @@ def excitation(save,DIFF,outline,THRESH):
     NEWEXC = np.zeros(EXC.shape,bool)
     NEWEXC[nzzs[1:]] = np.diff(EXC[nzzs].astype(int),axis=0)>0
     
-    return save,EXC,NEWEXC,outline
+    return savedir,EXC,NEWEXC,outline
 
 @return_dict
 def group_diff(bc,outline,tRes):
@@ -26,7 +26,7 @@ def group_diff(bc,outline,tRes):
     '''
     N = len(bc)
     from measure.preprocess import divide
-    groupsize = divide(1.2,tRes)# group consecutive frames so that each group is 1.2 sconds
+    groupsize = 1.2 // tRes# group consecutive frames so that each group is 1.2 sconds
     RAW,zgroups = grouped_avg(bc,groupsize)
     RAW = RAW.astype(np.uint16)
 

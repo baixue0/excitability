@@ -1,15 +1,35 @@
-from utils.path_io import pjoin,divide,pexists
+from utils.path_io import pjoin,pexists
 from utils.decorators import return_dict
 
 @return_dict
-def read_raw(save, dir_raw, ID, LabelR, tRes, nEnd):
-    '''
-    read raw imagestack for both channels
+def read_raw(savedir, dir_raw, ID, LabelR, tRes, nEnd):
+    """read raw imagestack
 
-    filename should startwith embryo ID and end with channel name 'G' or 'R'
-    
-    write time projection of green channel to outline directory
-    '''
+    raw tif files are located in ``dir_raw``, start with ``ID``, and end with ``G`` or ``R``.
+
+    refer to :func:`src.utils.decorators.return_dict` for how to use the decorator ``@return_dict``
+
+    Parameters
+    ----------
+    savedir : list of str
+        the directory to save the output as a dictionary
+
+    dir_raw : str
+        directory of raw tif files
+
+    Returns
+    -------
+    savedir : list of str
+        same as input savedir
+
+    img : np.array((T,X,Y))
+        cropped green channel image stack
+
+    imr : np.array((T,X,Y))
+        cropped red channel image stack
+
+    """
+
     from skimage import io
 
     # find raw tif in embryo directory
@@ -17,7 +37,7 @@ def read_raw(save, dir_raw, ID, LabelR, tRes, nEnd):
     rawfname = lambda channel: [pjoin([dir_raw,fname]) for fname in os.listdir(dir_raw) if fname.startswith(ID) and fname.endswith(channel+'.tif')]
     
     # determine number of frames for 1.2 seconds
-    groupsize = divide(1.2,tRes)
+    groupsize = 1.2 // tRes
 
     # read
     img = io.imread(rawfname('G')[0])[2*groupsize:nEnd]# skip the first 2.4 seconds
@@ -25,12 +45,18 @@ def read_raw(save, dir_raw, ID, LabelR, tRes, nEnd):
     if not LabelR=='None':
         imr = io.imread(rawfname('R')[0])[2*groupsize:nEnd]
 
-    return save, img, imr
+    return savedir, img, imr
 
 def read_outline(fname_outline):
-    '''
-    read outline of embryo
-    '''
+    """ read outline of embryo
+
+    Returns
+    -------
+    outline : np.array((X,Y),dtype=bool)
+        whether each pixel is in embryo 
+
+    """
+
     if not pexists(fname_outline):
         return
     from skimage import io
@@ -39,10 +65,15 @@ def read_outline(fname_outline):
 
 
 def channel_list(ID,embryos):
-    '''
-    if the red channel of embryo is LifeAct, return ['img','imr']
-    else, return ['img']
-    '''
+    """ helper function for :func:`src.scripts.quant.stepGroupDiff`
+
+    Returns
+    -------
+    channels : list of str
+        ``['img','imr']`` or ``['img']`` depending on whether the red channel is LifeAct
+
+    """
+
     channels = ['img']
     if embryos.loc[ID]['LabelR']=='LA':
         channels.append('imr')

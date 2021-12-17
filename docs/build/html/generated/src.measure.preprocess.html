@@ -102,22 +102,53 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="src.measure.preprocess.channel_list">
 <span class="sig-prename descclassname"><span class="pre">src.measure.preprocess.</span></span><span class="sig-name descname"><span class="pre">channel_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embryos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/preprocess.html#channel_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.preprocess.channel_list" title="Permalink to this definition"></a></dt>
-<dd><p>if the red channel of embryo is LifeAct, return [‘img’,’imr’]
-else, return [‘img’]</p>
+<dd><p>helper function for <a class="reference internal" href="src.scripts.quant.html#src.scripts.quant.stepGroupDiff" title="src.scripts.quant.stepGroupDiff"><code class="xref py py-func docutils literal notranslate"><span class="pre">src.scripts.quant.stepGroupDiff()</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>channels</strong> – <code class="docutils literal notranslate"><span class="pre">['img','imr']</span></code> or <code class="docutils literal notranslate"><span class="pre">['img']</span></code> depending on whether the red channel is LifeAct</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list of str</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.measure.preprocess.read_outline">
 <span class="sig-prename descclassname"><span class="pre">src.measure.preprocess.</span></span><span class="sig-name descname"><span class="pre">read_outline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname_outline</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/preprocess.html#read_outline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.preprocess.read_outline" title="Permalink to this definition"></a></dt>
 <dd><p>read outline of embryo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>outline</strong> – whether each pixel is in embryo</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>np.array((X,Y),dtype=bool)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.measure.preprocess.read_raw">
-<span class="sig-prename descclassname"><span class="pre">src.measure.preprocess.</span></span><span class="sig-name descname"><span class="pre">read_raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">save</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir_raw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LabelR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tRes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nEnd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/preprocess.html#read_raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.preprocess.read_raw" title="Permalink to this definition"></a></dt>
-<dd><p>read raw imagestack for both channels</p>
-<p>filename should startwith embryo ID and end with channel name ‘G’ or ‘R’</p>
-<p>write time projection of green channel to outline directory</p>
+<span class="sig-prename descclassname"><span class="pre">src.measure.preprocess.</span></span><span class="sig-name descname"><span class="pre">read_raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savedir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir_raw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LabelR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tRes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nEnd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/preprocess.html#read_raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.preprocess.read_raw" title="Permalink to this definition"></a></dt>
+<dd><p>read raw imagestack</p>
+<p>raw tif files are located in <code class="docutils literal notranslate"><span class="pre">dir_raw</span></code>, start with <code class="docutils literal notranslate"><span class="pre">ID</span></code>, and end with <code class="docutils literal notranslate"><span class="pre">G</span></code> or <code class="docutils literal notranslate"><span class="pre">R</span></code>.</p>
+<p>refer to <a class="reference internal" href="src.utils.decorators.html#src.utils.decorators.return_dict" title="src.utils.decorators.return_dict"><code class="xref py py-func docutils literal notranslate"><span class="pre">src.utils.decorators.return_dict()</span></code></a> for how to use the decorator <code class="docutils literal notranslate"><span class="pre">&#64;return_dict</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>savedir</strong> (<em>list of str</em>) – the directory to save the output as a dictionary</p></li>
+<li><p><strong>dir_raw</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – directory of raw tif files</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>savedir</strong> (<em>list of str</em>) – same as input savedir</p></li>
+<li><p><strong>img</strong> (<em>np.array((T,X,Y))</em>) – cropped green channel image stack</p></li>
+<li><p><strong>imr</strong> (<em>np.array((T,X,Y))</em>) – cropped red channel image stack</p></li>
+</ul>
+</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>

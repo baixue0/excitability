@@ -47,8 +47,6 @@ def step(xedges,y):#xedges.shape is (N+1,); y.shape is (N,)
     result += [(xedges[N-1],y[N-1]),(xedges[N],y[N-1])]
     return np.array(result).T
 
-histfunc = lambda x,bins: np.histogram(x,bins=bins,density=True)[0]
-
 def setlogy(ax,ylim):
     ax.set(yscale="log",ylabel='Fraction')
     locmin = matplotlib.ticker.LogLocator(base=10.0,subs=(0.2,0.4,0.6,0.8),numticks=5)

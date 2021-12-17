@@ -41,9 +41,6 @@ import numpy as np
 #: read pickled dictionary
 load_dict = lambda path: np.load(path+'.npy',allow_pickle=True).item()
 
-#: floor of a/b as integer
-divide = lambda a,b: int(np.floor(a/b))
-
 import pandas as pd
 directories = pd.read_csv(pjoin([dir_data,'directories.csv'])).set_index('name')['directory']
 

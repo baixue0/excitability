@@ -1,7 +1,7 @@
 import sys,os
 sys.path.insert(0, os.path.abspath(os.path.join(".")))
 from utils.path_io import *
-from utils.decorators import iterate,repeat,return_dict
+from utils.decorators import iterate,return_dict
 
 """pipeline to batch measure embryo"""
 

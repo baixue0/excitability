@@ -1,14 +1,14 @@
-Overview your project files and folders
-------------------------------------------
+Project files and folders
+---------------------------
 
 Generate FileTree 
 ^^^^^^^^^^^^^^^^^^
 
-go to directory ``~/Documents/GitHub``
+go to directory ``~/Documents/GitHub/excitability/docs/source``
 
 .. code-block:: console
 
-    python -u FileTreeMaker.py -r excitability -o excitability/FileTree.txt -xf env -xn .pyc .ipynb_checkpoints .ipynb .DS_Store __pycache__ build generated
+    python -u FileTreeMaker.py -r ../../../excitability -xf env -xn .pyc .ipynb_checkpoints .ipynb .DS_Store __pycache__ build generated .git
 
 FileTree 
 ^^^^^^^^^^^^^^^^^^
@@ -16,19 +16,23 @@ FileTree
 .. code-block:: none
 
    [excitability]
-   ├──FileTree.txt
+   ├──.readthedocs.yml
    ├──README.rst
    ├──__int__.py
    ├──[docs]
+   │   ├──.nojekyll
    │   ├──Makefile
+   │   ├──_config.yml
+   │   ├──index.html
    │   ├──make.bat
+   │   ├──requirements.txt
    │   └──[source]
+   │       ├──FileTreeMaker.py
    │       ├──conf.py
    │       ├──index.rst
    │       ├──pyenv.rst
    │       ├──sphinx.rst
    │       └──structure.rst
-   ├──docs.html
    └──[src]
        ├──__int__.py
        ├──[measure]
