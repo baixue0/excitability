@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.scripts.quant &mdash; pulsatile RhoA dynamics 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> pulsatile RhoA dynamics
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pyenv.html">Python virtual environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sphinx.html">Sphinx autodocumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../structure.html">Overview your project files and folders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../generated/modules.html">Modules</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pulsatile RhoA dynamics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>src.scripts.quant</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for src.scripts.quant</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">os</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)))</span>
+<span class="kn">from</span> <span class="nn">utils.path_io</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">utils.decorators</span> <span class="kn">import</span> <span class="n">iterate</span><span class="p">,</span><span class="n">repeat</span><span class="p">,</span><span class="n">return_dict</span>
+
+<span class="sd">&quot;&quot;&quot;pipeline to batch measure embryo&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="selectEmbryo"><a class="viewcode-back" href="../../../generated/src.scripts.quant.html#src.scripts.quant.selectEmbryo">[docs]</a><span class="k">def</span> <span class="nf">selectEmbryo</span><span class="p">(</span><span class="n">embryos</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">embryos</span><span class="p">[</span><span class="s1">&#39;LabelG&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;ROK&#39;</span><span class="p">,</span> <span class="c1"># green channel label is ROK</span>
+               <span class="n">embryos</span><span class="p">[</span><span class="s1">&#39;phenotype&#39;</span><span class="p">]</span><span class="o">!=</span><span class="s1">&#39;pfn&#39;</span><span class="p">,</span> <span class="c1"># phenotype is not pfn</span>
+               <span class="n">embryos</span><span class="p">[</span><span class="s1">&#39;note&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;SD&#39;</span><span class="p">),</span><span class="c1"># image is acquired with spinning disk microscopy</span>
+               <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">embryos</span><span class="p">[</span><span class="s1">&#39;nEnd&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">embryos</span><span class="p">[</span><span class="s1">&#39;tRes&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">130</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;long&#39;</span><span class="p">),</span><span class="c1"># duration of image stack is longer than 130 seconds</span>
+               <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">embryos</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;2021&#39;</span><span class="p">)),</span><span class="n">index</span><span class="o">=</span><span class="n">embryos</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;before2021&#39;</span><span class="p">),</span><span class="c1"># excludes embryos imaged in 2021</span>
+              <span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="c1"># stack colums left to right</span>
+    <span class="n">embryosquant</span> <span class="o">=</span> <span class="n">embryos</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span><span class="c1"># select rows that satisfy all conditions above</span>
+    <span class="k">return</span> <span class="n">embryosquant</span></div>
+
+<div class="viewcode-block" id="stepRaw"><a class="viewcode-back" href="../../../generated/src.scripts.quant.html#src.scripts.quant.stepRaw">[docs]</a><span class="k">def</span> <span class="nf">stepRaw</span><span class="p">(</span><span class="n">phenotype</span><span class="p">,</span><span class="n">ID</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    read raw 16-bit tif files</span>
+
+<span class="sd">    save as python dictionary for each embryo</span>
+
+<span class="sd">    export mean projection of green channel as tiff files</span>
+
+<span class="sd">    label outline of embryo in ImageJ manually and save as binary masks</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="kn">from</span> <span class="nn">measure.preprocess</span> <span class="kn">import</span> <span class="n">read_raw</span>
+    <span class="n">dir_raw</span> <span class="o">=</span> <span class="n">pjoin</span><span class="p">([</span><span class="n">dir_data</span><span class="p">,</span><span class="n">directories</span><span class="p">[</span><span class="s1">&#39;rawtif&#39;</span><span class="p">],</span><span class="n">phenotype</span><span class="p">,</span><span class="n">ID</span><span class="p">])</span>
+    <span class="n">result_read_raw</span> <span class="o">=</span> <span class="n">read_raw</span><span class="p">([</span><span class="n">dir_out</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">ID</span><span class="p">],</span><span class="n">dir_raw</span><span class="p">,</span><span class="n">ID</span><span class="p">,</span><span class="n">embryos</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ID</span><span class="p">][</span><span class="s1">&#39;LabelR&#39;</span><span class="p">],</span><span class="n">embryos</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ID</span><span class="p">][</span><span class="s1">&#39;tRes&#39;</span><span class="p">],</span><span class="n">embryos</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ID</span><span class="p">][</span><span class="s1">&#39;nEnd&#39;</span><span class="p">])</span><span class="c1">#read raw 16-bit tif files</span>
+    <span class="kn">import</span> <span class="nn">tifffile</span>
+    <span class="n">tifffile</span><span class="o">.</span><span class="n">imsave</span><span class="p">(</span><span class="n">pjoin</span><span class="p">([</span><span class="n">dir_data</span><span class="p">,</span><span class="n">directories</span><span class="p">[</span><span class="s1">&#39;outline&#39;</span><span class="p">],</span><span class="n">ID</span><span class="o">+</span><span class="s1">&#39;.tif&#39;</span><span class="p">]),</span><span class="n">result_read_raw</span><span class="p">[</span><span class="s1">&#39;img&#39;</span><span class="p">][:</span><span class="mi">100</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">))</span><span class="c1">#save as python dictionary for each embryo</span>
+    <span class="k">return</span> <span class="n">result_read_raw</span></div>
+
+<div class="viewcode-block" id="stepGroupDiff"><a class="viewcode-back" href="../../../generated/src.scripts.quant.html#src.scripts.quant.stepGroupDiff">[docs]</a><span class="k">def</span> <span class="nf">stepGroupDiff</span><span class="p">(</span><span class="n">phenotype</span><span class="p">,</span><span class="n">ID</span><span class="p">,</span><span class="n">run</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    read binary mask of the outline of the embryo</span>
+
+<span class="sd">    read raw 16-bit tif files</span>
+
+<span class="sd">    subtract photobleach trend in time for all pixels in each frame</span>
+
+<span class="sd">    calculate grouped average and derivative in time</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">pjoin</span><span class="p">([</span><span class="n">dir_out</span><span class="p">,</span><span class="s1">&#39;stepGroupDiff&#39;</span><span class="p">,</span><span class="n">ID</span><span class="p">])</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">run</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">load_dict</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">tRes</span> <span class="o">=</span> <span class="n">embryos</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ID</span><span class="p">][</span><span class="s1">&#39;tRes&#39;</span><span class="p">]</span>
+    <span class="kn">from</span> <span class="nn">measure.preprocess</span> <span class="kn">import</span> <span class="n">read_outline</span>
+    <span class="n">result</span><span class="p">[</span><span class="s1">&#39;outline&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">read_outline</span><span class="p">(</span><span class="n">pjoin</span><span class="p">([</span><span class="n">dir_data</span><span class="p">,</span><span class="n">directories</span><span class="p">[</span><span class="s1">&#39;outline&#39;</span><span class="p">],</span><span class="s1">&#39;poly-&#39;</span><span class="o">+</span><span class="n">ID</span><span class="o">+</span><span class="s1">&#39;.tif&#39;</span><span class="p">]))</span><span class="c1">#read binary mask of the outline of the embryo</span>
+
+    <span class="kn">from</span> <span class="nn">measure.segmentation</span> <span class="kn">import</span> <span class="n">bleach_correction</span><span class="p">,</span><span class="n">group_diff</span>
+    <span class="n">result_read_raw</span> <span class="o">=</span> <span class="n">load_dict</span><span class="p">(</span><span class="n">pjoin</span><span class="p">([</span><span class="n">dir_out</span><span class="p">,</span><span class="s1">&#39;read_raw&#39;</span><span class="p">,</span><span class="n">ID</span><span class="p">]))</span><span class="c1">#read raw 16-bit tif files</span>
+    <span class="kn">from</span> <span class="nn">measure.preprocess</span> <span class="kn">import</span> <span class="n">divide</span>
+    <span class="n">window_length</span><span class="p">,</span> <span class="n">videozmin</span> <span class="o">=</span> <span class="n">divide</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span><span class="n">tRes</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">divide</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="n">tRes</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">measure.preprocess</span> <span class="kn">import</span> <span class="n">channel_list</span>
+    <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">channel_list</span><span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="n">embryos</span><span class="p">):</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">result</span><span class="p">[</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;bc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bleach_correction</span><span class="p">(</span><span class="n">result_read_raw</span><span class="p">[</span><span class="n">channel</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;outline&#39;</span><span class="p">],</span> <span class="n">window_length</span><span class="p">,</span> <span class="n">videozmin</span><span class="p">)</span><span class="c1">#subtract photobleach trend in time for all pixels in each frame</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">group_diff</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;bc&#39;</span><span class="p">],</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;outline&#39;</span><span class="p">],</span><span class="n">tRes</span><span class="p">))</span><span class="c1">#calculate grouped average and derivative in time</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">result</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="writeThreshold"><a class="viewcode-back" href="../../../generated/src.scripts.quant.html#src.scripts.quant.writeThreshold">[docs]</a><span class="k">def</span> <span class="nf">writeThreshold</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">embryosquant</span><span class="p">,</span><span class="n">result_grouped</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    calculate and write intensity of maunally labeled pulsing pixels</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">dz</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">measure.pixel_intensity</span> <span class="kn">import</span> <span class="n">roi_to_stkmask</span><span class="p">,</span><span class="n">intensity_ts</span>
+    <span class="n">diffts</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">ID</span> <span class="ow">in</span> <span class="n">embryosquant</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+        <span class="n">path_circles</span> <span class="o">=</span> <span class="n">pjoin</span><span class="p">([</span><span class="n">dir_data</span><span class="p">,</span><span class="n">directories</span><span class="p">[</span><span class="s1">&#39;circles&#39;</span><span class="p">],</span> <span class="p">[</span><span class="n">embryosquant</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ID</span><span class="p">][</span><span class="s1">&#39;phenotype&#39;</span><span class="p">],</span><span class="n">ID</span><span class="p">]])</span><span class="o">+</span><span class="s1">&#39;.zip&#39;</span><span class="c1">#path of manually labeled excitation circles</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">pexists</span><span class="p">(</span><span class="n">path_circles</span><span class="p">):</span>
+            <span class="n">diffts</span><span class="p">[</span><span class="n">ID</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">continue</span>
+        <span class="n">resultgroupedID</span> <span class="o">=</span> <span class="n">result_grouped</span><span class="p">[</span><span class="n">ID</span><span class="p">]</span>
+        <span class="n">DIFF</span><span class="p">,</span><span class="n">zgroups</span><span class="p">,</span><span class="n">outline</span> <span class="o">=</span> <span class="n">resultgroupedID</span><span class="p">[</span><span class="s1">&#39;img&#39;</span><span class="p">][</span><span class="s1">&#39;DIFF&#39;</span><span class="p">],</span><span class="n">resultgroupedID</span><span class="p">[</span><span class="s1">&#39;img&#39;</span><span class="p">][</span><span class="s1">&#39;zgroups&#39;</span><span class="p">],</span><span class="n">resultgroupedID</span><span class="p">[</span><span class="s1">&#39;outline&#39;</span><span class="p">]</span>
+        <span class="n">circles_mask</span> <span class="o">=</span> <span class="n">roi_to_stkmask</span><span class="p">(</span><span class="n">DIFF</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="n">zgroups</span><span class="p">,</span><span class="n">path_circles</span><span class="p">)</span><span class="c1">#read manually labeled excitation circles</span>
+        <span class="n">diffts</span><span class="p">[</span><span class="n">ID</span><span class="p">]</span> <span class="o">=</span> <span class="n">intensity_ts</span><span class="p">(</span><span class="n">circles_mask</span><span class="p">,</span><span class="n">DIFF</span><span class="p">,</span><span class="n">dz</span><span class="p">,</span><span class="n">outline</span><span class="p">)</span>
+    <span class="n">diffts_group_vstack</span> <span class="o">=</span> <span class="n">embryosquant</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;phenotype&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">group</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">diffts</span><span class="p">[</span><span class="n">ID</span><span class="p">]</span> <span class="k">for</span> <span class="n">ID</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">index</span> <span class="k">if</span> <span class="n">diffts</span><span class="p">[</span><span class="n">ID</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]))</span><span class="c1">#measure intensity of temporal derivative in excitation circles</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">diffts_group_vstack</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="readThreshold"><a class="viewcode-back" href="../../../generated/src.scripts.quant.html#src.scripts.quant.readThreshold">[docs]</a><span class="k">def</span> <span class="nf">readThreshold</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">embryosquant</span><span class="p">,</span><span class="n">THRESHOLD</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    read intensity of maunally labeled pulsing pixels</span>
+
+<span class="sd">    calculate threshold value for each phenotype</span>
+
+<span class="sd">    assign threshold value to each embryo based on its phenotype</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">diffts</span> <span class="o">=</span> <span class="n">load_dict</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">df_threshold</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="n">i</span><span class="p">:[</span><span class="n">phenotype</span><span class="p">,</span><span class="n">arr</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">*</span><span class="n">THRESHOLD</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,(</span><span class="n">phenotype</span><span class="p">,</span> <span class="n">arr</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">diffts</span><span class="o">.</span><span class="n">items</span><span class="p">())})</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">df_threshold</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;phenotype&#39;</span><span class="p">,</span><span class="s1">&#39;threshold&#39;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">embryosquant</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_threshold</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;ID&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="stepExcitation"><a class="viewcode-back" href="../../../generated/src.scripts.quant.html#src.scripts.quant.stepExcitation">[docs]</a><span class="k">def</span> <span class="nf">stepExcitation</span><span class="p">(</span><span class="n">phenotype</span><span class="p">,</span><span class="n">ID</span><span class="p">,</span><span class="n">THRESHOLD</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    read binary mask of the outline of the embryo</span>
+
+<span class="sd">    use temporal derivative and threshold value to calculate binary mask of excitation and new excitation</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">data_GroupDiff</span> <span class="o">=</span> <span class="n">load_dict</span><span class="p">(</span><span class="n">pjoin</span><span class="p">([</span><span class="n">dir_out</span><span class="p">,</span><span class="s1">&#39;stepGroupDiff&#39;</span><span class="p">,</span><span class="n">ID</span><span class="p">]))</span>
+    <span class="kn">from</span> <span class="nn">measure.segmentation</span> <span class="kn">import</span> <span class="n">excitation</span>
+    <span class="n">result_excitation</span> <span class="o">=</span> <span class="n">excitation</span><span class="p">([</span><span class="n">dir_out</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">THRESHOLD</span><span class="p">),</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">ID</span><span class="p">],</span> <span class="n">data_GroupDiff</span><span class="p">[</span><span class="s1">&#39;img&#39;</span><span class="p">][</span><span class="s1">&#39;DIFF&#39;</span><span class="p">],</span><span class="n">data_GroupDiff</span><span class="p">[</span><span class="s1">&#39;outline&#39;</span><span class="p">],</span><span class="n">embryosquant</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ID</span><span class="p">][</span><span class="s1">&#39;threshold&#39;</span><span class="p">])</span><span class="c1">#calculate binary mask of excitation and new excitation</span>
+    
+    <span class="k">return</span> <span class="n">result_excitation</span></div>
+
+<div class="viewcode-block" id="stepSummary"><a class="viewcode-back" href="../../../generated/src.scripts.quant.html#src.scripts.quant.stepSummary">[docs]</a><span class="k">def</span> <span class="nf">stepSummary</span><span class="p">(</span><span class="n">phenotype</span><span class="p">,</span><span class="n">ID</span><span class="p">,</span><span class="n">THRESHOLD</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    calculate summary statistics from binary masks of excitations and newexcitations</span>
+
+<span class="sd">    calculate average F-actin level in newexcitation pixels</span>
+
+<span class="sd">    calculate average autocorrelation of ROK level in all pixels in the embryo</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">result_excitation</span> <span class="o">=</span> <span class="n">load_dict</span><span class="p">(</span><span class="n">pjoin</span><span class="p">([</span><span class="n">dir_out</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">THRESHOLD</span><span class="p">),</span><span class="s1">&#39;excitation&#39;</span><span class="p">,</span><span class="n">ID</span><span class="p">]))</span>
+    <span class="n">EXC</span><span class="p">,</span><span class="n">NEWEXC</span><span class="p">,</span><span class="n">outline</span> <span class="o">=</span> <span class="n">result_excitation</span><span class="p">[</span><span class="s1">&#39;EXC&#39;</span><span class="p">],</span><span class="n">result_excitation</span><span class="p">[</span><span class="s1">&#39;NEWEXC&#39;</span><span class="p">],</span><span class="n">result_excitation</span><span class="p">[</span><span class="s1">&#39;outline&#39;</span><span class="p">]</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">summary_exc</span><span class="p">(</span><span class="n">EXC</span><span class="p">,</span><span class="n">NEWEXC</span><span class="p">,</span><span class="n">outline</span><span class="p">))</span>
+
+    <span class="n">data_GroupDiff</span> <span class="o">=</span> <span class="n">load_dict</span><span class="p">(</span><span class="n">pjoin</span><span class="p">([</span><span class="n">dir_out</span><span class="p">,</span><span class="s1">&#39;stepGroupDiff&#39;</span><span class="p">,</span><span class="n">ID</span><span class="p">]))</span>
+    <span class="kn">from</span> <span class="nn">measure.pixel_intensity</span> <span class="kn">import</span> <span class="n">ts_embryo</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ts_embryo</span><span class="p">(</span><span class="n">data_GroupDiff</span><span class="p">,</span><span class="n">NEWEXC</span><span class="p">,</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;speedmsk&#39;</span><span class="p">],</span><span class="n">NMAX</span><span class="o">=</span><span class="mi">100</span><span class="p">))</span>
+
+    <span class="n">result</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;speedmsk&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="summary_exc"><a class="viewcode-back" href="../../../generated/src.scripts.quant.html#src.scripts.quant.summary_exc">[docs]</a><span class="nd">@return_dict</span>
+<span class="k">def</span> <span class="nf">summary_exc</span><span class="p">(</span><span class="n">EXC</span><span class="p">,</span><span class="n">NEWEXC</span><span class="p">,</span><span class="n">outline</span><span class="p">,</span><span class="n">NMAX</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    calculate summary statistics from binary masks of excitations and newexcitations</span>
+
+<span class="sd">    :param EXC: excitation mask</span>
+<span class="sd">    :type EXC: np.array((T,X,Y),dtype=bool)</span>
+<span class="sd">    :param NEWEXC: new excitation mask</span>
+<span class="sd">    :type NEWEXC: np.array((T,X,Y),dtype=bool)</span>
+<span class="sd">    :return: freq,wait,speed,area,speedmsk</span>
+<span class="sd">    :rtype: dict</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="kn">from</span> <span class="nn">measure.recurrence</span> <span class="kn">import</span> <span class="n">frequence</span><span class="p">,</span><span class="n">waittime</span>
+    <span class="n">freq</span> <span class="o">=</span> <span class="n">frequence</span><span class="p">(</span><span class="n">NEWEXC</span><span class="p">[:</span><span class="n">NMAX</span><span class="p">],</span><span class="n">outline</span><span class="p">)</span><span class="c1">#frequency of new excitations</span>
+    <span class="n">wait</span> <span class="o">=</span> <span class="n">waittime</span><span class="p">(</span><span class="n">NEWEXC</span><span class="p">[:</span><span class="n">NMAX</span><span class="p">],</span><span class="n">outline</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span><span class="c1">#wait time of new excitations</span>
+
+    <span class="kn">from</span> <span class="nn">measure.contour</span> <span class="kn">import</span> <span class="n">findContours</span>
+    <span class="n">blobs</span> <span class="o">=</span> <span class="n">findContours</span><span class="p">(</span><span class="n">EXC</span><span class="p">[:</span><span class="n">NMAX</span><span class="p">],</span><span class="n">minarea</span><span class="o">=</span><span class="mi">2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="c1"># dictionary of Blob instances that defines one excitation region</span>
+
+    <span class="kn">from</span> <span class="nn">measure.edgespeed</span> <span class="kn">import</span> <span class="n">point_velocity</span>
+    <span class="n">speed</span><span class="p">,</span> <span class="n">speedmsk</span> <span class="o">=</span> <span class="n">point_velocity</span><span class="p">(</span><span class="n">blobs</span><span class="p">,</span><span class="n">NEWEXC</span><span class="p">[:</span><span class="n">NMAX</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">outline</span><span class="p">)</span><span class="c1">#edge propagation speed of excitation regions</span>
+
+    <span class="kn">from</span> <span class="nn">measure.link</span> <span class="kn">import</span> <span class="n">connected_components</span>
+    <span class="n">area</span> <span class="o">=</span> <span class="n">connected_components</span><span class="p">(</span><span class="n">blobs</span><span class="p">)</span><span class="c1">#cumulative area of linked excitation regions</span>
+    <span class="n">area</span> <span class="o">=</span> <span class="n">area</span><span class="o">/</span><span class="n">outline</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">freq</span><span class="p">,</span><span class="n">wait</span><span class="p">,</span><span class="n">speed</span><span class="p">,</span><span class="n">area</span><span class="p">,</span><span class="n">speedmsk</span></div>
+
+<div class="viewcode-block" id="reorder"><a class="viewcode-back" href="../../../generated/src.scripts.quant.html#src.scripts.quant.reorder">[docs]</a><span class="k">def</span> <span class="nf">reorder</span><span class="p">(</span><span class="n">nesteddict</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Flip the order of a nested dictionary</span>
+
+<span class="sd">    :param nesteddict: ``{ID0:{&#39;x&#39;:x,&#39;y&#39;:y}, ID1:{&#39;x&#39;:x,&#39;y&#39;:y}, ...}``</span>
+<span class="sd">    :type nesteddict: dict</span>
+<span class="sd">    :return: ``{&#39;x&#39;:{ID0:x,&#39;ID1&#39;:x}, &#39;y&#39;:{ID0:y,&#39;ID1&#39;:y}, ...}``</span>
+<span class="sd">    :rtype: dict</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">nesteddict</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">embryosquant</span> <span class="o">=</span> <span class="n">selectEmbryo</span><span class="p">(</span><span class="n">embryos</span><span class="p">)</span>
+    <span class="c1">#iterate(stepRaw,embryosquant)</span>
+    <span class="c1">#result_grouped = iterate(stepGroupDiff,embryosquant)</span>
+    <span class="n">result_grouped</span> <span class="o">=</span> <span class="n">iterate</span><span class="p">(</span><span class="n">stepGroupDiff</span><span class="p">,</span><span class="n">embryosquant</span><span class="p">,</span><span class="n">run</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">path_threshold_diffts</span> <span class="o">=</span> <span class="n">pjoin</span><span class="p">([</span><span class="n">dir_out</span><span class="p">,</span><span class="s1">&#39;threshold_diffts&#39;</span><span class="p">])</span>
+    <span class="n">writeThreshold</span><span class="p">(</span><span class="n">path_threshold_diffts</span><span class="p">,</span><span class="n">embryosquant</span><span class="p">,</span><span class="n">result_grouped</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">THRESHOLD</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.4</span><span class="p">,]:</span><span class="c1">#0.4,0.36,0.44</span>
+        <span class="n">embryosquant</span> <span class="o">=</span> <span class="n">readThreshold</span><span class="p">(</span><span class="n">path_threshold_diffts</span><span class="p">,</span><span class="n">embryosquant</span><span class="p">,</span><span class="n">THRESHOLD</span><span class="p">)</span>
+        <span class="n">result_excitation</span> <span class="o">=</span> <span class="n">iterate</span><span class="p">(</span><span class="n">stepExcitation</span><span class="p">,</span><span class="n">embryosquant</span><span class="p">,</span><span class="n">THRESHOLD</span><span class="p">)</span>
+        <span class="n">result_summary</span> <span class="o">=</span> <span class="n">iterate</span><span class="p">(</span><span class="n">stepSummary</span><span class="p">,</span><span class="n">embryosquant</span><span class="p">,</span><span class="n">THRESHOLD</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="n">reorder</span><span class="p">(</span><span class="n">result_summary</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">pjoin</span><span class="p">([</span><span class="n">dir_out</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">THRESHOLD</span><span class="p">),</span><span class="s1">&#39;summary&#39;</span><span class="p">,</span><span class="n">name</span><span class="p">]),</span><span class="n">value</span><span class="p">)</span>
+
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

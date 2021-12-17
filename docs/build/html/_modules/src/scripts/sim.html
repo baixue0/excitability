@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.scripts.sim &mdash; pulsatile RhoA dynamics 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> pulsatile RhoA dynamics
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pyenv.html">Python virtual environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sphinx.html">Sphinx autodocumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../structure.html">Overview your project files and folders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../generated/modules.html">Modules</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pulsatile RhoA dynamics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>src.scripts.sim</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for src.scripts.sim</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">os</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)))</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<div class="viewcode-block" id="noise0d"><a class="viewcode-back" href="../../../generated/src.scripts.sim.html#src.scripts.sim.noise0d">[docs]</a><span class="k">def</span> <span class="nf">noise0d</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="mi">128</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">T</span><span class="o">=</span><span class="mi">240</span><span class="p">,</span><span class="n">DT</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">amp</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.03</span><span class="p">):</span><span class="c1">#X=128**2,T=240</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    for each x position, choose a fraction of uniformly distributed time points, apply perturbations of duration DT</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="n">frac</span><span class="p">)))</span>
+    <span class="n">duration</span> <span class="o">=</span> <span class="n">DT</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">T</span><span class="p">,</span><span class="n">X</span><span class="p">))</span><span class="c1"># shape is (#time points,#spatial points)</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">DT</span><span class="p">):</span>
+            <span class="n">arr</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">start</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">+</span><span class="n">dt</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">T</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">amp</span>
+    <span class="k">return</span> <span class="n">arr</span></div>
+
+<div class="viewcode-block" id="solve_params"><a class="viewcode-back" href="../../../generated/src.scripts.sim.html#src.scripts.sim.solve_params">[docs]</a><span class="k">def</span> <span class="nf">solve_params</span><span class="p">(</span><span class="n">a_lst</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    solve FitzhughNagumo reaction with stochastic perturbation on 1D grid</span>
+
+<span class="sd">    save the time evolution as tif images with shape ``(T,X^2)``</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">b_lst</span><span class="o">=</span><span class="p">[</span><span class="mf">0.6</span><span class="p">]</span>
+    <span class="n">I_lst</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">]</span>
+    <span class="n">tau_lst</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+    <span class="kn">import</span> <span class="nn">itertools</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">a_lst</span><span class="p">,</span> <span class="n">b_lst</span><span class="p">,</span> <span class="n">I_lst</span><span class="p">,</span> <span class="n">tau_lst</span><span class="p">))</span><span class="c1"># list of parameters</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">noisearr</span> <span class="o">=</span> <span class="n">noise0d</span><span class="p">()</span>
+    <span class="kn">from</span> <span class="nn">simrd.fitzhughnagumo</span> <span class="kn">import</span> <span class="n">FitzhughNagumo</span>
+    <span class="kn">from</span> <span class="nn">simrd.srd</span> <span class="kn">import</span> <span class="n">SRD</span>
+    <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">tau</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+        <span class="n">ode</span> <span class="o">=</span> <span class="n">FitzhughNagumo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
+        <span class="n">eq</span> <span class="o">=</span> <span class="n">SRD</span><span class="p">(</span><span class="n">noisearr</span><span class="p">,</span><span class="n">ode</span><span class="o">=</span><span class="n">ode</span><span class="p">)</span>
+        <span class="n">arrtx</span> <span class="o">=</span> <span class="n">eq</span><span class="o">.</span><span class="n">solvetx</span><span class="p">()</span>
+        <span class="kn">from</span> <span class="nn">utils.path_io</span> <span class="kn">import</span> <span class="n">dir_out</span><span class="p">,</span><span class="n">pjoin</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">pjoin</span><span class="p">([</span><span class="n">dir_out</span><span class="p">,</span><span class="s1">&#39;simrd&#39;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;.tif&#39;</span><span class="p">])</span>
+        <span class="kn">import</span> <span class="nn">tifffile</span>
+        <span class="n">tifffile</span><span class="o">.</span><span class="n">imsave</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">arrtx</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="freq_wait"><a class="viewcode-back" href="../../../generated/src.scripts.sim.html#src.scripts.sim.freq_wait">[docs]</a><span class="k">def</span> <span class="nf">freq_wait</span><span class="p">(</span><span class="n">a_lst</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    reshape ``(T,X^2)`` to ``(T,X,X)``</span>
+
+<span class="sd">    calculate excitation pixels, new excitation pixels, frequency and wait time of new excitations</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="kn">from</span> <span class="nn">utils.path_io</span> <span class="kn">import</span> <span class="n">dir_out</span><span class="p">,</span><span class="n">pjoin</span>
+    <span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">io</span>
+    <span class="n">freq</span><span class="p">,</span><span class="n">wait</span> <span class="o">=</span> <span class="p">{},{}</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">a_lst</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">pjoin</span><span class="p">([</span><span class="n">dir_out</span><span class="p">,</span><span class="s1">&#39;sim&#39;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;.tif&#39;</span><span class="p">])</span>
+        <span class="n">im</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">n2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="n">im2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">im</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n2</span><span class="p">,</span><span class="n">n2</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">n2</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">im2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">im2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">EXC</span> <span class="o">=</span> <span class="n">im2</span><span class="o">&gt;</span><span class="mi">1</span>
+        <span class="n">nzzs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">EXC</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">NEWEXC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">EXC</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="nb">bool</span><span class="p">)</span>
+        <span class="n">NEWEXC</span><span class="p">[</span><span class="n">nzzs</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">EXC</span><span class="p">[</span><span class="n">nzzs</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span>
+
+        <span class="kn">from</span> <span class="nn">measure.recurrence</span> <span class="kn">import</span> <span class="n">frequence</span><span class="p">,</span><span class="n">waittime</span>
+        <span class="n">outline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">NEWEXC</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+        <span class="n">freq</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">frequence</span><span class="p">(</span><span class="n">NEWEXC</span><span class="p">,</span><span class="n">outline</span><span class="p">)</span>
+        <span class="n">wait</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">waittime</span><span class="p">(</span><span class="n">NEWEXC</span><span class="p">,</span><span class="n">outline</span><span class="p">,</span><span class="mi">120</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">freq</span><span class="p">,</span><span class="n">wait</span></div>
+    
+<div class="viewcode-block" id="axes_sim"><a class="viewcode-back" href="../../../generated/src.scripts.sim.html#src.scripts.sim.axes_sim">[docs]</a><span class="k">def</span> <span class="nf">axes_sim</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span><span class="n">freqx</span><span class="p">,</span><span class="n">freqy</span><span class="p">,</span><span class="n">waitx</span><span class="p">,</span><span class="n">waity</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Plot histogram of frequency and wait time</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        figure(pjoin([dir_out,&#39;images&#39;]),func=axes_sim,funcdata=[freq_bins/240,freq_hist,wait_bins,wait_hist])</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">W</span> <span class="o">=</span> <span class="mf">2.5</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="mf">3.5</span>
+    <span class="n">hspace</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">axes</span> <span class="o">=</span> <span class="n">addax</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span><span class="n">L</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">W</span><span class="o">=</span><span class="mf">1.3</span><span class="p">,</span><span class="n">T</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">H</span><span class="o">=</span><span class="mf">1.3</span><span class="p">)</span>
+    <span class="n">axes2</span> <span class="o">=</span> <span class="n">addax</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span><span class="n">L</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">W</span><span class="o">=</span><span class="n">W</span><span class="p">,</span><span class="n">T</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="p">,</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">nrows</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">hspace</span><span class="o">=</span><span class="n">hspace</span><span class="p">,</span><span class="n">sharex</span><span class="o">=</span><span class="s1">&#39;col&#39;</span><span class="p">,</span><span class="n">sharey</span><span class="o">=</span><span class="s1">&#39;col&#39;</span><span class="p">)</span><span class="c1">#,sharey=&#39;all&#39;</span>
+    <span class="n">axes3</span> <span class="o">=</span> <span class="n">addax</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span><span class="n">L</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">W</span><span class="o">=</span><span class="n">W</span><span class="p">,</span><span class="n">T</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="p">,</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">nrows</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">hspace</span><span class="o">=</span><span class="n">hspace</span><span class="p">,</span><span class="n">sharex</span><span class="o">=</span><span class="s1">&#39;col&#39;</span><span class="p">,</span><span class="n">sharey</span><span class="o">=</span><span class="s1">&#39;col&#39;</span><span class="p">)</span><span class="c1">#,sharey=&#39;all&#39;</span>
+    <span class="n">axes3tw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">addax</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span><span class="n">L</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">W</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span><span class="n">T</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="p">,</span><span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nrows</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">hspace</span><span class="o">=</span><span class="n">hspace</span><span class="p">,</span><span class="n">sharex</span><span class="o">=</span><span class="s1">&#39;col&#39;</span><span class="p">,</span><span class="n">sharey</span><span class="o">=</span><span class="s1">&#39;col&#39;</span><span class="p">),</span><span class="c1">#,sharey=&#39;all&#39;</span>
+                       <span class="n">addax</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span><span class="n">L</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">W</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span><span class="n">T</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="p">,</span><span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nrows</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">hspace</span><span class="o">=</span><span class="n">hspace</span><span class="p">,</span><span class="n">sharex</span><span class="o">=</span><span class="s1">&#39;col&#39;</span><span class="p">,</span><span class="n">sharey</span><span class="o">=</span><span class="s1">&#39;col&#39;</span><span class="p">),])</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="n">axes</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">b</span><span class="o">=</span><span class="mf">0.6</span>
+    <span class="n">I</span><span class="o">=</span><span class="mf">0.5</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">ncu</span> <span class="o">=</span> <span class="n">u</span><span class="o">-</span><span class="p">(</span><span class="n">u</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span><span class="o">+</span><span class="n">I</span>
+    <span class="n">axes</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">ncu</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">freqy</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">ncv</span> <span class="o">=</span> <span class="p">(</span><span class="n">u</span><span class="o">+</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">b</span>
+        <span class="n">axes</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">ncv</span><span class="p">,</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes2</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes2</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,:]:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.8</span><span class="p">],</span><span class="n">yticks</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],</span>
+               <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;frequency&#39;</span><span class="p">,</span><span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">freqx</span><span class="o">.</span><span class="n">max</span><span class="p">()])</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">freqy</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+        <span class="n">xx</span><span class="p">,</span><span class="n">yy</span> <span class="o">=</span> <span class="n">step</span><span class="p">(</span><span class="n">freqx</span><span class="p">,</span><span class="n">freqy</span><span class="p">[</span><span class="n">label</span><span class="p">])</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;darkgray&#39;</span>
+        <span class="n">axes2</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        
+    <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes3</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes3</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,:]:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">120</span><span class="p">],</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;      wait time (s)&#39;</span><span class="p">,</span><span class="n">xticks</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">121</span><span class="p">,</span><span class="mi">60</span><span class="p">),</span><span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">yticks</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">waity</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+        <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">waitx</span><span class="p">,</span><span class="n">waity</span><span class="p">[</span><span class="n">label</span><span class="p">]</span>
+        <span class="n">xx</span><span class="p">,</span><span class="n">yy</span> <span class="o">=</span> <span class="n">step</span><span class="p">(</span><span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">y</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;darkgray&#39;</span>
+        <span class="n">axes3</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">axes3tw</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes3tw</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,:]:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">xticks</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span><span class="n">xticklabels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;&gt;120&#39;</span><span class="p">],</span><span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">yticks</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span></div>
+    
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">solve_params</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.65</span><span class="p">,</span><span class="mf">1.1</span><span class="p">,</span><span class="mf">0.05</span><span class="p">))</span>
+
+    <span class="n">freq</span><span class="p">,</span><span class="n">wait</span> <span class="o">=</span> <span class="n">freq_wait</span><span class="p">([</span><span class="mf">0.95</span><span class="p">,</span><span class="mf">0.9</span><span class="p">,</span><span class="mf">0.85</span><span class="p">,</span><span class="mf">0.65</span><span class="p">])</span>
+
+    <span class="kn">from</span> <span class="nn">utils.path_io</span> <span class="kn">import</span> <span class="n">dir_out</span><span class="p">,</span><span class="n">pjoin</span>
+    <span class="kn">from</span> <span class="nn">visualization.plot</span> <span class="kn">import</span> <span class="n">figure</span><span class="p">,</span><span class="n">addax</span><span class="p">,</span><span class="n">step</span>
+
+    <span class="n">freq_bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">freq_hist</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">kv</span><span class="p">:(</span><span class="n">kv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">kv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">freq_bins</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">freq</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+
+    <span class="n">dwait</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">wait_bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">121</span><span class="p">,</span><span class="n">dwait</span><span class="p">)</span>
+    <span class="n">wait_hist</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">kv</span><span class="p">:(</span><span class="n">kv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">kv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">wait_bins</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">dwait</span><span class="p">),</span> <span class="n">wait</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+
+    <span class="n">figure</span><span class="p">(</span><span class="n">pjoin</span><span class="p">([</span><span class="n">dir_out</span><span class="p">,</span><span class="s1">&#39;images&#39;</span><span class="p">]),</span><span class="n">func</span><span class="o">=</span><span class="n">axes_sim</span><span class="p">,</span><span class="n">funcdata</span><span class="o">=</span><span class="p">[</span><span class="n">freq_bins</span><span class="o">/</span><span class="mi">240</span><span class="p">,</span><span class="n">freq_hist</span><span class="p">,</span><span class="n">wait_bins</span><span class="p">,</span><span class="n">wait_hist</span><span class="p">])</span>
+    
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
