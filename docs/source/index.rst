@@ -6,12 +6,8 @@ Documentation of pulsatile RhoA dynamics
    :titlesonly:
    :glob:
 
+   README.md
+   structure
    pyenv
    sphinx
-   structure
    generated/modules
-
-
-
-..
-   .. include:: ../../README.rst

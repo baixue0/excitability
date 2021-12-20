@@ -41,9 +41,10 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../README.html">Quantification of the spatiotemporal excitation patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../structure.html">Project files and folders</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../pyenv.html">Python virtual environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../sphinx.html">Sphinx autodocumentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../structure.html">Overview your project files and folders</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../generated/modules.html">Modules</a></li>
 </ul>
 
@@ -120,8 +121,6 @@
         <span class="n">result</span> <span class="o">+=</span> <span class="p">[(</span><span class="n">xedges</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]),(</span><span class="n">xedges</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span>
     <span class="n">result</span> <span class="o">+=</span> <span class="p">[(</span><span class="n">xedges</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">]),(</span><span class="n">xedges</span><span class="p">[</span><span class="n">N</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">])]</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">.</span><span class="n">T</span></div>
-
-<span class="n">histfunc</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">bins</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span><span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
 <div class="viewcode-block" id="setlogy"><a class="viewcode-back" href="../../../generated/src.visualization.plot.html#src.visualization.plot.setlogy">[docs]</a><span class="k">def</span> <span class="nf">setlogy</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="n">ylim</span><span class="p">):</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">yscale</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">,</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Fraction&#39;</span><span class="p">)</span>

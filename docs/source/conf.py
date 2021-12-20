@@ -21,9 +21,9 @@ import os
 import sys
 
 sys.path.insert(0, os.path.abspath(os.path.join("..", "..")))
-
 dir_src = os.path.abspath(os.path.join("..", "..","src"))
 sys.path.insert(0, dir_src)
+print(sys.path)
 '''
 def listdirs(rootdir,lst):
     import os
@@ -58,7 +58,8 @@ extensions = ['sphinx.ext.autodoc',
 'sphinx.ext.githubpages',
 'sphinx.ext.napoleon',
 'sphinx_rtd_theme',
-'sphinx_copybutton'
+'sphinx_copybutton',
+"myst_parser"# https://myst-parser.readthedocs.io/en/latest/sphinx/intro.html
 ]
 mathjax_path = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"
 

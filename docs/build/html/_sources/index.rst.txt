@@ -1,4 +1,13 @@
 Documentation of pulsatile RhoA dynamics
 ===========================================================
 
-.. include:: ../../README.rst
+.. toctree::
+   :maxdepth: 1
+   :titlesonly:
+   :glob:
+
+   README.md
+   structure
+   pyenv
+   sphinx
+   generated/modules

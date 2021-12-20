@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quantification of the spatiotemporal excitation patterns &mdash; pulsatile RhoA dynamics 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Project files and folders" href="structure.html" />
+    <link rel="prev" title="Documentation of pulsatile RhoA dynamics" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> pulsatile RhoA dynamics
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quantification of the spatiotemporal excitation patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure.html">Project files and folders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyenv.html">Python virtual environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sphinx.html">Sphinx autodocumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/modules.html">Modules</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pulsatile RhoA dynamics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Quantification of the spatiotemporal excitation patterns</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="quantification-of-the-spatiotemporal-excitation-patterns">
+<h1>Quantification of the spatiotemporal excitation patterns<a class="headerlink" href="#quantification-of-the-spatiotemporal-excitation-patterns" title="Permalink to this headline"></a></h1>
+<p>This is a guide on how to reproduce the crucial plots and movies in the paper xxx.</p>
+<section id="data-organization">
+<h2>Data organization<a class="headerlink" href="#data-organization" title="Permalink to this headline"></a></h2>
+<section id="raw-tiff-image-stacks-and-table-of-all-embryos">
+<h3>Raw tiff image stacks and table of all embryos<a class="headerlink" href="#raw-tiff-image-stacks-and-table-of-all-embryos" title="Permalink to this headline"></a></h3>
+<p>During image acquisition, each embryo is given an unique ID made up of the date and acquisition order. The acquired image is a 16-bit TIFF image stack whose stack position is the relative acquisition time in the timelapse video and is stored at <code class="docutils literal notranslate"><span class="pre">data/tiff_ROK/phenotype/ID/ID_channel.tif</span></code>. The ID, genotype, genetic perturbation and imaging conditions of each embryo is written as one row in the table and saved as CSV format. The table is loaded as a pandas Dataframe in python, which simplifies the selection and grouping of embryos based on its field (column) values. For example,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">embryos</span><span class="p">[</span><span class="s1">&#39;note&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;SD&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>selects the embryos imaged using spinning disk (SD) microscopy, where “embryos” is the Dataframe and its field ‘note’ contains information about imaging conditions. I also used the comment feature of CSV format to exclude embryos and to write a note to my future self.</p>
+</section>
+<section id="label-pixels-in-the-embryo">
+<h3>Label pixels in the embryo<a class="headerlink" href="#label-pixels-in-the-embryo" title="Permalink to this headline"></a></h3>
+<p>To visualize the location of the embryo, the maxium projection of the first 100 frames of the raw image stack is stored at <code class="docutils literal notranslate"><span class="pre">data/tiff_outline/ID.tif</span></code> and then opened in ImageJ. The polygon or freehand tool in ImageJ is used to draw lines at the edge of the embryo. The resulting drawing is then converted to a binary mask and saved at <code class="docutils literal notranslate"><span class="pre">data/tiff_outline/poly-ID.tif</span></code>.</p>
+</section>
+<section id="label-pulsing-regions-in-the-embryo">
+<h3>Label pulsing regions in the embryo<a class="headerlink" href="#label-pulsing-regions-in-the-embryo" title="Permalink to this headline"></a></h3>
+<p>{% comment %}
+These commments will not include inside the source.
+manually labeled the binary mask that defines the pixels inside of the embryo, and points located in pulsing regions with different amplitudes. The binary mask of embryo outline is saved as a tiff file and imported in python as a boolean numpy array. The pulsing regions are saved as multipoint ROI (region of interest) and imported in python as objects containing the stack positions and spatial coordinates of each labeled point.
+Aggregate manually labeled pulsing regions to determine the threshold for embryos of the same phenotype
+Read ROIs and measure temporal derivative of ROK for each labeled region
+Organize output data
+decorator
+Plot summary statistics</p>
+<p>This iterative process of refining the segmentation workflow and imaging conditions is time consuming but rewarding.</p>
+<p>The second section shows the steps to process each embryo, from the raw images to summary statistics. During this process, individual embryos are processed independently at most steps, but a few steps require the aggregate information from multiple embryos. The complete workflow is shown in section three. At the end of the workflow, the summary statistics from embryos of the same phenotype are aggregated and plotted as histograms.</p>
+<p>What did you learn?
+What makes your project stand out?
+If your project has a lot of features, consider adding a “Features” section and listing them here.</p>
+<p>What was your motivation?
+Why did you build this project?</p>
+<p>{% endcomment %}</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Documentation of pulsatile RhoA dynamics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="structure.html" class="btn btn-neutral float-right" title="Project files and folders" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
