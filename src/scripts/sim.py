@@ -15,11 +15,16 @@ def noise0d(X=128**2,T=240,DT=3,amp=0.1,frac=0.03):#X=128**2,T=240
     return arr
 
 def solve_params(a_lst):
-    '''
-    solve FitzhughNagumo reaction with stochastic perturbation on 1D grid
+    """solve FitzhughNagumo reaction with stochastic perturbation on 1D grid
 
-    save the time evolution as tif images with shape ``(T,X^2)``
-    '''
+    run one simulation for each "a" value and save u value at all time points as a tif image with shape ``(T,X^2)``
+
+    Parameters
+    ----------
+    a_lst : list
+        values for parameter "a"
+    """
+
     b_lst=[0.6]
     I_lst=[0.5]
     tau_lst=[10]
@@ -30,20 +35,30 @@ def solve_params(a_lst):
     from simrd.fitzhughnagumo import FitzhughNagumo
     from simrd.srd import SRD
     for a, b, I, tau in params:
-        ode = FitzhughNagumo(a, b, I, tau)
-        eq = SRD(noisearr,ode=ode)
-        arrtx = eq.solvetx()
+        ode = FitzhughNagumo(a, b, I, tau)#set parameters
+        eq = SRD(noisearr,ode=ode)# set perturbations
+        arrtx = eq.solvetx()# solve partial differential equation
         from utils.path_io import dir_out,pjoin
         path = pjoin([dir_out,'simrd',str(round(a,3))+'.tif'])
         import tifffile
         tifffile.imsave(path,arrtx)
 
 def freq_wait(a_lst):
-    '''
-    reshape ``(T,X^2)`` to ``(T,X,X)``
+    """read u value at all time points, reshape ``(T,X^2)`` to ``(T,X,X)``, calculate frequency and wait time
 
-    calculate excitation pixels, new excitation pixels, frequency and wait time of new excitations
-    '''
+    Parameters
+    ----------
+    a_lst : list
+        values for parameter "a"
+
+    Returns
+    --------
+    freq : 1D array
+        number of new excitations in every pixel
+    wait : 1D array
+        number of frames before next new excitation
+    """
+
     from utils.path_io import dir_out,pjoin
     from skimage import io
     freq,wait = {},{}
@@ -58,9 +73,9 @@ def freq_wait(a_lst):
         NEWEXC = np.zeros(EXC.shape,bool)
         NEWEXC[nzzs[1:]] = np.diff(EXC[nzzs].astype(int),axis=0)>0
 
-        from measure.recurrence import frequence,waittime
+        from measure.recurrence import frequency,waittime
         outline = np.ones(NEWEXC[0].shape,dtype=bool)
-        freq[a] = frequence(NEWEXC,outline)
+        freq[a] = frequency(NEWEXC,outline)
         wait[a] = waittime(NEWEXC,outline,120)
     return freq,wait
     

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>src.scripts.quant &mdash; pulsatile RhoA dynamics 0.1.0 documentation</title>
+  <title>src.scripts.quant &mdash; Quantify spatiotemporal patterns of excitions at cell surface 0.1.0 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
@@ -27,7 +27,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> pulsatile RhoA dynamics
+            <a href="../../../index.html" class="icon icon-home"> Quantify spatiotemporal patterns of excitions at cell surface
           </a>
               <div class="version">
                 0.1.0
@@ -41,8 +41,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../README.html">Quantification of the spatiotemporal excitation patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../structure.html">Project files and folders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../README.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../pyenv.html">Python virtual environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../sphinx.html">Sphinx autodocumentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../generated/modules.html">Modules</a></li>
@@ -54,7 +53,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../index.html">pulsatile RhoA dynamics</a>
+          <a href="../../../index.html">Quantify spatiotemporal patterns of excitions at cell surface</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -81,6 +80,25 @@
 <span class="sd">&quot;&quot;&quot;pipeline to batch measure embryo&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="selectEmbryo"><a class="viewcode-back" href="../../../generated/src.scripts.quant.html#src.scripts.quant.selectEmbryo">[docs]</a><span class="k">def</span> <span class="nf">selectEmbryo</span><span class="p">(</span><span class="n">embryos</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Select embryos to quantify</span>
+
+<span class="sd">    embryos to quantify should satisfy the following conditions</span>
+
+<span class="sd">    - green channel label is ROK</span>
+<span class="sd">    - phenotype is not pfn</span>
+<span class="sd">    - duration of image stack is longer than 130 seconds</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    embryos : `pandas.DataFrame`</span>
+<span class="sd">        all embryos</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    --------</span>
+<span class="sd">    embryosquant : `pandas.DataFrame`</span>
+<span class="sd">        selected embryos</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">embryos</span><span class="p">[</span><span class="s1">&#39;LabelG&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;ROK&#39;</span><span class="p">,</span> <span class="c1"># green channel label is ROK</span>
                <span class="n">embryos</span><span class="p">[</span><span class="s1">&#39;phenotype&#39;</span><span class="p">]</span><span class="o">!=</span><span class="s1">&#39;pfn&#39;</span><span class="p">,</span> <span class="c1"># phenotype is not pfn</span>
                <span class="n">embryos</span><span class="p">[</span><span class="s1">&#39;note&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;SD&#39;</span><span class="p">),</span><span class="c1"># image is acquired with spinning disk microscopy</span>
@@ -204,18 +222,33 @@
 
 <div class="viewcode-block" id="summary_exc"><a class="viewcode-back" href="../../../generated/src.scripts.quant.html#src.scripts.quant.summary_exc">[docs]</a><span class="nd">@return_dict</span>
 <span class="k">def</span> <span class="nf">summary_exc</span><span class="p">(</span><span class="n">EXC</span><span class="p">,</span><span class="n">NEWEXC</span><span class="p">,</span><span class="n">outline</span><span class="p">,</span><span class="n">NMAX</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    calculate summary statistics from binary masks of excitations and newexcitations</span>
+    <span class="sd">&quot;&quot;&quot;calculate summary statistics from binary masks of excitations and newexcitations</span>
 
-<span class="sd">    :param EXC: excitation mask</span>
-<span class="sd">    :type EXC: np.array((T,X,Y),dtype=bool)</span>
-<span class="sd">    :param NEWEXC: new excitation mask</span>
-<span class="sd">    :type NEWEXC: np.array((T,X,Y),dtype=bool)</span>
-<span class="sd">    :return: freq,wait,speed,area,speedmsk</span>
-<span class="sd">    :rtype: dict</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="kn">from</span> <span class="nn">measure.recurrence</span> <span class="kn">import</span> <span class="n">frequence</span><span class="p">,</span><span class="n">waittime</span>
-    <span class="n">freq</span> <span class="o">=</span> <span class="n">frequence</span><span class="p">(</span><span class="n">NEWEXC</span><span class="p">[:</span><span class="n">NMAX</span><span class="p">],</span><span class="n">outline</span><span class="p">)</span><span class="c1">#frequency of new excitations</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    EXC : np.array((T,X,Y),dtype=bool)</span>
+<span class="sd">        excitation mask</span>
+<span class="sd">    NEWEXC : np.array((T,X,Y),dtype=bool)</span>
+<span class="sd">        new excitation mask</span>
+<span class="sd">    outline : np.array((X,Y),dtype=bool)</span>
+<span class="sd">        mask of pixels in embryo</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    --------</span>
+<span class="sd">    freq : 1D array</span>
+<span class="sd">        number of new excitations in every pixel</span>
+<span class="sd">    wait : 1D array</span>
+<span class="sd">        number of frames before next new excitation</span>
+<span class="sd">    speed : 1D array</span>
+<span class="sd">        distance from point to edge of new excitation regions</span>
+<span class="sd">    speedmsk : np.array((T,X,Y),dtype=np.float32)</span>
+<span class="sd">        pixel value represents amplitude of edge propagation. pixels outside of embryo are labeled -1.</span>
+<span class="sd">    area : 1D array</span>
+<span class="sd">        largest cumulative are of linked excitation regions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="kn">from</span> <span class="nn">measure.recurrence</span> <span class="kn">import</span> <span class="n">frequency</span><span class="p">,</span><span class="n">waittime</span>
+    <span class="n">freq</span> <span class="o">=</span> <span class="n">frequency</span><span class="p">(</span><span class="n">NEWEXC</span><span class="p">[:</span><span class="n">NMAX</span><span class="p">],</span><span class="n">outline</span><span class="p">)</span><span class="c1">#frequency of new excitations</span>
     <span class="n">wait</span> <span class="o">=</span> <span class="n">waittime</span><span class="p">(</span><span class="n">NEWEXC</span><span class="p">[:</span><span class="n">NMAX</span><span class="p">],</span><span class="n">outline</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span><span class="c1">#wait time of new excitations</span>
 
     <span class="kn">from</span> <span class="nn">measure.contour</span> <span class="kn">import</span> <span class="n">findContours</span>
@@ -245,13 +278,13 @@
     <span class="n">embryosquant</span> <span class="o">=</span> <span class="n">selectEmbryo</span><span class="p">(</span><span class="n">embryos</span><span class="p">)</span>
     <span class="c1">#iterate(stepRaw,embryosquant)</span>
     <span class="c1">#result_grouped = iterate(stepGroupDiff,embryosquant)</span>
-    <span class="n">result_grouped</span> <span class="o">=</span> <span class="n">iterate</span><span class="p">(</span><span class="n">stepGroupDiff</span><span class="p">,</span><span class="n">embryosquant</span><span class="p">,</span><span class="n">run</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="c1">#result_grouped = iterate(stepGroupDiff,embryosquant,run=False)</span>
     <span class="n">path_threshold_diffts</span> <span class="o">=</span> <span class="n">pjoin</span><span class="p">([</span><span class="n">dir_out</span><span class="p">,</span><span class="s1">&#39;threshold_diffts&#39;</span><span class="p">])</span>
-    <span class="n">writeThreshold</span><span class="p">(</span><span class="n">path_threshold_diffts</span><span class="p">,</span><span class="n">embryosquant</span><span class="p">,</span><span class="n">result_grouped</span><span class="p">)</span>
+    <span class="c1">#writeThreshold(path_threshold_diffts,embryosquant,result_grouped)</span>
     <span class="k">for</span> <span class="n">THRESHOLD</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.4</span><span class="p">,]:</span><span class="c1">#0.4,0.36,0.44</span>
         <span class="n">embryosquant</span> <span class="o">=</span> <span class="n">readThreshold</span><span class="p">(</span><span class="n">path_threshold_diffts</span><span class="p">,</span><span class="n">embryosquant</span><span class="p">,</span><span class="n">THRESHOLD</span><span class="p">)</span>
-        <span class="n">result_excitation</span> <span class="o">=</span> <span class="n">iterate</span><span class="p">(</span><span class="n">stepExcitation</span><span class="p">,</span><span class="n">embryosquant</span><span class="p">,</span><span class="n">THRESHOLD</span><span class="p">)</span>
-        <span class="n">result_summary</span> <span class="o">=</span> <span class="n">iterate</span><span class="p">(</span><span class="n">stepSummary</span><span class="p">,</span><span class="n">embryosquant</span><span class="p">,</span><span class="n">THRESHOLD</span><span class="p">)</span>
+        <span class="c1">#result_excitation = iterate(stepExcitation,embryosquant,THRESHOLD)</span>
+        <span class="n">result_summary</span> <span class="o">=</span> <span class="n">iterate</span><span class="p">(</span><span class="n">stepSummary</span><span class="p">,</span><span class="n">embryosquant</span><span class="p">,</span><span class="n">THRESHOLD</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="n">reorder</span><span class="p">(</span><span class="n">result_summary</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">pjoin</span><span class="p">([</span><span class="n">dir_out</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">THRESHOLD</span><span class="p">),</span><span class="s1">&#39;summary&#39;</span><span class="p">,</span><span class="n">name</span><span class="p">]),</span><span class="n">value</span><span class="p">)</span>
 

@@ -3,9 +3,31 @@ import numpy as np
 
 @return_dict
 def excitation(savedir,DIFF,outline,THRESH):
-    '''
-    pixels in DIFF above THRESH is EXC, the first frame to cross the threshold is NEWEXC
-    '''
+    """pixels in DIFF above THRESH is EXC; the first frame to cross the threshold is NEWEXC
+
+    Parameters
+    ----------
+    savedir : str
+        path to save returned values
+    DIFF : `numpy.ndarray`, (T,X,Y), np.float32
+        temporal difference
+    outline : `numpy.ndarray`, (X,Y), bool
+        mask of pixels in embryo
+    THRESH : float
+        threshold value
+
+    Returns
+    --------
+    savedir : str
+        path to save returned values
+    EXC : `numpy.ndarray`, (T,X,Y), bool
+        excitation mask
+    NEWEXC : `numpy.ndarray`, (T,X,Y), bool
+        new excitation mask
+    outline : `numpy.ndarray`, (X,Y), bool
+        mask of pixels in embryo
+    """
+
     EXC = DIFF>THRESH
     EXC[:,~outline] = False
 
@@ -20,17 +42,37 @@ def excitation(savedir,DIFF,outline,THRESH):
     return savedir,EXC,NEWEXC,outline
 
 @return_dict
-def group_diff(bc,outline,tRes):
-    '''
-    group imagestack; smooth in space and time; 
-    '''
-    N = len(bc)
+def group_diff(stk,outline,tRes):
+    """group imagestack; smooth in space and time
+
+    Parameters
+    ----------
+    stk : `numpy.ndarray`, (T_raw,X,Y), np.float32
+        raw image stack
+    outline : `numpy.ndarray`, (X,Y), bool
+        mask of pixels in embryo
+    tRes : float
+        time between consecutive frames
+
+    Returns
+    --------
+    RAW : `numpy.ndarray`, (T,X,Y), np.uint16
+        raw
+    SMOOTH : `numpy.ndarray`, (T,X,Y), np.float32
+        smoothed
+    DIFF : `numpy.ndarray`, (T,X,Y), np.float32
+        temporal difference 
+    zgroups : nested 1D array
+        frames that are grouped together
+    """
+
+    N = len(stk)
     from measure.preprocess import divide
     groupsize = 1.2 // tRes# group consecutive frames so that each group is 1.2 sconds
-    RAW,zgroups = grouped_avg(bc,groupsize)
+    RAW,zgroups = grouped_avg(stk,groupsize)
     RAW = RAW.astype(np.uint16)
 
-    smooth = np.stack([smoothxy(bc[z].copy().astype(np.float32)) for z in range(N)],0)
+    smooth = np.stack([smoothxy(stk[z].copy().astype(np.float32)) for z in range(N)],0)
     smooth = moving_avg(smooth,groupsize).astype(np.float32)
     SMOOTH,zgroups = grouped_avg(smooth,groupsize)
     DIFF = diff(SMOOTH,outline).astype(np.float32)
@@ -38,12 +80,29 @@ def group_diff(bc,outline,tRes):
 
 
 def bleach_correction(stk, outline, window_length, videozmin):
-    '''
-    measure mean intensity as a function of time, smooth, compensate for loss
+    """compensate for photobleach
 
-    :returns: mean intensity over time raw, smoothed, corrected ; corrected imagestack
-    :rtype: np.array((N frames,),float), np.array((Z,X,Y),float)
-    '''
+    Parameters
+    ----------
+    stk : `numpy.ndarray`, (T_raw,X,Y), np.float32
+        raw image stack
+    outline : `numpy.ndarray`, (X,Y), bool
+        mask of pixels in embryo
+    window_length : int
+        window_length for savgol_filter smoothing
+    videozmin : int
+        mask of pixels in embryo
+
+    Returns
+    --------
+    y : 1D array
+        average intensity of all pixels in embryo at each time point
+    ys : 1D array
+        smooth y with savgol_filter
+    imbc : `numpy.ndarray`, (T_raw,X,Y), np.float32
+        image stack after compensating for photobleach
+    """
+
     outlier_bounds = lambda arr: (np.percentile(arr,10**-4),np.percentile(arr,100-10**-4))
     stk = np.clip(stk,*outlier_bounds(pixelsinembryo(stk, outline)))
     from scipy.signal import savgol_filter
@@ -54,13 +113,26 @@ def bleach_correction(stk, outline, window_length, videozmin):
     return y,ys,imbc
 
 def diff(stk,outline,window=2):
-    '''
-    temporal derivative with given window size
-    skip the first and last few frames where pixels are all zero
-    '''
+    """temporal derivative with given window size of 4.8 seconds
+
+    Parameters
+    ----------
+    stk : `numpy.ndarray`, (T_raw,X,Y), np.float32
+        raw image stack
+    outline : `numpy.ndarray`, (X,Y), bool
+        mask of pixels in embryo
+    window : int, optional
+        window_length for savgol_filter smoothing
+
+    Returns
+    --------
+    diff_normed : `numpy.ndarray`, (T,X,Y), np.float32
+        image stack after compensating for photobleach
+    """
+    
     nzzs = nonzeroz(stk)
     diff = np.zeros(stk.shape,dtype=np.float32)# temporal derivative image
-    for z in nzzs[window:-window]:
+    for z in nzzs[window:-window]:#skip the first and last few frames where pixels are all zero
         diff[z] = stk[z+window]-stk[z-window]# time window for difference is 4*1.2 seconds
     temp = pixelsinembryo(diff, outline)
     diff_normed = (diff-temp.mean())/temp.std()

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>src.measure.recurrence module &mdash; pulsatile RhoA dynamics 0.1.0 documentation</title>
+  <title>src.measure.recurrence module &mdash; Quantify spatiotemporal patterns of excitions at cell surface 0.1.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> pulsatile RhoA dynamics
+            <a href="../index.html" class="icon icon-home"> Quantify spatiotemporal patterns of excitions at cell surface
           </a>
               <div class="version">
                 0.1.0
@@ -44,8 +44,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../README.html">Quantification of the spatiotemporal excitation patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../structure.html">Project files and folders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyenv.html">Python virtual environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sphinx.html">Sphinx autodocumentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Modules</a><ul class="current">
@@ -77,7 +76,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">pulsatile RhoA dynamics</a>
+          <a href="../index.html">Quantify spatiotemporal patterns of excitions at cell surface</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -101,20 +100,66 @@
   <section id="module-src.measure.recurrence">
 <span id="src-measure-recurrence-module"></span><h1>src.measure.recurrence module<a class="headerlink" href="#module-src.measure.recurrence" title="Permalink to this headline"></a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="src.measure.recurrence.frequence">
-<span class="sig-prename descclassname"><span class="pre">src.measure.recurrence.</span></span><span class="sig-name descname"><span class="pre">frequence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">example</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/recurrence.html#frequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.recurrence.frequence" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dt class="sig sig-object py" id="src.measure.recurrence.frequency">
+<span class="sig-prename descclassname"><span class="pre">src.measure.recurrence.</span></span><span class="sig-name descname"><span class="pre">frequency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">example</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/recurrence.html#frequency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.recurrence.frequency" title="Permalink to this definition"></a></dt>
+<dd><p>number of new excitations for each pixel</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stk</strong> (<cite>numpy.ndarray</cite>, (T_raw,X,Y), np.float32) – raw image stack</p></li>
+<li><p><strong>outline</strong> (<cite>numpy.ndarray</cite>, (X,Y), bool) – mask of pixels in embryo</p></li>
+<li><p><strong>example</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – whether the returned value are used as example embryo</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>freq_false</strong> (<cite>numpy.ndarray</cite>, (# pixels in embryo), int) – (example is False) number of new excitations for pixels in embryo</p></li>
+<li><p><strong>freq_true</strong> (<cite>numpy.ndarray</cite>, (X,Y), int) – (example is True) number of new excitations for all pixels. pixels outside of embryo are -1.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.measure.recurrence.index_first_true">
-<span class="sig-prename descclassname"><span class="pre">src.measure.recurrence.</span></span><span class="sig-name descname"><span class="pre">index_first_true</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/recurrence.html#index_first_true"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.recurrence.index_first_true" title="Permalink to this definition"></a></dt>
-<dd><p>If no item was found return None, other return types might be a problem due to numbas type inference</p>
+<span class="sig-prename descclassname"><span class="pre">src.measure.recurrence.</span></span><span class="sig-name descname"><span class="pre">index_first_true</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/recurrence.html#index_first_true"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.recurrence.index_first_true" title="Permalink to this definition"></a></dt>
+<dd><p>find the index of first True in a binary 1D array</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>arr</strong> (<cite>numpy.ndarray</cite>, (N,), bool) – array to search</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>index</strong> – index of first True. If not found, return None</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a> or <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.measure.recurrence.waittime">
 <span class="sig-prename descclassname"><span class="pre">src.measure.recurrence.</span></span><span class="sig-name descname"><span class="pre">waittime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">windowlength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">example</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/recurrence.html#waittime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.recurrence.waittime" title="Permalink to this definition"></a></dt>
-<dd><p>find z,x,y position of new excitation pixels; in the following timeseries with length of windowlength, find the next new excitation.</p>
+<dd><p>number of frames before next new excitation for each new excitation pixel</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stk</strong> (<cite>numpy.ndarray</cite>, (T_raw,X,Y), np.float32) – raw image stack</p></li>
+<li><p><strong>outline</strong> (<cite>numpy.ndarray</cite>, (X,Y), bool) – mask of pixels in embryo</p></li>
+<li><p><strong>windowlength</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – number of frames within which to search for the next new excitation</p></li>
+<li><p><strong>example</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – whether the returned value are used as example embryo</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>wait time</strong> (<cite>numpy.ndarray</cite>, (# new excitation pixels able to observe the entire window), int) – (example is False) number of frames before next new excitation</p></li>
+<li><p><strong>zxyr</strong> (<cite>numpy.ndarray</cite>, (# new excitation pixels able to observe the entire window, 3), int) – (example is True) temporal and spatial coordinates and wait time of new excitation pixels</p></li>
+<li><p><strong>imshape</strong> (<em>tuple</em>) – (example is True) (T,X,Y) used to create image stack</p></li>
+</ul>
+</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>

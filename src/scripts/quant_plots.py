@@ -1,7 +1,8 @@
 import sys,os
 sys.path.insert(0, os.path.abspath(os.path.join(".")))
-from visualization.plot import figure, addax
-from utils.path_io import pjoin, dir_out, embryos
+import numpy as np
+from visualization.plot import figure, addax, legends
+from utils.path_io import pjoin, dir_out, embryos, load_dict
 
 def axes_freq(fig,x,y):
     '''
@@ -36,7 +37,6 @@ def axes_freq(fig,x,y):
         xx,yy = step(x,y[phenotype])
         color = 'slateblue'
         axes_speed[i,1].plot(xx,yy,color=color)
-
 
 def axes_wait(fig,x,y):
     '''    
@@ -144,7 +144,6 @@ def axes_actin(fig,x):
         axes[1,i].plot(t,x['newexc_imr_diff'][phenotype][m],color=color)
         axes[2,i].plot(t,x['fast_imr_diff'][phenotype][m],color='darkorange')
         axes[2,i].plot(t,x['slow_imr_diff'][phenotype][m],color='dodgerblue')
-        
 
 def axes_acf(fig,x):
     '''
@@ -153,21 +152,29 @@ def axes_acf(fig,x):
     Example::
 
         figure(pjoin([dir_out,'images']),func=axes_acf,funcdata=[meandict])
+
     '''
-    t = np.arange(41)*1.2
-    axes = addax(fig,L=1,W=5.5,T=1,H=4,ncols=4,nrows=3,wspace=0.5,hspace=1,sharey='row')
-    for ax in axes.ravel():
-        ax.set(xlabel='timelag (s)',xlim=[0,t[-1]],xticks=np.arange(0,t[-1],20))
-    for ax in axes[:,0]:
-        ax.set(ylabel='autocorrelation')
+    dz = np.arange(-97,98)
+    m = np.abs(dz)<40
+    mhalf = np.logical_and(dz>=0,dz<40)
+    axes = addax(fig,L=1,W=4,T=1,H=1.2,ncols=2,nrows=1,wspace=1,hspace=1)
+    ax2 = addax(fig,L=1,W=3,T=3,H=1.2)
+
     for i,phenotype in enumerate(['spd','cyk','ani']):
         color = legends[phenotype][1]
-        axes[0,0].plot(t,x['acf_img_smooth'][phenotype],color=color)
-        axes[1,0].plot(t,x['acf_img_diff'][phenotype],color=color)
+        axes[0].plot(dz[mhalf]*1.2,x['acfrect_smooth'][phenotype][mhalf],color=color)
+        axes[1].plot(dz[mhalf]*1.2,x['acf_smooth'][phenotype][mhalf],color=color)
+        ax2.plot(dz[m]*1.2,x['ccf_smooth'][phenotype][m],color=color)
+    for ax in axes:
+        ax.set(xlabel='timelag (s)',xticks=np.arange(0,41,20),xlim=[dz[mhalf][0]*1.2,dz[mhalf][-1]*1.2],
+        ylim=[-0.5,1])#ylabel='correlation',
+
+    ax2.set(xlabel='timelag (s)',xticks=np.arange(-40,41,20),xlim=[dz[m][0]*1.2,dz[m][-1]*1.2],
+    ylim=[-0.5,1])#ylabel='correlation',
 
 
 if __name__ == "__main__":
-    hstack_hist = lambda datadict,IDs,bins: np.histogram(np.hstack([datadict[ID] for ID in IDs]),bins)[0]
+    direxc = '0.4'
     
     from scripts.quant import selectEmbryo
     embryosquant = selectEmbryo(embryos)
@@ -175,7 +182,8 @@ if __name__ == "__main__":
     groups = embryosquant.groupby('phenotype')
     groupsR = embryosquant.loc[embryosquant['LabelR']=='LA'].groupby('phenotype')
 
-    direxc = '0.4'
+    '''
+    hstack_hist = lambda datadict,IDs,bins: np.histogram(np.hstack([datadict[ID] for ID in IDs]),bins)[0]
 
     datadict = load_dict(pjoin([dir_out,direxc,'summary','freq']))
     freq_bins = np.arange(12)
@@ -195,12 +203,17 @@ if __name__ == "__main__":
     datadict = load_dict(pjoin([dir_out,direxc,'summary','area']))
     area = groups.apply(lambda groupdf: [datadict[ID]*100 for ID in groupdf.index])
     figure(pjoin([dir_out,'images']),func=axes_area,funcdata=[area])
+    '''
 
-    hstack_mean = lambda datadict,IDs: np.vstack([datadict[ID] for ID in IDs]).mean(0)
+    vstack_mean = lambda datadict,IDs: np.vstack([datadict[ID] for ID in IDs]).mean(0)
     meandict = {}
-    for name in ['newexc_imr_raw','newexc_imr_diff','fast_imr_diff','slow_imr_diff','acf_img_smooth','acf_img_diff']:
+    for name in [
+    #'newexc_imr_raw','newexc_imr_diff','fast_imr_diff','slow_imr_diff',
+    'acfrect_smooth','ccf_smooth','acf_smooth',
+    ]:
         datadict = load_dict(pjoin([dir_out,direxc,'summary',name]))
-        meandict[name] = groups.apply(lambda groupdf: hstack_mean(datadict,groupdf.index))
-    figure(pjoin([dir_out,'images']),func=axes_actin,funcdata=[meandict])
+        print(name,next(iter(datadict.values())).shape)
+        meandict[name] = groups.apply(lambda groupdf: vstack_mean(datadict,groupdf.index))
+    #figure(pjoin([dir_out,'images']),func=axes_actin,funcdata=[meandict])
     figure(pjoin([dir_out,'images']),func=axes_acf,funcdata=[meandict])
 

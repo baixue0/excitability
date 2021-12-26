@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>src.measure.recurrence &mdash; pulsatile RhoA dynamics 0.1.0 documentation</title>
+  <title>src.measure.recurrence &mdash; Quantify spatiotemporal patterns of excitions at cell surface 0.1.0 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
@@ -27,7 +27,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> pulsatile RhoA dynamics
+            <a href="../../../index.html" class="icon icon-home"> Quantify spatiotemporal patterns of excitions at cell surface
           </a>
               <div class="version">
                 0.1.0
@@ -41,8 +41,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../README.html">Quantification of the spatiotemporal excitation patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../structure.html">Project files and folders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../README.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../pyenv.html">Python virtual environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../sphinx.html">Sphinx autodocumentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../generated/modules.html">Modules</a></li>
@@ -54,7 +53,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../index.html">pulsatile RhoA dynamics</a>
+          <a href="../../../index.html">Quantify spatiotemporal patterns of excitions at cell surface</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -78,15 +77,43 @@
 
 <span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">njit</span>
 <div class="viewcode-block" id="index_first_true"><a class="viewcode-back" href="../../../generated/src.measure.recurrence.html#src.measure.recurrence.index_first_true">[docs]</a><span class="nd">@njit</span>
-<span class="k">def</span> <span class="nf">index_first_true</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39; </span>
-<span class="sd">    If no item was found return None, other return types might be a problem due to numbas type inference</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">ndenumerate</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">index_first_true</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;find the index of first True in a binary 1D array</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    arr : `numpy.ndarray`, (N,), bool</span>
+<span class="sd">        array to search</span>
+<span class="sd">    Returns</span>
+<span class="sd">    --------</span>
+<span class="sd">    index : int or None</span>
+<span class="sd">        index of first True. If not found, return None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">ndenumerate</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">val</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="frequence"><a class="viewcode-back" href="../../../generated/src.measure.recurrence.html#src.measure.recurrence.frequence">[docs]</a><span class="k">def</span> <span class="nf">frequence</span><span class="p">(</span><span class="n">stk</span><span class="p">,</span><span class="n">outline</span><span class="p">,</span><span class="n">example</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="frequency"><a class="viewcode-back" href="../../../generated/src.measure.recurrence.html#src.measure.recurrence.frequency">[docs]</a><span class="k">def</span> <span class="nf">frequency</span><span class="p">(</span><span class="n">stk</span><span class="p">,</span><span class="n">outline</span><span class="p">,</span><span class="n">example</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;number of new excitations for each pixel</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    stk : `numpy.ndarray`, (T_raw,X,Y), np.float32</span>
+<span class="sd">        raw image stack</span>
+<span class="sd">    outline : `numpy.ndarray`, (X,Y), bool</span>
+<span class="sd">        mask of pixels in embryo</span>
+<span class="sd">    example : bool</span>
+<span class="sd">        whether the returned value are used as example embryo</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    --------</span>
+<span class="sd">    freq_false : `numpy.ndarray`, (# pixels in embryo), int</span>
+<span class="sd">        (example is False) number of new excitations for pixels in embryo</span>
+<span class="sd">    freq_true : `numpy.ndarray`, (X,Y), int</span>
+<span class="sd">        (example is True) number of new excitations for all pixels. pixels outside of embryo are -1.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">freq</span> <span class="o">=</span> <span class="n">stk</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
     <span class="n">freq</span><span class="p">[</span><span class="o">~</span><span class="n">outline</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">example</span><span class="p">:</span>
@@ -95,16 +122,36 @@
         
 
 <div class="viewcode-block" id="waittime"><a class="viewcode-back" href="../../../generated/src.measure.recurrence.html#src.measure.recurrence.waittime">[docs]</a><span class="k">def</span> <span class="nf">waittime</span><span class="p">(</span><span class="n">stk</span><span class="p">,</span><span class="n">outline</span><span class="p">,</span><span class="n">windowlength</span><span class="p">,</span><span class="n">example</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    find z,x,y position of new excitation pixels; in the following timeseries with length of windowlength, find the next new excitation.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot;number of frames before next new excitation for each new excitation pixel</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    stk : `numpy.ndarray`, (T_raw,X,Y), np.float32</span>
+<span class="sd">        raw image stack</span>
+<span class="sd">    outline : `numpy.ndarray`, (X,Y), bool</span>
+<span class="sd">        mask of pixels in embryo</span>
+<span class="sd">    windowlength : int</span>
+<span class="sd">        number of frames within which to search for the next new excitation</span>
+<span class="sd">    example : bool</span>
+<span class="sd">        whether the returned value are used as example embryo</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    --------</span>
+<span class="sd">    wait time : `numpy.ndarray`, (# new excitation pixels able to observe the entire window), int</span>
+<span class="sd">        (example is False) number of frames before next new excitation</span>
+<span class="sd">    zxyr : `numpy.ndarray`, (# new excitation pixels able to observe the entire window, 3), int</span>
+<span class="sd">        (example is True) temporal and spatial coordinates and wait time of new excitation pixels</span>
+<span class="sd">    imshape : tuple</span>
+<span class="sd">        (example is True) (T,X,Y) used to create image stack</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">imshape</span> <span class="o">=</span> <span class="n">stk</span><span class="o">.</span><span class="n">shape</span>
     <span class="n">stk</span><span class="p">[:,</span><span class="o">~</span><span class="n">outline</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">zxy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">stk</span><span class="p">),</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">zxy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">stk</span><span class="p">),</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="c1">#find z,x,y position of new excitation pixels</span>
     <span class="n">zxyr</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,(</span><span class="n">z</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">zxy</span><span class="p">):</span>
         <span class="n">ts</span> <span class="o">=</span> <span class="n">stk</span><span class="p">[</span><span class="n">z</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="nb">min</span><span class="p">(</span><span class="n">z</span><span class="o">+</span><span class="n">windowlength</span><span class="p">,</span><span class="n">imshape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">]</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="n">index_first_true</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span><span class="c1">#</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">index_first_true</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span><span class="c1">#find the next new excitation</span>
         <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">l</span><span class="o">==</span><span class="n">windowlength</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="c1">#no activation in observation window</span>

@@ -6,6 +6,25 @@ from utils.decorators import iterate,return_dict
 """pipeline to batch measure embryo"""
 
 def selectEmbryo(embryos):
+    """Select embryos to quantify
+
+    embryos to quantify should satisfy the following conditions
+
+    - green channel label is ROK
+    - phenotype is not pfn
+    - duration of image stack is longer than 130 seconds
+
+    Parameters
+    ----------
+    embryos : `pandas.DataFrame`
+        all embryos
+
+    Returns
+    --------
+    embryosquant : `pandas.DataFrame`
+        selected embryos
+    """
+
     df = pd.concat([embryos['LabelG']=='ROK', # green channel label is ROK
                embryos['phenotype']!='pfn', # phenotype is not pfn
                embryos['note'].str.startswith('SD'),# image is acquired with spinning disk microscopy
@@ -129,18 +148,33 @@ def stepSummary(phenotype,ID,THRESHOLD):
 
 @return_dict
 def summary_exc(EXC,NEWEXC,outline,NMAX=100):
-    '''
-    calculate summary statistics from binary masks of excitations and newexcitations
+    """calculate summary statistics from binary masks of excitations and newexcitations
 
-    :param EXC: excitation mask
-    :type EXC: np.array((T,X,Y),dtype=bool)
-    :param NEWEXC: new excitation mask
-    :type NEWEXC: np.array((T,X,Y),dtype=bool)
-    :return: freq,wait,speed,area,speedmsk
-    :rtype: dict
-    '''
-    from measure.recurrence import frequence,waittime
-    freq = frequence(NEWEXC[:NMAX],outline)#frequency of new excitations
+    Parameters
+    ----------
+    EXC : np.array((T,X,Y),dtype=bool)
+        excitation mask
+    NEWEXC : np.array((T,X,Y),dtype=bool)
+        new excitation mask
+    outline : np.array((X,Y),dtype=bool)
+        mask of pixels in embryo
+
+    Returns
+    --------
+    freq : 1D array
+        number of new excitations in every pixel
+    wait : 1D array
+        number of frames before next new excitation
+    speed : 1D array
+        distance from point to edge of new excitation regions
+    speedmsk : np.array((T,X,Y),dtype=np.float32)
+        pixel value represents amplitude of edge propagation. pixels outside of embryo are labeled -1.
+    area : 1D array
+        largest cumulative are of linked excitation regions
+    """
+
+    from measure.recurrence import frequency,waittime
+    freq = frequency(NEWEXC[:NMAX],outline)#frequency of new excitations
     wait = waittime(NEWEXC[:NMAX],outline,50)#wait time of new excitations
 
     from measure.contour import findContours
@@ -170,13 +204,13 @@ if __name__ == "__main__":
     embryosquant = selectEmbryo(embryos)
     #iterate(stepRaw,embryosquant)
     #result_grouped = iterate(stepGroupDiff,embryosquant)
-    result_grouped = iterate(stepGroupDiff,embryosquant,run=False)
+    #result_grouped = iterate(stepGroupDiff,embryosquant,run=False)
     path_threshold_diffts = pjoin([dir_out,'threshold_diffts'])
-    writeThreshold(path_threshold_diffts,embryosquant,result_grouped)
+    #writeThreshold(path_threshold_diffts,embryosquant,result_grouped)
     for THRESHOLD in [0.4,]:#0.4,0.36,0.44
         embryosquant = readThreshold(path_threshold_diffts,embryosquant,THRESHOLD)
-        result_excitation = iterate(stepExcitation,embryosquant,THRESHOLD)
-        result_summary = iterate(stepSummary,embryosquant,THRESHOLD)
+        #result_excitation = iterate(stepExcitation,embryosquant,THRESHOLD)
+        result_summary = iterate(stepSummary,embryosquant,THRESHOLD, shuffle=False)
         for name,value in reorder(result_summary).items():
             np.save(pjoin([dir_out,str(THRESHOLD),'summary',name]),value)
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>src.measure.pixel_intensity &mdash; pulsatile RhoA dynamics 0.1.0 documentation</title>
+  <title>src.measure.pixel_intensity &mdash; Quantify spatiotemporal patterns of excitions at cell surface 0.1.0 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
@@ -27,7 +27,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> pulsatile RhoA dynamics
+            <a href="../../../index.html" class="icon icon-home"> Quantify spatiotemporal patterns of excitions at cell surface
           </a>
               <div class="version">
                 0.1.0
@@ -41,8 +41,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../README.html">Quantification of the spatiotemporal excitation patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../structure.html">Project files and folders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../README.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../pyenv.html">Python virtual environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../sphinx.html">Sphinx autodocumentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../generated/modules.html">Modules</a></li>
@@ -54,7 +53,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../index.html">pulsatile RhoA dynamics</a>
+          <a href="../../../index.html">Quantify spatiotemporal patterns of excitions at cell surface</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -75,30 +74,78 @@
   <h1>Source code for src.measure.pixel_intensity</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
+<div class="viewcode-block" id="ccfbf"><a class="viewcode-back" href="../../../generated/src.measure.pixel_intensity.html#src.measure.pixel_intensity.ccfbf">[docs]</a><span class="k">def</span> <span class="nf">ccfbf</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span><span class="n">ts2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;centered cross correlation of two time series</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ts : `numpy.ndarray`, (T,)</span>
+<span class="sd">        first time series</span>
+<span class="sd">    ts2 : `numpy.ndarray`, (T,)</span>
+<span class="sd">        second time series</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    --------</span>
+<span class="sd">    crosscorr : (2T-1,)</span>
+<span class="sd">        centered cross correlation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="kn">from</span> <span class="nn">statsmodels.tsa.stattools</span> <span class="kn">import</span> <span class="n">ccf</span>
+    <span class="n">backwards</span> <span class="o">=</span> <span class="n">ccf</span><span class="p">(</span><span class="n">ts</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">ts2</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">adjusted</span><span class="o">=</span><span class="kc">False</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">forwards</span> <span class="o">=</span> <span class="n">ccf</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">ts2</span><span class="p">,</span> <span class="n">adjusted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">backwards</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">forwards</span><span class="p">]</span></div>
+
 <div class="viewcode-block" id="ts_embryo"><a class="viewcode-back" href="../../../generated/src.measure.pixel_intensity.html#src.measure.pixel_intensity.ts_embryo">[docs]</a><span class="k">def</span> <span class="nf">ts_embryo</span><span class="p">(</span><span class="n">imstkgr</span><span class="p">,</span><span class="n">NEWEXC</span><span class="p">,</span><span class="n">speedmsk</span><span class="p">,</span><span class="n">NMAX</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
     <span class="n">outline</span> <span class="o">=</span> <span class="n">imstkgr</span><span class="p">[</span><span class="s1">&#39;outline&#39;</span><span class="p">]</span>
-    <span class="n">dz</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">dz</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;dz&#39;</span><span class="p">:</span><span class="n">dz</span><span class="p">}</span>
     <span class="n">channel</span> <span class="o">=</span> <span class="s1">&#39;img&#39;</span>
     <span class="n">result</span><span class="p">[</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;newexc&#39;</span><span class="p">,</span><span class="n">channel</span><span class="p">,</span><span class="s1">&#39;raw&#39;</span><span class="p">])]</span> <span class="o">=</span> <span class="n">intensity_ts</span><span class="p">(</span><span class="n">NEWEXC</span><span class="p">[:</span><span class="n">NMAX</span><span class="p">],</span><span class="n">imstkgr</span><span class="p">[</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;RAW&#39;</span><span class="p">][:</span><span class="n">NMAX</span><span class="p">],</span><span class="n">dz</span><span class="p">,</span><span class="n">outline</span><span class="p">)</span>
     
-    <span class="kn">from</span> <span class="nn">statsmodels.tsa.stattools</span> <span class="kn">import</span> <span class="n">acf</span>
-    <span class="n">ts</span> <span class="o">=</span> <span class="n">imstkgr</span><span class="p">[</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;SMOOTH&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">outline</span><span class="p">]</span>
-    <span class="n">result</span><span class="p">[</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;acf&#39;</span><span class="p">,</span><span class="n">channel</span><span class="p">,</span><span class="s1">&#39;smooth&#39;</span><span class="p">])]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">acf</span><span class="p">(</span><span class="n">ts</span><span class="p">[:,</span><span class="n">pixel</span><span class="p">],</span> <span class="n">nlags</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span> <span class="k">for</span> <span class="n">pixel</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span>
-    <span class="n">ts</span> <span class="o">=</span> <span class="n">imstkgr</span><span class="p">[</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;DIFF&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">outline</span><span class="p">]</span>
-    <span class="n">result</span><span class="p">[</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;acf&#39;</span><span class="p">,</span><span class="n">channel</span><span class="p">,</span><span class="s1">&#39;diff&#39;</span><span class="p">])]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">acf</span><span class="p">(</span><span class="n">ts</span><span class="p">[:,</span><span class="n">pixel</span><span class="p">],</span> <span class="n">nlags</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span> <span class="k">for</span> <span class="n">pixel</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span>
+    <span class="n">ccf_col</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">ts</span><span class="p">,</span><span class="n">ts2</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">ccfbf</span><span class="p">(</span><span class="n">ts</span><span class="p">[:,</span><span class="n">pixel</span><span class="p">],</span> <span class="n">ts2</span><span class="p">[:,</span><span class="n">pixel</span><span class="p">])</span> <span class="k">for</span> <span class="n">pixel</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])],</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="n">cx</span><span class="p">,</span><span class="n">cy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">outline</span><span class="p">),</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">dxy</span> <span class="o">=</span> <span class="mi">40</span>
+    <span class="n">grect</span> <span class="o">=</span> <span class="n">imstkgr</span><span class="p">[</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;SMOOTH&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="n">NMAX</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">cx</span><span class="o">-</span><span class="n">dxy</span><span class="p">:</span><span class="n">cx</span><span class="o">+</span><span class="n">dxy</span><span class="p">,</span><span class="n">cy</span><span class="o">-</span><span class="n">dxy</span><span class="p">:</span><span class="n">cy</span><span class="o">+</span><span class="n">dxy</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+    <span class="n">result</span><span class="p">[</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;acfrect&#39;</span><span class="p">,</span><span class="s1">&#39;smooth&#39;</span><span class="p">])]</span> <span class="o">=</span> <span class="n">ccf_col</span><span class="p">(</span><span class="n">grect</span><span class="p">,</span><span class="n">grect</span><span class="p">)</span>
+
+    <span class="n">g</span> <span class="o">=</span> <span class="n">imstkgr</span><span class="p">[</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;SMOOTH&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="n">NMAX</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">outline</span><span class="p">]</span>
+    <span class="n">result</span><span class="p">[</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;acf&#39;</span><span class="p">,</span><span class="s1">&#39;smooth&#39;</span><span class="p">])]</span> <span class="o">=</span> <span class="n">ccf_col</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">g</span><span class="p">)</span>
     
     <span class="n">channel</span> <span class="o">=</span> <span class="s1">&#39;imr&#39;</span>
     <span class="k">if</span> <span class="n">channel</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">imstkgr</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
         <span class="k">return</span> <span class="n">result</span>
+
     <span class="n">result</span><span class="p">[</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;newexc&#39;</span><span class="p">,</span><span class="n">channel</span><span class="p">,</span><span class="s1">&#39;raw&#39;</span><span class="p">])]</span> <span class="o">=</span> <span class="n">intensity_ts</span><span class="p">(</span><span class="n">NEWEXC</span><span class="p">[:</span><span class="n">NMAX</span><span class="p">],</span><span class="n">imstkgr</span><span class="p">[</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;RAW&#39;</span><span class="p">][:</span><span class="n">NMAX</span><span class="p">],</span><span class="n">dz</span><span class="p">,</span><span class="n">outline</span><span class="p">)</span>
     <span class="n">result</span><span class="p">[</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;newexc&#39;</span><span class="p">,</span><span class="n">channel</span><span class="p">,</span><span class="s1">&#39;diff&#39;</span><span class="p">])]</span> <span class="o">=</span> <span class="n">intensity_ts</span><span class="p">(</span><span class="n">NEWEXC</span><span class="p">[:</span><span class="n">NMAX</span><span class="p">],</span><span class="n">imstkgr</span><span class="p">[</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;DIFF&#39;</span><span class="p">][:</span><span class="n">NMAX</span><span class="p">],</span><span class="n">dz</span><span class="p">,</span><span class="n">outline</span><span class="p">)</span>
     <span class="n">result</span><span class="p">[</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;fast&#39;</span><span class="p">,</span><span class="n">channel</span><span class="p">,</span><span class="s1">&#39;diff&#39;</span><span class="p">])]</span> <span class="o">=</span> <span class="n">intensity_ts</span><span class="p">((</span><span class="n">speedmsk</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">)[:</span><span class="n">NMAX</span><span class="p">],</span><span class="n">imstkgr</span><span class="p">[</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;DIFF&#39;</span><span class="p">][:</span><span class="n">NMAX</span><span class="p">],</span><span class="n">dz</span><span class="p">,</span><span class="n">outline</span><span class="p">)</span>
     <span class="n">result</span><span class="p">[</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;slow&#39;</span><span class="p">,</span><span class="n">channel</span><span class="p">,</span><span class="s1">&#39;diff&#39;</span><span class="p">])]</span> <span class="o">=</span> <span class="n">intensity_ts</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">speedmsk</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">,</span> <span class="n">speedmsk</span><span class="o">&lt;=</span><span class="mi">2</span><span class="p">)[:</span><span class="n">NMAX</span><span class="p">],</span><span class="n">imstkgr</span><span class="p">[</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;DIFF&#39;</span><span class="p">][:</span><span class="n">NMAX</span><span class="p">],</span><span class="n">dz</span><span class="p">,</span><span class="n">outline</span><span class="p">)</span>
+
+    <span class="n">r</span> <span class="o">=</span> <span class="n">imstkgr</span><span class="p">[</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;SMOOTH&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="n">NMAX</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">outline</span><span class="p">]</span>
+    <span class="n">result</span><span class="p">[</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;ccf&#39;</span><span class="p">,</span><span class="s1">&#39;smooth&#39;</span><span class="p">])]</span> <span class="o">=</span> <span class="n">ccf_col</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">result</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">result</span></div>
 
 
 <div class="viewcode-block" id="roi_to_stkmask"><a class="viewcode-back" href="../../../generated/src.measure.pixel_intensity.html#src.measure.pixel_intensity.roi_to_stkmask">[docs]</a><span class="k">def</span> <span class="nf">roi_to_stkmask</span><span class="p">(</span><span class="n">imshape</span><span class="p">,</span><span class="n">zgroups</span><span class="p">,</span><span class="n">path_circles</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;read multipoint ROIs; converts to binary mask where ROI is True</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    imshape : tuple</span>
+<span class="sd">        (T,X,Y)</span>
+<span class="sd">    zgroups : nested 1D array</span>
+<span class="sd">        frames that are grouped together</span>
+<span class="sd">    path_circles : str</span>
+<span class="sd">        path to ROIs</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    --------</span>
+<span class="sd">    msk : `numpy.ndarray`, (T,X,Y), bool</span>
+<span class="sd">        binary mask where ROI is True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">msk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">imshape</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
     <span class="n">zgroups</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">zgroups</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
     <span class="kn">from</span> <span class="nn">measure.read_roi</span> <span class="kn">import</span> <span class="n">read_roi_zip</span>
@@ -110,11 +157,25 @@
     <span class="k">return</span> <span class="n">msk</span></div>
 
 <div class="viewcode-block" id="intensity_ts"><a class="viewcode-back" href="../../../generated/src.measure.pixel_intensity.html#src.measure.pixel_intensity.intensity_ts">[docs]</a><span class="k">def</span> <span class="nf">intensity_ts</span><span class="p">(</span><span class="n">msk</span><span class="p">,</span><span class="n">measure</span><span class="p">,</span><span class="n">dz</span><span class="p">,</span><span class="n">outline</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    msk,measure: imagestacks with type bool and float respectively</span>
-<span class="sd">    dz: relative shift in stack positions at which pixel intensity is measured</span>
-<span class="sd">    return shape: (#time points, #pixels in msk, # channels)</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot;read multipoint ROIs; converts to binary mask where ROI is True</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    msk : `numpy.ndarray`, (T,X,Y), bool</span>
+<span class="sd">        pixels to measure</span>
+<span class="sd">    measure : `numpy.ndarray`, (T,X,Y)</span>
+<span class="sd">        intensity image stack</span>
+<span class="sd">    dz : `numpy.ndarray`, (DT,), int</span>
+<span class="sd">        time offset to measure intensity</span>
+<span class="sd">    outline : `numpy.ndarray`, (X,Y), bool</span>
+<span class="sd">        mask of pixels in embryo</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    --------</span>
+<span class="sd">    ts : `numpy.ndarray`, (DT,#pixels in msk)</span>
+<span class="sd">        intensity at different time offsets</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">msk</span><span class="p">[:,</span><span class="o">~</span><span class="n">outline</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">if</span> <span class="n">msk</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;all False in binary mask&#39;</span><span class="p">)</span>

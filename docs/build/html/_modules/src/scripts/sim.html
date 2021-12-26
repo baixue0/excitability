@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>src.scripts.sim &mdash; pulsatile RhoA dynamics 0.1.0 documentation</title>
+  <title>src.scripts.sim &mdash; Quantify spatiotemporal patterns of excitions at cell surface 0.1.0 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
@@ -27,7 +27,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> pulsatile RhoA dynamics
+            <a href="../../../index.html" class="icon icon-home"> Quantify spatiotemporal patterns of excitions at cell surface
           </a>
               <div class="version">
                 0.1.0
@@ -41,8 +41,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../README.html">Quantification of the spatiotemporal excitation patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../structure.html">Project files and folders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../README.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../pyenv.html">Python virtual environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../sphinx.html">Sphinx autodocumentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../generated/modules.html">Modules</a></li>
@@ -54,7 +53,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../index.html">pulsatile RhoA dynamics</a>
+          <a href="../../../index.html">Quantify spatiotemporal patterns of excitions at cell surface</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -90,11 +89,16 @@
     <span class="k">return</span> <span class="n">arr</span></div>
 
 <div class="viewcode-block" id="solve_params"><a class="viewcode-back" href="../../../generated/src.scripts.sim.html#src.scripts.sim.solve_params">[docs]</a><span class="k">def</span> <span class="nf">solve_params</span><span class="p">(</span><span class="n">a_lst</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    solve FitzhughNagumo reaction with stochastic perturbation on 1D grid</span>
+    <span class="sd">&quot;&quot;&quot;solve FitzhughNagumo reaction with stochastic perturbation on 1D grid</span>
 
-<span class="sd">    save the time evolution as tif images with shape ``(T,X^2)``</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    run one simulation for each &quot;a&quot; value and save u value at all time points as a tif image with shape ``(T,X^2)``</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    a_lst : list</span>
+<span class="sd">        values for parameter &quot;a&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">b_lst</span><span class="o">=</span><span class="p">[</span><span class="mf">0.6</span><span class="p">]</span>
     <span class="n">I_lst</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">]</span>
     <span class="n">tau_lst</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
@@ -105,20 +109,30 @@
     <span class="kn">from</span> <span class="nn">simrd.fitzhughnagumo</span> <span class="kn">import</span> <span class="n">FitzhughNagumo</span>
     <span class="kn">from</span> <span class="nn">simrd.srd</span> <span class="kn">import</span> <span class="n">SRD</span>
     <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">tau</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
-        <span class="n">ode</span> <span class="o">=</span> <span class="n">FitzhughNagumo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
-        <span class="n">eq</span> <span class="o">=</span> <span class="n">SRD</span><span class="p">(</span><span class="n">noisearr</span><span class="p">,</span><span class="n">ode</span><span class="o">=</span><span class="n">ode</span><span class="p">)</span>
-        <span class="n">arrtx</span> <span class="o">=</span> <span class="n">eq</span><span class="o">.</span><span class="n">solvetx</span><span class="p">()</span>
+        <span class="n">ode</span> <span class="o">=</span> <span class="n">FitzhughNagumo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span><span class="c1">#set parameters</span>
+        <span class="n">eq</span> <span class="o">=</span> <span class="n">SRD</span><span class="p">(</span><span class="n">noisearr</span><span class="p">,</span><span class="n">ode</span><span class="o">=</span><span class="n">ode</span><span class="p">)</span><span class="c1"># set perturbations</span>
+        <span class="n">arrtx</span> <span class="o">=</span> <span class="n">eq</span><span class="o">.</span><span class="n">solvetx</span><span class="p">()</span><span class="c1"># solve partial differential equation</span>
         <span class="kn">from</span> <span class="nn">utils.path_io</span> <span class="kn">import</span> <span class="n">dir_out</span><span class="p">,</span><span class="n">pjoin</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">pjoin</span><span class="p">([</span><span class="n">dir_out</span><span class="p">,</span><span class="s1">&#39;simrd&#39;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;.tif&#39;</span><span class="p">])</span>
         <span class="kn">import</span> <span class="nn">tifffile</span>
         <span class="n">tifffile</span><span class="o">.</span><span class="n">imsave</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">arrtx</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="freq_wait"><a class="viewcode-back" href="../../../generated/src.scripts.sim.html#src.scripts.sim.freq_wait">[docs]</a><span class="k">def</span> <span class="nf">freq_wait</span><span class="p">(</span><span class="n">a_lst</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    reshape ``(T,X^2)`` to ``(T,X,X)``</span>
+    <span class="sd">&quot;&quot;&quot;read u value at all time points, reshape ``(T,X^2)`` to ``(T,X,X)``, calculate frequency and wait time</span>
 
-<span class="sd">    calculate excitation pixels, new excitation pixels, frequency and wait time of new excitations</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    a_lst : list</span>
+<span class="sd">        values for parameter &quot;a&quot;</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    --------</span>
+<span class="sd">    freq : 1D array</span>
+<span class="sd">        number of new excitations in every pixel</span>
+<span class="sd">    wait : 1D array</span>
+<span class="sd">        number of frames before next new excitation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="kn">from</span> <span class="nn">utils.path_io</span> <span class="kn">import</span> <span class="n">dir_out</span><span class="p">,</span><span class="n">pjoin</span>
     <span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">io</span>
     <span class="n">freq</span><span class="p">,</span><span class="n">wait</span> <span class="o">=</span> <span class="p">{},{}</span>
@@ -133,9 +147,9 @@
         <span class="n">NEWEXC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">EXC</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="nb">bool</span><span class="p">)</span>
         <span class="n">NEWEXC</span><span class="p">[</span><span class="n">nzzs</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">EXC</span><span class="p">[</span><span class="n">nzzs</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span>
 
-        <span class="kn">from</span> <span class="nn">measure.recurrence</span> <span class="kn">import</span> <span class="n">frequence</span><span class="p">,</span><span class="n">waittime</span>
+        <span class="kn">from</span> <span class="nn">measure.recurrence</span> <span class="kn">import</span> <span class="n">frequency</span><span class="p">,</span><span class="n">waittime</span>
         <span class="n">outline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">NEWEXC</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-        <span class="n">freq</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">frequence</span><span class="p">(</span><span class="n">NEWEXC</span><span class="p">,</span><span class="n">outline</span><span class="p">)</span>
+        <span class="n">freq</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">frequency</span><span class="p">(</span><span class="n">NEWEXC</span><span class="p">,</span><span class="n">outline</span><span class="p">)</span>
         <span class="n">wait</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">waittime</span><span class="p">(</span><span class="n">NEWEXC</span><span class="p">,</span><span class="n">outline</span><span class="p">,</span><span class="mi">120</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">freq</span><span class="p">,</span><span class="n">wait</span></div>
     

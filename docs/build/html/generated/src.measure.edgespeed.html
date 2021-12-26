@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>src.measure.edgespeed module &mdash; pulsatile RhoA dynamics 0.1.0 documentation</title>
+  <title>src.measure.edgespeed module &mdash; Quantify spatiotemporal patterns of excitions at cell surface 0.1.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> pulsatile RhoA dynamics
+            <a href="../index.html" class="icon icon-home"> Quantify spatiotemporal patterns of excitions at cell surface
           </a>
               <div class="version">
                 0.1.0
@@ -44,8 +44,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../README.html">Quantification of the spatiotemporal excitation patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../structure.html">Project files and folders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyenv.html">Python virtual environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sphinx.html">Sphinx autodocumentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Modules</a><ul class="current">
@@ -77,7 +76,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">pulsatile RhoA dynamics</a>
+          <a href="../index.html">Quantify spatiotemporal patterns of excitions at cell surface</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -103,21 +102,38 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="src.measure.edgespeed.count11">
 <span class="sig-prename descclassname"><span class="pre">src.measure.edgespeed.</span></span><span class="sig-name descname"><span class="pre">count11</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/edgespeed.html#count11"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.edgespeed.count11" title="Permalink to this definition"></a></dt>
-<dd><p>count number of consecutive ‘1’s in binary sequence</p>
+<dd><p>count the lenghth of first consecutive ‘1’s in binary sequence</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>int</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>seq</strong> (<em>np.array</em><em>(</em><em>(</em><em>N</em><em>,</em><em>)</em><em>,</em><em>dtype=bool</em><em>)</em>) – binary time series</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>length</strong> – lenghth of first consecutive ‘1’s</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="src.measure.edgespeed.measure_amp">
-<span class="sig-prename descclassname"><span class="pre">src.measure.edgespeed.</span></span><span class="sig-name descname"><span class="pre">measure_amp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pointxy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointuv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">im</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlength</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/edgespeed.html#measure_amp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.edgespeed.measure_amp" title="Permalink to this definition"></a></dt>
-<dd><p>distance from point to edge of new excitation regions</p>
+<dt class="sig sig-object py" id="src.measure.edgespeed.line_intensity">
+<span class="sig-prename descclassname"><span class="pre">src.measure.edgespeed.</span></span><span class="sig-name descname"><span class="pre">line_intensity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pointxy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointuv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">im</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlength</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/edgespeed.html#line_intensity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.edgespeed.line_intensity" title="Permalink to this definition"></a></dt>
+<dd><p>intensity of pixels along the line that start front pointxy in the direction of pointuv</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>int</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pointxy</strong> (<em>np.array</em><em>(</em><em>(</em><em>2</em><em>,</em><em>)</em><em>,</em><em>dtype=int</em><em>)</em>) – x,y coordinates of point</p></li>
+<li><p><strong>pointuv</strong> (<em>np.array</em><em>(</em><em>(</em><em>2</em><em>,</em><em>)</em><em>,</em><em>dtype=int</em><em>)</em>) – u,v coordinates of point</p></li>
+<li><p><strong>im</strong> (<em>np.array</em><em>(</em><em>(</em><em>X</em><em>,</em><em>Y</em><em>)</em><em>,</em><em>dtype=bool</em><em>)</em>) – single frame of new excitation image</p></li>
+<li><p><strong>maxlength</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – maximum length of the line</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>lineim</strong> – intensity of pixels along the line sorted by distance to the startxy in ascending order</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array((N,),dtype=bool)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -125,10 +141,20 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="src.measure.edgespeed.point_velocity">
 <span class="sig-prename descclassname"><span class="pre">src.measure.edgespeed.</span></span><span class="sig-name descname"><span class="pre">point_velocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blobs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NEWEXC</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outline</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/edgespeed.html#point_velocity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.edgespeed.point_velocity" title="Permalink to this definition"></a></dt>
-<dd><p>find evenly spaced points along contour in new excitation regions at current frame; measure distance from point to edge of new excitation regions at next frame</p>
+<dd><p>centered cross correlation of two time series</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>array of int</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>NEWEXC</strong> (<em>np.array</em><em>(</em><em>(</em><em>T</em><em>,</em><em>X</em><em>,</em><em>Y</em><em>)</em><em>,</em><em>dtype=bool</em><em>)</em>) – new excitation mask</p></li>
+<li><p><strong>outline</strong> (<em>np.array</em><em>(</em><em>(</em><em>X</em><em>,</em><em>Y</em><em>)</em><em>,</em><em>dtype=bool</em><em>)</em>) – mask of pixels in embryo</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>speed</strong> (<em>(# evenly spaced points along contour,)</em>) – distance from point to edge of new excitation regions</p></li>
+<li><p><strong>speedmsk</strong> (<em>np.array((T,X,Y),dtype=np.float32)</em>) – pixel value represents amplitude of edge propagation. pixels outside of embryo are labeled -1</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -136,12 +162,45 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="src.measure.edgespeed.rect_zxy">
 <span class="sig-prename descclassname"><span class="pre">src.measure.edgespeed.</span></span><span class="sig-name descname"><span class="pre">rect_zxy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imshape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">5)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">W</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/edgespeed.html#rect_zxy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.edgespeed.rect_zxy" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>find pixels in the bounding rectangle of a vector</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – vector {‘xy’:xy,’uv’:uv}</p></li>
+<li><p><strong>imshape</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><em>tuple</em></a>) – dimensions of image (X,Y)</p></li>
+<li><p><strong>L</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><em>tuple</em></a>) – relative start and end points of the rectangle along the vector</p></li>
+<li><p><strong>W</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – dimention of rectangle perpendicular to the vector</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>rectx</strong> (<em>np.array((N,),dtype=int)</em>) – x coordinate of pixels in rectangle</p></li>
+<li><p><strong>recty</strong> (<em>np.array((N,),dtype=int)</em>) – y coordinate of pixels in rectangle</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.measure.edgespeed.rectangle">
 <span class="sig-prename descclassname"><span class="pre">src.measure.edgespeed.</span></span><span class="sig-name descname"><span class="pre">rectangle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">W</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/edgespeed.html#rectangle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.edgespeed.rectangle" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>locate the x,y coordinates of the bounding rectangle of a vector</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – start point of vector</p></li>
+<li><p><strong>q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – end point of vector</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>length</strong> – lenghth of first consecutive ‘1’s</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 

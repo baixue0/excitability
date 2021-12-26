@@ -87,7 +87,7 @@ source_suffix = ['.rst', '.md']
 master_doc = 'index'
 
 # General information about the project.
-project = 'pulsatile RhoA dynamics'
+project = 'Quantify spatiotemporal patterns of excitions at cell surface'
 copyright = ''
 author = 'baixue yao'
 

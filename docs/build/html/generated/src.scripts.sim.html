@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>src.scripts.sim module &mdash; pulsatile RhoA dynamics 0.1.0 documentation</title>
+  <title>src.scripts.sim module &mdash; Quantify spatiotemporal patterns of excitions at cell surface 0.1.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> pulsatile RhoA dynamics
+            <a href="../index.html" class="icon icon-home"> Quantify spatiotemporal patterns of excitions at cell surface
           </a>
               <div class="version">
                 0.1.0
@@ -44,8 +44,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../README.html">Quantification of the spatiotemporal excitation patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../structure.html">Project files and folders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyenv.html">Python virtual environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sphinx.html">Sphinx autodocumentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Modules</a><ul class="current">
@@ -74,7 +73,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">pulsatile RhoA dynamics</a>
+          <a href="../index.html">Quantify spatiotemporal patterns of excitions at cell surface</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -110,8 +109,19 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="src.scripts.sim.freq_wait">
 <span class="sig-prename descclassname"><span class="pre">src.scripts.sim.</span></span><span class="sig-name descname"><span class="pre">freq_wait</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a_lst</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/scripts/sim.html#freq_wait"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.scripts.sim.freq_wait" title="Permalink to this definition"></a></dt>
-<dd><p>reshape <code class="docutils literal notranslate"><span class="pre">(T,X^2)</span></code> to <code class="docutils literal notranslate"><span class="pre">(T,X,X)</span></code></p>
-<p>calculate excitation pixels, new excitation pixels, frequency and wait time of new excitations</p>
+<dd><p>read u value at all time points, reshape <code class="docutils literal notranslate"><span class="pre">(T,X^2)</span></code> to <code class="docutils literal notranslate"><span class="pre">(T,X,X)</span></code>, calculate frequency and wait time</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>a_lst</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – values for parameter “a”</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>freq</strong> (<em>1D array</em>) – number of new excitations in every pixel</p></li>
+<li><p><strong>wait</strong> (<em>1D array</em>) – number of frames before next new excitation</p></li>
+</ul>
+</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -124,7 +134,12 @@
 <dt class="sig sig-object py" id="src.scripts.sim.solve_params">
 <span class="sig-prename descclassname"><span class="pre">src.scripts.sim.</span></span><span class="sig-name descname"><span class="pre">solve_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a_lst</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/scripts/sim.html#solve_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.scripts.sim.solve_params" title="Permalink to this definition"></a></dt>
 <dd><p>solve FitzhughNagumo reaction with stochastic perturbation on 1D grid</p>
-<p>save the time evolution as tif images with shape <code class="docutils literal notranslate"><span class="pre">(T,X^2)</span></code></p>
+<p>run one simulation for each “a” value and save u value at all time points as a tif image with shape <code class="docutils literal notranslate"><span class="pre">(T,X^2)</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>a_lst</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – values for parameter “a”</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>

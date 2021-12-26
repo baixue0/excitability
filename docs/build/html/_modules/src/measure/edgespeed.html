@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>src.measure.edgespeed &mdash; pulsatile RhoA dynamics 0.1.0 documentation</title>
+  <title>src.measure.edgespeed &mdash; Quantify spatiotemporal patterns of excitions at cell surface 0.1.0 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
@@ -27,7 +27,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> pulsatile RhoA dynamics
+            <a href="../../../index.html" class="icon icon-home"> Quantify spatiotemporal patterns of excitions at cell surface
           </a>
               <div class="version">
                 0.1.0
@@ -41,8 +41,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../README.html">Quantification of the spatiotemporal excitation patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../structure.html">Project files and folders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../README.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../pyenv.html">Python virtual environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../sphinx.html">Sphinx autodocumentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../generated/modules.html">Modules</a></li>
@@ -54,7 +53,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../index.html">pulsatile RhoA dynamics</a>
+          <a href="../../../index.html">Quantify spatiotemporal patterns of excitions at cell surface</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -76,17 +75,29 @@
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <div class="viewcode-block" id="point_velocity"><a class="viewcode-back" href="../../../generated/src.measure.edgespeed.html#src.measure.edgespeed.point_velocity">[docs]</a><span class="k">def</span> <span class="nf">point_velocity</span><span class="p">(</span><span class="n">blobs</span><span class="p">,</span><span class="n">NEWEXC</span><span class="p">,</span><span class="n">outline</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    find evenly spaced points along contour in new excitation regions at current frame; measure distance from point to edge of new excitation regions at next frame</span>
+    <span class="sd">&quot;&quot;&quot;centered cross correlation of two time series</span>
 
-<span class="sd">    :returns: array of int</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    NEWEXC : np.array((T,X,Y),dtype=bool)</span>
+<span class="sd">        new excitation mask</span>
+<span class="sd">    outline : np.array((X,Y),dtype=bool)</span>
+<span class="sd">        mask of pixels in embryo</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    --------</span>
+<span class="sd">    speed : (# evenly spaced points along contour,)</span>
+<span class="sd">        distance from point to edge of new excitation regions</span>
+<span class="sd">    speedmsk : np.array((T,X,Y),dtype=np.float32)</span>
+<span class="sd">        pixel value represents amplitude of edge propagation. pixels outside of embryo are labeled -1</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">imshape</span> <span class="o">=</span> <span class="n">NEWEXC</span><span class="o">.</span><span class="n">shape</span>
     <span class="n">ampstk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">imshape</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
     <span class="kn">from</span> <span class="nn">skimage.morphology</span> <span class="kn">import</span> <span class="n">binary_erosion</span><span class="p">,</span><span class="n">disk</span>
     <span class="n">outline</span> <span class="o">=</span> <span class="n">binary_erosion</span><span class="p">(</span><span class="n">outline</span><span class="p">,</span> <span class="n">disk</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
     <span class="n">blobzs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">blobs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-    <span class="n">amparr</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">speed</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">pz</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">blobzs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">blobzs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
         <span class="k">if</span> <span class="n">pz</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">blobs</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">or</span> <span class="n">pz</span><span class="o">+</span><span class="mi">1</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">blobs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="k">continue</span>
@@ -99,22 +110,37 @@
                     <span class="k">continue</span>
                 
                 <span class="k">if</span> <span class="n">NEWEXC</span><span class="p">[</span><span class="n">pz</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">]:</span>
-                    <span class="n">amp</span> <span class="o">=</span> <span class="n">measure_amp</span><span class="p">(</span><span class="n">point</span><span class="p">[</span><span class="s1">&#39;xy&#39;</span><span class="p">],</span><span class="n">point</span><span class="p">[</span><span class="s1">&#39;uv&#39;</span><span class="p">],</span><span class="n">NEWEXC</span><span class="p">[</span><span class="n">pz</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="n">lineim</span> <span class="o">=</span> <span class="n">line_intensity</span><span class="p">(</span><span class="n">point</span><span class="p">[</span><span class="s1">&#39;xy&#39;</span><span class="p">],</span><span class="n">point</span><span class="p">[</span><span class="s1">&#39;uv&#39;</span><span class="p">],</span><span class="n">NEWEXC</span><span class="p">[</span><span class="n">pz</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="n">amp</span> <span class="o">=</span> <span class="n">count11</span><span class="p">(</span><span class="n">lineim</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">amp</span> <span class="o">=</span> <span class="kc">None</span>
                 <span class="n">point</span><span class="p">[</span><span class="s1">&#39;amp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">amp</span>
                 <span class="k">if</span> <span class="n">amp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">amparr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">amp</span><span class="p">)</span>
+                    <span class="n">speed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">amp</span><span class="p">)</span>
                     <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">rect_zxy</span><span class="p">(</span><span class="n">point</span><span class="p">,</span><span class="n">imshape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
                     <span class="n">ampstk</span><span class="p">[</span><span class="n">pz</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">amp</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">amparr</span><span class="p">),</span> <span class="n">ampstk</span></div>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">speed</span><span class="p">),</span> <span class="n">ampstk</span></div>
 
-<div class="viewcode-block" id="measure_amp"><a class="viewcode-back" href="../../../generated/src.measure.edgespeed.html#src.measure.edgespeed.measure_amp">[docs]</a><span class="k">def</span> <span class="nf">measure_amp</span><span class="p">(</span><span class="n">pointxy</span><span class="p">,</span><span class="n">pointuv</span><span class="p">,</span><span class="n">im</span><span class="p">,</span><span class="n">maxlength</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    distance from point to edge of new excitation regions</span>
+<div class="viewcode-block" id="line_intensity"><a class="viewcode-back" href="../../../generated/src.measure.edgespeed.html#src.measure.edgespeed.line_intensity">[docs]</a><span class="k">def</span> <span class="nf">line_intensity</span><span class="p">(</span><span class="n">pointxy</span><span class="p">,</span><span class="n">pointuv</span><span class="p">,</span><span class="n">im</span><span class="p">,</span><span class="n">maxlength</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;intensity of pixels along the line that start front pointxy in the direction of pointuv</span>
 
-<span class="sd">    :returns: int</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pointxy : np.array((2,),dtype=int)</span>
+<span class="sd">        x,y coordinates of point</span>
+<span class="sd">    pointuv : np.array((2,),dtype=int)</span>
+<span class="sd">        u,v coordinates of point</span>
+<span class="sd">    im : np.array((X,Y),dtype=bool)</span>
+<span class="sd">        single frame of new excitation image</span>
+<span class="sd">    maxlength : int</span>
+<span class="sd">        maximum length of the line</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    --------</span>
+<span class="sd">    lineim : np.array((N,),dtype=bool)</span>
+<span class="sd">        intensity of pixels along the line sorted by distance to the startxy in ascending order</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="c1"># draw a line with length &quot;maxlength&quot; from point in the direction of its outward pointing vector</span>
     <span class="n">xystart</span><span class="p">,</span><span class="n">xyend</span> <span class="o">=</span> <span class="n">pointxy</span><span class="p">,(</span><span class="n">pointxy</span><span class="o">+</span><span class="n">pointuv</span><span class="o">*</span><span class="n">maxlength</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
     <span class="kn">from</span> <span class="nn">skimage.draw</span> <span class="kn">import</span> <span class="n">line</span>
@@ -127,14 +153,22 @@
     <span class="n">lineim</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="n">linex</span><span class="p">[</span><span class="n">m</span><span class="p">],</span><span class="n">liney</span><span class="p">[</span><span class="n">m</span><span class="p">]]</span><span class="c1"># intensity of pixels along the line</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">lineim</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span><span class="c1">#no new excitation neighboring the point</span>
         <span class="k">return</span> <span class="mi">0</span>
-    <span class="k">return</span> <span class="n">count11</span><span class="p">(</span><span class="n">lineim</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">lineim</span></div>
         
 <div class="viewcode-block" id="count11"><a class="viewcode-back" href="../../../generated/src.measure.edgespeed.html#src.measure.edgespeed.count11">[docs]</a><span class="k">def</span> <span class="nf">count11</span><span class="p">(</span><span class="n">seq</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    count number of consecutive &#39;1&#39;s in binary sequence</span>
+    <span class="sd">&quot;&quot;&quot;count the lenghth of first consecutive &#39;1&#39;s in binary sequence</span>
 
-<span class="sd">    :returns: int</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    seq : np.array((N,),dtype=bool)</span>
+<span class="sd">        binary time series</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    --------</span>
+<span class="sd">    length : int</span>
+<span class="sd">        lenghth of first consecutive &#39;1&#39;s</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">while</span> <span class="ow">not</span> <span class="n">seq</span><span class="p">[</span><span class="n">start</span><span class="p">]:</span>
         <span class="n">start</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -150,6 +184,27 @@
     <span class="k">return</span> <span class="n">end</span><span class="o">-</span><span class="n">start</span></div>
 
 <div class="viewcode-block" id="rect_zxy"><a class="viewcode-back" href="../../../generated/src.measure.edgespeed.html#src.measure.edgespeed.rect_zxy">[docs]</a><span class="k">def</span> <span class="nf">rect_zxy</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">imshape</span><span class="p">,</span><span class="n">L</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">W</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;find pixels in the bounding rectangle of a vector</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p : dict</span>
+<span class="sd">        vector {&#39;xy&#39;:xy,&#39;uv&#39;:uv}</span>
+<span class="sd">    imshape : tuple</span>
+<span class="sd">        dimensions of image (X,Y)</span>
+<span class="sd">    L : tuple</span>
+<span class="sd">        relative start and end points of the rectangle along the vector</span>
+<span class="sd">    W : int</span>
+<span class="sd">        dimention of rectangle perpendicular to the vector</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    --------</span>
+<span class="sd">    rectx : np.array((N,),dtype=int)</span>
+<span class="sd">        x coordinate of pixels in rectangle</span>
+<span class="sd">    recty : np.array((N,),dtype=int)</span>
+<span class="sd">        y coordinate of pixels in rectangle</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">vec</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="s1">&#39;xy&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">p</span><span class="p">[</span><span class="s1">&#39;uv&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">p</span><span class="p">[</span><span class="s1">&#39;xy&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">p</span><span class="p">[</span><span class="s1">&#39;uv&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
     <span class="n">poly</span> <span class="o">=</span> <span class="n">rectangle</span><span class="p">(</span><span class="o">*</span><span class="n">vec</span><span class="p">,</span><span class="n">W</span><span class="p">)</span>
     <span class="kn">from</span> <span class="nn">skimage.draw</span> <span class="kn">import</span> <span class="n">polygon</span>
@@ -157,6 +212,21 @@
     <span class="k">return</span> <span class="n">rectx</span><span class="p">,</span><span class="n">recty</span></div>
 
 <div class="viewcode-block" id="rectangle"><a class="viewcode-back" href="../../../generated/src.measure.edgespeed.html#src.measure.edgespeed.rectangle">[docs]</a><span class="k">def</span> <span class="nf">rectangle</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">W</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;locate the x,y coordinates of the bounding rectangle of a vector</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p : int</span>
+<span class="sd">        start point of vector</span>
+<span class="sd">    q : int</span>
+<span class="sd">        end point of vector</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    --------</span>
+<span class="sd">    length : int</span>
+<span class="sd">        lenghth of first consecutive &#39;1&#39;s</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">vpq</span> <span class="o">=</span> <span class="n">q</span><span class="o">-</span><span class="n">p</span>
     <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">vpq</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">vnorm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>

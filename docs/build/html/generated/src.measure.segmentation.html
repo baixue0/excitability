@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>src.measure.segmentation module &mdash; pulsatile RhoA dynamics 0.1.0 documentation</title>
+  <title>src.measure.segmentation module &mdash; Quantify spatiotemporal patterns of excitions at cell surface 0.1.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> pulsatile RhoA dynamics
+            <a href="../index.html" class="icon icon-home"> Quantify spatiotemporal patterns of excitions at cell surface
           </a>
               <div class="version">
                 0.1.0
@@ -44,8 +44,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../README.html">Quantification of the spatiotemporal excitation patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../structure.html">Project files and folders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyenv.html">Python virtual environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sphinx.html">Sphinx autodocumentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Modules</a><ul class="current">
@@ -77,7 +76,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">pulsatile RhoA dynamics</a>
+          <a href="../index.html">Quantify spatiotemporal patterns of excitions at cell surface</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -103,13 +102,23 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="src.measure.segmentation.bleach_correction">
 <span class="sig-prename descclassname"><span class="pre">src.measure.segmentation.</span></span><span class="sig-name descname"><span class="pre">bleach_correction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">videozmin</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/segmentation.html#bleach_correction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.segmentation.bleach_correction" title="Permalink to this definition"></a></dt>
-<dd><p>measure mean intensity as a function of time, smooth, compensate for loss</p>
+<dd><p>compensate for photobleach</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>mean intensity over time raw, smoothed, corrected ; corrected imagestack</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stk</strong> (<cite>numpy.ndarray</cite>, (T_raw,X,Y), np.float32) – raw image stack</p></li>
+<li><p><strong>outline</strong> (<cite>numpy.ndarray</cite>, (X,Y), bool) – mask of pixels in embryo</p></li>
+<li><p><strong>window_length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – window_length for savgol_filter smoothing</p></li>
+<li><p><strong>videozmin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – mask of pixels in embryo</p></li>
+</ul>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>np.array((N frames,),<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a>), np.array((Z,X,Y),<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a>)</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>y</strong> (<em>1D array</em>) – average intensity of all pixels in embryo at each time point</p></li>
+<li><p><strong>ys</strong> (<em>1D array</em>) – smooth y with savgol_filter</p></li>
+<li><p><strong>imbc</strong> (<cite>numpy.ndarray</cite>, (T_raw,X,Y), np.float32) – image stack after compensating for photobleach</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -117,20 +126,71 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="src.measure.segmentation.diff">
 <span class="sig-prename descclassname"><span class="pre">src.measure.segmentation.</span></span><span class="sig-name descname"><span class="pre">diff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/segmentation.html#diff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.segmentation.diff" title="Permalink to this definition"></a></dt>
-<dd><p>temporal derivative with given window size
-skip the first and last few frames where pixels are all zero</p>
+<dd><p>temporal derivative with given window size of 4.8 seconds</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stk</strong> (<cite>numpy.ndarray</cite>, (T_raw,X,Y), np.float32) – raw image stack</p></li>
+<li><p><strong>outline</strong> (<cite>numpy.ndarray</cite>, (X,Y), bool) – mask of pixels in embryo</p></li>
+<li><p><strong>window</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>, </em><em>optional</em>) – window_length for savgol_filter smoothing</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>diff_normed</strong> – image stack after compensating for photobleach</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><cite>numpy.ndarray</cite>, (T,X,Y), np.float32</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.measure.segmentation.excitation">
 <span class="sig-prename descclassname"><span class="pre">src.measure.segmentation.</span></span><span class="sig-name descname"><span class="pre">excitation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savedir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">DIFF</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">THRESH</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/segmentation.html#excitation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.segmentation.excitation" title="Permalink to this definition"></a></dt>
-<dd><p>pixels in DIFF above THRESH is EXC, the first frame to cross the threshold is NEWEXC</p>
+<dd><p>pixels in DIFF above THRESH is EXC; the first frame to cross the threshold is NEWEXC</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>savedir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – path to save returned values</p></li>
+<li><p><strong>DIFF</strong> (<cite>numpy.ndarray</cite>, (T,X,Y), np.float32) – temporal difference</p></li>
+<li><p><strong>outline</strong> (<cite>numpy.ndarray</cite>, (X,Y), bool) – mask of pixels in embryo</p></li>
+<li><p><strong>THRESH</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – threshold value</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>savedir</strong> (<em>str</em>) – path to save returned values</p></li>
+<li><p><strong>EXC</strong> (<cite>numpy.ndarray</cite>, (T,X,Y), bool) – excitation mask</p></li>
+<li><p><strong>NEWEXC</strong> (<cite>numpy.ndarray</cite>, (T,X,Y), bool) – new excitation mask</p></li>
+<li><p><strong>outline</strong> (<cite>numpy.ndarray</cite>, (X,Y), bool) – mask of pixels in embryo</p></li>
+</ul>
+</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.measure.segmentation.group_diff">
-<span class="sig-prename descclassname"><span class="pre">src.measure.segmentation.</span></span><span class="sig-name descname"><span class="pre">group_diff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tRes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/segmentation.html#group_diff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.segmentation.group_diff" title="Permalink to this definition"></a></dt>
-<dd><p>group imagestack; smooth in space and time;</p>
+<span class="sig-prename descclassname"><span class="pre">src.measure.segmentation.</span></span><span class="sig-name descname"><span class="pre">group_diff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tRes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/segmentation.html#group_diff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.segmentation.group_diff" title="Permalink to this definition"></a></dt>
+<dd><p>group imagestack; smooth in space and time</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stk</strong> (<cite>numpy.ndarray</cite>, (T_raw,X,Y), np.float32) – raw image stack</p></li>
+<li><p><strong>outline</strong> (<cite>numpy.ndarray</cite>, (X,Y), bool) – mask of pixels in embryo</p></li>
+<li><p><strong>tRes</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – time between consecutive frames</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>RAW</strong> (<cite>numpy.ndarray</cite>, (T,X,Y), np.uint16) – raw</p></li>
+<li><p><strong>SMOOTH</strong> (<cite>numpy.ndarray</cite>, (T,X,Y), np.float32) – smoothed</p></li>
+<li><p><strong>DIFF</strong> (<cite>numpy.ndarray</cite>, (T,X,Y), np.float32) – temporal difference</p></li>
+<li><p><strong>zgroups</strong> (<em>nested 1D array</em>) – frames that are grouped together</p></li>
+</ul>
+</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">

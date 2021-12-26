@@ -7,7 +7,7 @@ Documentation of pulsatile RhoA dynamics
    :glob:
 
    README.md
-   structure
    pyenv
    sphinx
    generated/modules
+
