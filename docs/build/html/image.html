@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image analysis &#8212; excitability 0.1.0 documentation</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/blank.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Analyze one embryo" href="image_embryo.html" />
+    <link rel="prev" title="Document a python project" href="template.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="index.html">
+<p class="title">excitability</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="README.html">
+  README
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="filetree.html">
+  FileTree
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="template.html">
+  Document a python project
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="current reference internal nav-link" href="#">
+  Image analysis
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="visualization.html">
+  Visualization
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="RD.html">
+  RD simulation
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-and-code-organization">
+   Data and code organization
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="image-analysis">
+<h1>Image analysis<a class="headerlink" href="#image-analysis" title="Permalink to this headline"></a></h1>
+<div class="section" id="data-and-code-organization">
+<h2>Data and code organization<a class="headerlink" href="#data-and-code-organization" title="Permalink to this headline"></a></h2>
+<a class="reference internal image-reference" href="_images/flow.jpg"><img alt="_images/flow.jpg" src="_images/flow.jpg" style="width: 600px;" /></a>
+<ul class="simple">
+<li><p>The gray box shows the data and image processing for one embryo.</p></li>
+<li><p>The texts and arrows represent data and image processing steps respectively.</p></li>
+<li><p>Important image proceesing steps are labeled with circled numbers.</p></li>
+<li><p>Input and output is labeled blue and green respectively.</p></li>
+<li><p>Purple shows how the threshold is calculated from embryos of the same phenotype. Red texts indicate that they are the same data. Segmentation is broken into two steps because the threshold depends on ROK temporal derivative over time for all embryos of the same phenotype.</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="image_embryo.html">Analyze one embryo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="image_embryo.html#segmentation-i">① segmentation I</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image_embryo.html#segmentation-ii">② segmentation II</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image_embryo.html#summary-statistics">③ summary statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image_embryo.html#pixel-intensity-in-binary-mask-at-a-range-of-time-offsets">④ pixel intensity in binary mask at a range of time offsets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="image_input.html">Input</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="image_input.html#raw-tiff-image-stacks-and-table-of-all-embryos">raw tiff image stacks and table of all embryos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image_input.html#label-pixels-in-the-embryo">label pixels in the embryo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image_input.html#label-pulsing-regions-in-the-embryo">label pulsing regions in the embryo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="image_output.html">Output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="image_output.html#apply-the-same-function-to-a-list-of-embryos">apply the same function to a list of embryos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image_output.html#return-function-output-as-a-dictionary">return function output as a dictionary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Example_jupyter_notebook.html">Example jupyter notebook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Example_jupyter_notebook.html#Segment-pulses-of-activity-in-videos">Segment pulses of activity in videos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Example_jupyter_notebook.html#table-of-all-embryos">table of all embryos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Example_jupyter_notebook.html#read-raw-tiff-image">read raw tiff image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Example_jupyter_notebook.html#pixels-in-the-embryo">pixels in the embryo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Example_jupyter_notebook.html#correct-photobleach">correct photobleach</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Example_jupyter_notebook.html#grouped-average-in-time">grouped average in time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Example_jupyter_notebook.html#excitation-=-temporal-derivative-&gt;-threshold">excitation = temporal derivative &gt; threshold</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Example_jupyter_notebook.html#ROK-temporal-difference-in-labled-pulsing-regions">ROK temporal difference in labled pulsing regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_jupyter_notebook.html#Measure-summary-statistics">Measure summary statistics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Example_jupyter_notebook.html#detect-contour-of-excitation-regions">detect contour of excitation regions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Example_jupyter_notebook.html#measure-polygon-local-deformations-perpendicular-to-its-edge">measure polygon local deformations perpendicular to its edge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Example_jupyter_notebook.html#link-polygons-recursively-to-map-pulse-trajectories">link polygons recursively to map pulse trajectories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Example_jupyter_notebook.html#measure-periodicity-of-local-time-series">measure periodicity of local time series</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="template.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Document a python project</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="image_embryo.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Analyze one embryo</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright .<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

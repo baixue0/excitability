@@ -1,0 +1,326 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>visualization.movie &#8212; excitability 0.1.0 documentation</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/blank.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="../../index.html">
+<p class="title">excitability</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../README.html">
+  README
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../filetree.html">
+  FileTree
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../template.html">
+  Document a python project
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../image.html">
+  Image analysis
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../visualization.html">
+  Visualization
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../RD.html">
+  RD simulation
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for visualization.movie</h1><div class="highlight"><pre>
+<span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">functions to make movies</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">def</span> <span class="nf">create_title</span><span class="p">(</span><span class="n">imshape</span><span class="p">,</span><span class="n">txt</span><span class="p">,</span><span class="n">heightratio</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span><span class="n">textcolor</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)):</span>
+    <span class="kn">import</span> <span class="nn">cv2</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">imshape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">heightratio</span><span class="p">)</span>
+    <span class="n">titleim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">height</span><span class="p">,</span><span class="n">imshape</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="mi">255</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+    <span class="c1">#coordinates of the bottom-left corner of the text string in the image</span>
+    <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">imshape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mf">0.3</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">height</span><span class="o">*</span><span class="mf">0.7</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">putText</span><span class="p">(</span><span class="n">titleim</span><span class="p">,</span> <span class="n">txt</span><span class="p">,</span> <span class="n">org</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span> <span class="n">fontFace</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">FONT_HERSHEY_SIMPLEX</span> <span class="p">,</span> <span class="n">fontScale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">textcolor</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">titlestk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">titleim</span><span class="p">]</span><span class="o">*</span><span class="n">imshape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">)]</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">titlestk</span>
+
+<div class="viewcode-block" id="time_scalebar"><a class="viewcode-back" href="../../visualization.html#visualization.movie.time_scalebar">[docs]</a><span class="k">def</span> <span class="nf">time_scalebar</span><span class="p">(</span><span class="n">stk</span><span class="p">,</span><span class="n">dt</span><span class="p">,</span><span class="n">cbarstk</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">textcolor</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="n">padcolor</span><span class="o">=</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;overlay time stamp and scale bar on image stack</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    im : np.array((T,X,Y,3),dtype=np.uint8)</span>
+<span class="sd">        original image stack</span>
+<span class="sd">    dt : float</span>
+<span class="sd">        time gap between consecutive frames</span>
+<span class="sd">    cbarstk : list of np.array((X,Y,3),dtype=np.uint8)</span>
+<span class="sd">        image stack of colorbar</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    --------</span>
+<span class="sd">    labeled : np.array((T,X,Y,3),dtype=np.uint8)</span>
+<span class="sd">        labeled image stack</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">imshape</span> <span class="o">=</span> <span class="n">stk</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">timex</span><span class="p">,</span><span class="n">timey</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">imshape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mf">0.06</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">imshape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mf">0.13</span><span class="p">)</span>
+    <span class="n">scalex</span><span class="p">,</span><span class="n">scaley</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">imshape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mf">0.05</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">imshape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mf">0.95</span><span class="p">)</span>
+    <span class="kn">import</span> <span class="nn">cv2</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">imshape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">cv2</span><span class="o">.</span><span class="n">putText</span><span class="p">(</span><span class="n">stk</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">dt</span><span class="o">*</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39; S&#39;</span><span class="p">,</span> <span class="n">org</span><span class="o">=</span><span class="p">(</span><span class="n">timex</span><span class="p">,</span><span class="n">timey</span><span class="p">),</span> <span class="n">fontFace</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">FONT_HERSHEY_SIMPLEX</span> <span class="p">,</span> <span class="n">fontScale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">textcolor</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="c1">#label time at top left corner</span>
+        <span class="n">cv2</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">stk</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">pt1</span><span class="o">=</span><span class="p">(</span><span class="n">scalex</span><span class="p">,</span><span class="n">scaley</span><span class="p">),</span> <span class="n">pt2</span><span class="o">=</span><span class="p">(</span><span class="n">scalex</span><span class="o">+</span><span class="mi">50</span><span class="p">,</span><span class="n">scaley</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">textcolor</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="c1"># scale bar 5um at bottom left corner</span>
+    <span class="k">if</span> <span class="n">cbarstk</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">stk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span><span class="n">cbarstk</span><span class="p">),</span><span class="n">stk</span><span class="p">])</span><span class="c1">#stack left to right</span>
+    <span class="k">return</span> <span class="n">stk</span></div>
+
+<div class="viewcode-block" id="boarder"><a class="viewcode-back" href="../../visualization.html#visualization.movie.boarder">[docs]</a><span class="k">def</span> <span class="nf">boarder</span><span class="p">(</span><span class="n">im</span><span class="p">,</span><span class="n">top_bottom_left_right</span><span class="p">,</span><span class="n">padcolor</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]):</span><span class="c1">#input RGB 8bit image</span>
+    <span class="sd">&quot;&quot;&quot;add boarder to image or imagestack</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    im : np.array((X,Y,3),dtype=np.uint8) or (T,X,Y,3)</span>
+<span class="sd">        original image stack</span>
+<span class="sd">    top_bottom_left_right : tuple of int</span>
+<span class="sd">        top, bottom, left, right</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    --------</span>
+<span class="sd">    resized : np.array((top+X+bottom,left+Y+right,3),dtype=np.uint8) or (T,top+X+bottom,left+Y+right,3)</span>
+<span class="sd">        resized image stack</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="kn">import</span> <span class="nn">cv2</span>
+    <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">ndim</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">copyMakeBorder</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="o">*</span><span class="n">top_bottom_left_right</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">BORDER_CONSTANT</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">padcolor</span><span class="p">)</span><span class="c1">#top, bottom, left, right</span>
+    <span class="k">elif</span> <span class="n">im</span><span class="o">.</span><span class="n">ndim</span><span class="o">==</span><span class="mi">4</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">cv2</span><span class="o">.</span><span class="n">copyMakeBorder</span><span class="p">(</span><span class="n">im</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="o">*</span><span class="n">top_bottom_left_right</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">BORDER_CONSTANT</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">padcolor</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])],</span><span class="mi">0</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="stk_upsizexy"><a class="viewcode-back" href="../../visualization.html#visualization.movie.stk_upsizexy">[docs]</a><span class="k">def</span> <span class="nf">stk_upsizexy</span><span class="p">(</span><span class="n">imstk</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;resize imagestack</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    imstk : np.array((T,X,Y),dtype=np.uint8) or (T,X,Y,3)</span>
+<span class="sd">        original image stack</span>
+<span class="sd">    scale : float</span>
+<span class="sd">        percent of original x,y dimension</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    --------</span>
+<span class="sd">    resized : np.array((T,X*scale,Y*scale),dtype=np.uint8) or (T,X*scale,Y*scale,3)</span>
+<span class="sd">        resized image stack</span>
+<span class="sd">        </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="kn">import</span> <span class="nn">cv2</span>
+     <span class="c1"># percent of original size</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">imstk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">scale</span><span class="p">)</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">imstk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">scale</span><span class="p">)</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">imstk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">upsized</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">imstk</span><span class="p">[</span><span class="n">z</span><span class="p">],</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="n">interpolation</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">INTER_AREA</span><span class="p">)</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">upsized</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="saveMP4"><a class="viewcode-back" href="../../visualization.html#visualization.movie.saveMP4">[docs]</a><span class="k">def</span> <span class="nf">saveMP4</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">imtsk</span><span class="p">,</span><span class="n">fps</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;save imagestack as MP4 file with `imageio &lt;https://pypi.org/project/imageio/&gt;`_</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    path : str</span>
+<span class="sd">        path to save MP4</span>
+<span class="sd">    imtsk : np.array((T,X,Y,3),dtype=np.uint8)</span>
+<span class="sd">        image stack to convert</span>
+<span class="sd">    fps : int</span>
+<span class="sd">        frames per second</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="kn">import</span> <span class="nn">imageio</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">get_writer</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="s1">&#39;.mp4&#39;</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="n">fps</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">im</span> <span class="ow">in</span> <span class="n">imtsk</span><span class="p">:</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">append_data</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+<span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">stk</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">measure.preprocess</span> <span class="kn">import</span> <span class="n">read_outline</span>
+    <span class="n">outline</span> <span class="o">=</span> <span class="n">read_outline</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">visualization.rotate_crop</span> <span class="kn">import</span> <span class="n">Rotate_Crop</span>
+    <span class="n">RC</span> <span class="o">=</span> <span class="n">Rotate_Crop</span><span class="p">(</span><span class="n">outline</span><span class="p">)</span>
+    <span class="n">stk</span><span class="p">[:,</span><span class="o">~</span><span class="n">outline</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>
+    <span class="n">stk</span> <span class="o">=</span> <span class="n">RC</span><span class="o">.</span><span class="n">rotate_stk</span><span class="p">(</span><span class="n">stk</span><span class="p">,</span><span class="mi">255</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">stk</span>
+
+</pre></div>
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright .<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

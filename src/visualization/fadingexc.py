@@ -14,11 +14,29 @@ def fade(colors,blobs,imshape,N=5):
                 znew = z+dz
                 if znew<0:
                     continue
-                stk[znew,x,y] = linearinterpcolor(dz,-N,1,saturated,gray)
-    cbar = np.array([[linearinterpcolor(dz,-N,1,indexcolor(label),gray) for dz in np.flip(np.arange(-N,1))] for label in range(10)])
+                stk[znew,x,y] = linearinterpcolor(dz,(-N,1),saturated,gray)
+    cbar = np.array([[linearinterpcolor(dz,(-N,1),(indexcolor(label),gray)) for dz in np.flip(np.arange(-N,1))] for label in range(10)])
     return stk,cbar
 
-def linearinterpcolor(v,vmin,vmax,colormin,colormax,reverse=False):
+def linearinterpcolor(v,vminmax,colorminmax,reverse=False):
+    """convert number or array to RGB color given the colors at extremes of LinearSegmentedColormap
+
+    Parameters
+    ----------
+    v : number or ndarray with dimention 1, 2 or 3
+        value to be converted to RGB color
+    vminmax : tuple
+        (vmin,vmax) to normalize v
+    colorminmax : tuple
+        (colormin,colormax) at extremes of LinearSegmentedColormap
+
+    Returns
+    --------
+    rgb255 : same shape as v, dtype=np.uint8
+        converted value
+        
+     """
+
     from matplotlib.colors import LinearSegmentedColormap
     cmap = LinearSegmentedColormap.from_list('', [(i,c) for i,c in enumerate([colormin,colormax])])
     from visualization.image import interpcolor

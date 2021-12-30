@@ -1,8 +1,6 @@
 src namespace
 =============
 
-.. py:module:: src
-
 Subpackages
 -----------
 
@@ -12,5 +10,12 @@ Subpackages
    src.measure
    src.scripts
    src.simrd
-   src.utils
    src.visualization
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 3
+
+   src.utils

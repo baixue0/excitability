@@ -1,13 +1,20 @@
-Documentation of pulsatile RhoA dynamics
+Table of contents
 ===========================================================
 
 .. toctree::
+   :caption: About this project
    :maxdepth: 1
-   :titlesonly:
-   :glob:
 
    README.md
-   pyenv
-   sphinx
-   generated/modules
+   filetree.md
+   template
 
+,,,,,,,
+
+.. toctree::
+   :caption: Usage
+   :maxdepth: 3
+
+   image
+   visualization
+   RD

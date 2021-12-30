@@ -23,6 +23,8 @@ import sys
 sys.path.insert(0, os.path.abspath(os.path.join("..", "..")))
 dir_src = os.path.abspath(os.path.join("..", "..","src"))
 sys.path.insert(0, dir_src)
+dir_tests = os.path.abspath(os.path.join("..", "..","tests"))
+sys.path.insert(0, dir_tests+'/')
 print(sys.path)
 '''
 def listdirs(rootdir,lst):
@@ -46,7 +48,8 @@ import sphinx_rtd_theme
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc',
+extensions = [
+'sphinx.ext.autodoc',
 'sphinx.ext.doctest',
 'sphinx.ext.autosummary',
 'sphinx.ext.intersphinx',
@@ -59,6 +62,7 @@ extensions = ['sphinx.ext.autodoc',
 'sphinx.ext.napoleon',
 'sphinx_rtd_theme',
 'sphinx_copybutton',
+'nbsphinx',
 "myst_parser"# https://myst-parser.readthedocs.io/en/latest/sphinx/intro.html
 ]
 mathjax_path = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"
@@ -87,7 +91,7 @@ source_suffix = ['.rst', '.md']
 master_doc = 'index'
 
 # General information about the project.
-project = 'Quantify spatiotemporal patterns of excitions at cell surface'
+project = 'excitability'
 copyright = ''
 author = 'baixue yao'
 
@@ -124,7 +128,7 @@ todo_include_todos = True
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
+html_theme = "pydata_sphinx_theme"#'haiku'#'alabaster'#'classic'#'sphinx_rtd_theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -135,7 +139,11 @@ html_theme = 'sphinx_rtd_theme'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = []#'_static'
+html_static_path = ['_static']
+
+html_css_files = [
+    'css/custom.css',
+]
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -144,70 +152,12 @@ html_static_path = []#'_static'
 # refs: http://alabaster.readthedocs.io/en/latest/installation.html#sidebars
 html_sidebars = {
     '**': [
-        'relations.html',  # needs 'show_related': True theme option to display
+        #'relations.html',  # needs 'show_related': True theme option to display
         'searchbox.html',
     ]
 }
 
-
-# -- Options for HTMLHelp output ------------------------------------------
-
-# Output file base name for HTML help builder.
-htmlhelp_basename = 'my-sphinx-testdoc'
-
-
-# -- Options for LaTeX output ---------------------------------------------
-
-latex_elements = {
-    # The paper size ('letterpaper' or 'a4paper').
-    #
-    # 'papersize': 'letterpaper',
-
-    # The font size ('10pt', '11pt' or '12pt').
-    #
-    # 'pointsize': '10pt',
-
-    # Additional stuff for the LaTeX preamble.
-    #
-    # 'preamble': '',
-
-    # Latex figure (float) alignment
-    #
-    # 'figure_align': 'htbp',
-}
-
-# Grouping the document tree into LaTeX files. List of tuples
-# (source start file, target name, title,
-#  author, documentclass [howto, manual, or own class]).
-latex_documents = [
-    (master_doc, 'my-sphinx-test.tex', 'my-sphinx-test Documentation',
-     'CMT', 'manual'),
-]
-
-
-# -- Options for manual page output ---------------------------------------
-
-# One entry per manual page. List of tuples
-# (source start file, name, description, authors, manual section).
-man_pages = [
-    (master_doc, 'my-sphinx-test', 'my-sphinx-test Documentation',
-     [author], 1)
-]
-
-
-# -- Options for Texinfo output -------------------------------------------
-
-# Grouping the document tree into Texinfo files. List of tuples
-# (source start file, target name, title, author,
-#  dir menu entry, description, category)
-texinfo_documents = [
-    (master_doc, 'my-sphinx-test', 'my-sphinx-test Documentation',
-     author, 'my-sphinx-test', 'One line description of project.',
-     'Miscellaneous'),
-]
-
-
-
-
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'https://docs.python.org/': None}
+autodoc_member_order = 'bysource'
+

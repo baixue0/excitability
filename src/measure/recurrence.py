@@ -34,10 +34,16 @@ def frequency(stk,outline,example=False):
 
     Returns
     --------
-    freq_false : `numpy.ndarray`, (# pixels in embryo), int
-        (example is False) number of new excitations for pixels in embryo
-    freq_true : `numpy.ndarray`, (X,Y), int
-        (example is True) number of new excitations for all pixels. pixels outside of embryo are -1.
+    freq : `numpy.ndarray`, (# pixels in embryo), int
+        number of new excitations for pixels in embryo
+
+    Note
+    --------
+    returns the following when ``example==True``
+
+    * freq : `numpy.ndarray`, (X,Y), int
+        number of new excitations for all pixels. pixels outside of embryo are -1.
+
     """
 
     freq = stk.sum(0).astype(int)
@@ -63,12 +69,20 @@ def waittime(stk,outline,windowlength,example=False):
 
     Returns
     --------
-    wait time : `numpy.ndarray`, (# new excitation pixels able to observe the entire window), int
-        (example is False) number of frames before next new excitation
-    zxyr : `numpy.ndarray`, (# new excitation pixels able to observe the entire window, 3), int
-        (example is True) temporal and spatial coordinates and wait time of new excitation pixels
-    imshape : tuple
-        (example is True) (T,X,Y) used to create image stack
+    waittime : `numpy.ndarray`, (N,), int
+        number of frames before next new excitation
+
+        N = # new excitation pixels able to observe the entire window
+
+    Note
+    --------
+    returns the following when ``example==True``
+
+    * zxyr : `numpy.ndarray`, (N,3), int
+        3 column : temporal coordinate, spatial coordinate, wait time
+    * imshape : tuple, (T,X,Y), int
+        used to reconstruct image stack
+
     """
 
     imshape = stk.shape

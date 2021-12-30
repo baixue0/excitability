@@ -2,7 +2,7 @@ import sys,os
 sys.path.insert(0, os.path.abspath(os.path.join(".")))
 import numpy as np
 from visualization.plot import figure, addax, legends
-from utils.path_io import pjoin, dir_out, embryos, load_dict
+from utils import pjoin, dir_out, embryos, load_dict
 
 def axes_freq(fig,x,y):
     '''

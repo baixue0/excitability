@@ -1,11 +1,21 @@
 import numpy as np
 
-def findContours(exc,minarea):
-    '''
-    detect contour of connected pixels whose area is larger than minarea
+def findContours(exc):
+    """detect contour of connected pixels
 
-    :return: dictionary of a list of blobs in each frame. {frame0:[blob0, ..., blobn], frame1:[blob0, ..., blobn], ...}
-    '''
+    See more at :class:`src.measure.contour.Blob`
+
+    Parameters
+    ----------
+    stk : `numpy.ndarray`, (T_raw,X,Y), np.float32
+        raw image stack
+
+    Returns
+    --------
+    blobs : dict
+        dictionary of a list of blobs in each frame. ``{frame0:[blob0, ...], frame1:[blob0, ...], ...}``. 
+    """
+
     import cv2
     exc[:,0,:] = False
     exc[:,-1,:] = False
@@ -19,8 +29,6 @@ def findContours(exc,minarea):
         numLabels, labels, stats, centroids = cv2.connectedComponentsWithStats(im, 8)
         for label in range(1,numLabels):
             area = stats[label, cv2.CC_STAT_AREA]
-            if area < minarea:
-                continue
             m = labels==label
             pixels = np.stack(np.where(m),-1)
             cnt = np.fliplr(np.squeeze(cv2.findContours(m.astype(np.uint8),cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)[0]))
@@ -30,6 +38,27 @@ def findContours(exc,minarea):
         
 
 class Blob(object):
+    """
+    one excitation region
+
+    Attributes
+    ----------
+    pixels : ndarray, (N,2)
+        x,y cordinates of pixels within the excitation region
+    pixelsp : list of tuples, [(x0,y0),(x1,y1), ...]
+        same as pixels
+    cnt : ndarray, (N,2)
+        x,y coordinates of pixels along the boundary of the excitation region
+    cntp : list of tuples, [(x0,y0),(x1,y1), ...]
+        same as cnt
+    pz : int
+        frame number
+    j : int
+        index of blob in frame pz
+    points : list of dict, ``[{'xy':xy1,'uv':uv1}, {'xy':xy2,'uv':uv2}, ...]``
+        the x,y coordinates and unit bisector vector of one boundary point is saved in one dict
+    """
+
     def __init__(self,pixels,cnt,pz,j):
         self.pixels = pixels
         self.pixelsp = [(x,y) for x,y in pixels]# location of pixels inside of blob[(x0,y0),(x1,y1), ...]
@@ -39,11 +68,17 @@ class Blob(object):
         self.j = j
         
     def sparseContour(self,N=5):# [(x0,y0),(x1,y1),...]
-        '''
-        find evently spaced points along the contour and the outward facing bisector at each point
-        N defines the distance between neighboring points
-        :return: a list of dictionaries which contains the xy position and unit bisector vector
-        '''
+        """find evently spaced points along the contour and the outward facing bisector at each point
+
+        add a list of dictionaries which contains the xy position and unit bisector vector
+
+        Parameters
+        ----------
+        N : int
+            the distance between neighboring points
+
+        """
+
         cntp = self.cntp
         
         i0,i1 = 0,1# i0 points to the left of a segment with lenght N, i1 points to the right

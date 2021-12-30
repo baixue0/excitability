@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FileTree &#8212; excitability 0.1.0 documentation</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/blank.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Document a python project" href="template.html" />
+    <link rel="prev" title="README" href="README.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="index.html">
+<p class="title">excitability</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="README.html">
+  README
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="current reference internal nav-link" href="#">
+  FileTree
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="template.html">
+  Document a python project
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="image.html">
+  Image analysis
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="visualization.html">
+  Visualization
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="RD.html">
+  RD simulation
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+
+<nav id="bd-toc-nav">
+    
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="filetree">
+<h1>FileTree<a class="headerlink" href="#filetree" title="Permalink to this headline"></a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">docs</span></code> contains MarkDown or reStructuredText code</p>
+<p><code class="docutils literal notranslate"><span class="pre">src</span></code> contains python source code</p>
+<p>Click any python module to view its documentation and source code</p>
+<pre>
+excitability
+├──__int__.py
+├──docs
+│   ├──.nojekyll
+│   ├──Makefile
+│   ├──README.md
+│   ├──index.html
+│   ├──make.bat
+│   ├──requirements.txt
+│   └──source
+│       ├──FileTreeMaker.py
+│       ├──README.md
+│       ├──conf.py
+│       ├──index.rst
+│       └──template.rst
+└──src
+    ├──__int__.py
+    ├──<a href="generated/src.measure.html">measure</a>
+    │   ├──__int__.py
+    │   ├──<a href="generated/src.measure.contour.html">contour</a>
+    │   ├──<a href="generated/src.measure.edgespeed.html">edgespeed</a>
+    │   ├──<a href="generated/src.measure.link.html">link</a>
+    │   ├──<a href="generated/src.measure.pixel_intensity.html">pixel_intensity</a>
+    │   ├──<a href="generated/src.measure.preprocess.html">preprocess</a>
+    │   ├──<a href="generated/src.measure.read_roi.html">read_roi</a>
+    │   ├──<a href="generated/src.measure.recurrence.html">recurrence</a>
+    │   └──<a href="generated/src.measure.segmentation.html">segmentation</a>
+    ├──<a href="generated/src.scripts.html">scripts</a>
+    │   ├──__int__.py
+    │   ├──<a href="generated/src.scripts.movie123.html">movie123</a>
+    │   ├──<a href="generated/src.scripts.movie456.html">movie456</a>
+    │   ├──<a href="generated/src.scripts.quant.html">quant</a>
+    │   ├──<a href="generated/src.scripts.quant_plots.html">quant_plots</a>
+    │   └──<a href="generated/src.scripts.sim.html">sim</a>
+    ├──<a href="generated/src.simrd.html">simrd</a>
+    │   ├──__int__.py
+    │   ├──<a href="generated/src.simrd.fitzhughnagumo.html">fitzhughnagumo</a>
+    │   └──<a href="generated/src.simrd.srd.html">srd</a>
+    ├──<a href="generated/src.utils.html">utils</a>
+    └──<a href="generated/src.visualization.html">visualization</a>
+        ├──__int__.py
+        ├──<a href="generated/src.visualization.fadingexc.html">fadingexc</a>
+        ├──<a href="generated/src.visualization.image.html">image</a>
+        ├──<a href="generated/src.visualization.movie.html">movie</a>
+        ├──<a href="generated/src.visualization.plot.html">plot</a>
+        └──<a href="generated/src.visualization.rotate_crop.html">rotate_crop</a>
+</pre>
+</div>
+
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="README.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">README</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="template.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Document a python project</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright .<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,137 +1,343 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>src.utils namespace &mdash; Quantify spatiotemporal patterns of excitions at cell surface 0.1.0 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/clipboard.min.js"></script>
-        <script src="../_static/copybutton.js"></script>
-    <script src="../_static/js/theme.js"></script>
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>src.utils module &#8212; excitability 0.1.0 documentation</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/blank.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="src.utils.decorators module" href="src.utils.decorators.html" />
-    <link rel="prev" title="src.simrd.srd module" href="src.simrd.srd.html" /> 
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> Quantify spatiotemporal patterns of excitions at cell surface
-          </a>
-              <div class="version">
-                0.1.0
-              </div>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../README.html">Getting started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pyenv.html">Python virtual environment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sphinx.html">Sphinx autodocumentation</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Modules</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="src.html">src namespace</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="src.measure.html">src.measure namespace</a></li>
-<li class="toctree-l3"><a class="reference internal" href="src.scripts.html">src.scripts namespace</a></li>
-<li class="toctree-l3"><a class="reference internal" href="src.simrd.html">src.simrd namespace</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">src.utils namespace</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="src.utils.decorators.html">src.utils.decorators module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="src.utils.path_io.html">src.utils.path_io module</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="src.visualization.html">src.visualization namespace</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
 
-        </div>
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="../index.html">
+<p class="title">excitability</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../README.html">
+  README
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../filetree.html">
+  FileTree
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../template.html">
+  Document a python project
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../image.html">
+  Image analysis
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../visualization.html">
+  Visualization
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../RD.html">
+  RD simulation
+ </a>
+</li>
+
+    
+</ul>
       </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Quantify spatiotemporal patterns of excitions at cell surface</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="modules.html">Modules</a> &raquo;</li>
-          <li><a href="src.html">src namespace</a> &raquo;</li>
-      <li>src.utils namespace</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/generated/src.utils.rst.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  <section id="module-src.utils">
-<span id="src-utils-namespace"></span><h1>src.utils namespace<a class="headerlink" href="#module-src.utils" title="Permalink to this headline"></a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="src.utils.decorators.html">src.utils.decorators module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="src.utils.path_io.html">src.utils.path_io module</a></li>
-</ul>
-</div>
-</section>
-</section>
-
-
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="src.simrd.srd.html" class="btn btn-neutral float-left" title="src.simrd.srd module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="src.utils.decorators.html" class="btn btn-neutral float-right" title="src.utils.decorators module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+      
     </div>
 
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright .</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
-        </div>
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
       </div>
-    </section>
+      
+    </div>
   </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+</div>
+    </nav>
+    
 
-</body>
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+
+<nav id="bd-toc-nav">
+    
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="module-src.utils">
+<span id="src-utils-module"></span><h1>src.utils module<a class="headerlink" href="#module-src.utils" title="Permalink to this headline"></a></h1>
+<dl class="py data">
+<dt id="src.utils.dir_data">
+<code class="sig-prename descclassname"><span class="pre">src.utils.</span></code><code class="sig-name descname"><span class="pre">dir_data</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'/Volumes/extdrive/baixue/data'</span></em><a class="headerlink" href="#src.utils.dir_data" title="Permalink to this definition"></a></dt>
+<dd><p>directory containing input data</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="src.utils.dir_out">
+<code class="sig-prename descclassname"><span class="pre">src.utils.</span></code><code class="sig-name descname"><span class="pre">dir_out</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'/Volumes/extdrive/baixue/out'</span></em><a class="headerlink" href="#src.utils.dir_out" title="Permalink to this definition"></a></dt>
+<dd><p>directory containing output data</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.utils.pjoin">
+<code class="sig-prename descclassname"><span class="pre">src.utils.</span></code><code class="sig-name descname"><span class="pre">pjoin</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lst</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">createdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/utils.html#pjoin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.utils.pjoin" title="Permalink to this definition"></a></dt>
+<dd><p>Create path from a (nested) list of str</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>lst</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – a (nested) list of str</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pjoin</span><span class="p">([</span><span class="n">str0</span><span class="p">,</span> <span class="n">str1</span><span class="p">])</span>
+<span class="go">str0/str1</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pjoin</span><span class="p">([[</span><span class="n">str0</span><span class="p">,</span> <span class="n">str1</span><span class="p">],</span> <span class="n">str2</span><span class="p">])</span>
+<span class="go">str0-str1/str2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.utils.load_dict">
+<code class="sig-prename descclassname"><span class="pre">src.utils.</span></code><code class="sig-name descname"><span class="pre">load_dict</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.load_dict" title="Permalink to this definition"></a></dt>
+<dd><p>read pickled dictionary</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.utils.iterate">
+<code class="sig-prename descclassname"><span class="pre">src.utils.</span></code><code class="sig-name descname"><span class="pre">iterate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embryos</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/utils.html#iterate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.utils.iterate" title="Permalink to this definition"></a></dt>
+<dd><p>apply func to each embryo</p>
+<p>This function simplies the code to execute the same function for a list of embryos</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> (<em>function</em>) – a function that takes <code class="docutils literal notranslate"><span class="pre">phenotype</span></code> and <code class="docutils literal notranslate"><span class="pre">ID</span></code> as the first two arguments with additional positional and/or keyword arguments</p></li>
+<li><p><strong>embryos</strong> (<em>pandas.DataFrame</em>) – each line specifies the <code class="docutils literal notranslate"><span class="pre">phenotype</span></code> , <code class="docutils literal notranslate"><span class="pre">ID</span></code> and other information about an embryo</p></li>
+<li><p><strong>result</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) – stores the returned value from func</p></li>
+<li><p><strong>shuffle</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – whether to randomize the order of embryos</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>returned values from func for each embryo</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">phenotype</span><span class="p">,</span><span class="n">ID</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="k">return</span> <span class="n">value</span>
+
+<span class="n">iterate</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">embryos</span><span class="p">)</span>
+<span class="c1"># returns {ID1:func(phenotype1,ID1), ID2:func(phenotype2,ID2), ...}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">args</span></code> and <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> allows one to pass an unspecified number of arguments to func.</p></li>
+<li><p>If func returns None, this ID will not be added to the dictionary.</p></li>
+<li><p>While executing, iterate prints the embryo to be analyzed in real time, so if func fails on one specific embryo, the same exception can be reproduced for debugging.</p></li>
+<li><p>To randomize the order of execution, set shuffle=True. Shuffling speeds up debugging because the embryos are organized by phenotype and func tested using one phenotype are more likely to fail on a different phenotype.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.utils.return_dict">
+<code class="sig-prename descclassname"><span class="pre">src.utils.</span></code><code class="sig-name descname"><span class="pre">return_dict</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/utils.html#return_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.utils.return_dict" title="Permalink to this definition"></a></dt>
+<dd><p>convert (save) returned variables to a dictionary, when used as a decorator</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>func</strong> (<em>function</em>) – the function to decorate</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>variables returned by the decorated function as a dictionary</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@return_dict</span>
+<span class="k">def</span> <span class="nf">func1</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="k">return</span> <span class="n">var0</span><span class="p">,</span> <span class="n">var1</span>
+<span class="n">dict1</span> <span class="o">=</span> <span class="n">func1</span><span class="p">()</span>
+<span class="c1"># returns {&#39;var0&#39;:var0, &#39;var1&#39;:var1}</span>
+
+<span class="nd">@return_dict</span>
+<span class="k">def</span> <span class="nf">func2</span><span class="p">(</span><span class="n">savedir</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="k">return</span> <span class="n">savedir</span><span class="p">,</span> <span class="n">var0</span><span class="p">,</span> <span class="n">var1</span>
+
+<span class="n">savedir</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;data_output&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">ID</span><span class="p">]</span>
+<span class="n">dict2</span> <span class="o">=</span> <span class="n">func2</span><span class="p">([</span><span class="s1">&#39;data_output&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">ID</span><span class="p">])</span>
+<span class="c1"># returns ``{&#39;savedir&#39;:savedir, &#39;var0&#39;:var0, &#39;var1&#39;:var1}``</span>
+<span class="c1"># saves the dictionary as &#39;data_output/func2/ID.npy&#39;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Results from different functions can be combined by</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">dict</span><span class="p">(</span><span class="o">**</span><span class="n">dict1</span><span class="p">,</span><span class="o">**</span><span class="n">dict2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</div>
+
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright .<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
 </html>

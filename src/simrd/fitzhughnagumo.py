@@ -1,7 +1,7 @@
 import numpy as np
 
 class FitzhughNagumo(object):
-    r'''
+    r"""
     Fitzhugh-Nagumo neural model
 
     .. math::
@@ -9,33 +9,45 @@ class FitzhughNagumo(object):
         \frac{du}{dt} = u-\frac{u^{3}}{3}-v+I\\
         \frac{dv}{dt} = \frac{1}{\tau}(u+a-b \cdot v)
 
-    [u,v]: [Membrane potential, Recovery variable]
-    a, b (float): Parameters.
-    tau (float): Time scale.
-    t (float): Time (Not used: autonomous system)
-    I (float): Constant stimulus current. 
+    * u : Membrane potential
+    * v : Recovery variable
+    * t : Time
+    * tau : Time scale
+    * I : Constant stimulus current
+    * a,b : Parameters
 
-    Example::
-
-        ode = FitzhughNagumo(a, b, I, tau)
-    '''
+    """
 
     def __init__(self, a, b, I, tau):
+        """ initialize reaction parameter
+
+        """
+
         self.a = a
         self.b = b
         self.I = I
         self.tau = tau
 
     def roots(self):
-        '''
-        solve real fixed points
-        :rtype: list
-        '''
-        #The coeficients of the polynomial equation are:
-        #1           * v**3 
-        #0           * v**2 
-        #- (1/b - 1) * v**1 
-        #- (a/b + I) * v**0
+        r"""
+        solve fixed points and keep only the roots with real values
+        
+        the polynomial equation to solve
+
+        .. math::
+
+            1                     v^{3}
+            + 0                   v^{2}
+            - (\frac{1}{b} - 1)   v^{1}
+            - (\frac{a}{b} + I)   v^{0}
+            = 0
+
+        Returns
+        --------
+        roots : list
+            the fixed point(s) with real values
+
+        """
         
         coef = [1/3, 0, 1/self.b - 1, self.a/self.b - self.I]
         

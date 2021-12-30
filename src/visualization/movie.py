@@ -1,5 +1,5 @@
 '''
-help functions to make movies
+functions to make movies
 '''
 import numpy as np
 import matplotlib
@@ -16,6 +16,24 @@ def create_title(imshape,txt,heightratio=0.2,textcolor=(0,0,0)):
     return titlestk
 
 def time_scalebar(stk,dt,cbarstk=None,textcolor=(0,0,0),padcolor=(255,255,255)):
+    """overlay time stamp and scale bar on image stack
+
+    Parameters
+    ----------
+    im : np.array((T,X,Y,3),dtype=np.uint8)
+        original image stack
+    dt : float
+        time gap between consecutive frames
+    cbarstk : list of np.array((X,Y,3),dtype=np.uint8)
+        image stack of colorbar
+
+    Returns
+    --------
+    labeled : np.array((T,X,Y,3),dtype=np.uint8)
+        labeled image stack
+
+    """
+
     imshape = stk.shape
     timex,timey = int(imshape[1]*0.06),int(imshape[1]*0.13)
     scalex,scaley = int(imshape[1]*0.05),int(imshape[1]*0.95)
@@ -27,16 +45,23 @@ def time_scalebar(stk,dt,cbarstk=None,textcolor=(0,0,0),padcolor=(255,255,255)):
         stk = np.dstack([np.hstack(cbarstk),stk])#stack left to right
     return stk
 
-def rotate(path,stk):
-    from measure.preprocess import read_outline
-    outline = read_outline(path)
-    from visualization.rotate_crop import Rotate_Crop
-    RC = Rotate_Crop(outline)
-    stk[:,~outline] = 255
-    stk = RC.rotate_stk(stk,255)
-    return stk
-
 def boarder(im,top_bottom_left_right,padcolor=[0,0,0]):#input RGB 8bit image
+    """add boarder to image or imagestack
+
+    Parameters
+    ----------
+    im : np.array((X,Y,3),dtype=np.uint8) or (T,X,Y,3)
+        original image stack
+    top_bottom_left_right : tuple of int
+        top, bottom, left, right
+
+    Returns
+    --------
+    resized : np.array((top+X+bottom,left+Y+right,3),dtype=np.uint8) or (T,top+X+bottom,left+Y+right,3)
+        resized image stack
+
+    """
+
     import cv2
     if im.ndim==3:
         return cv2.copyMakeBorder(im, *top_bottom_left_right, cv2.BORDER_CONSTANT, None, padcolor)#top, bottom, left, right
@@ -44,6 +69,22 @@ def boarder(im,top_bottom_left_right,padcolor=[0,0,0]):#input RGB 8bit image
         return np.stack([cv2.copyMakeBorder(im[i], *top_bottom_left_right, cv2.BORDER_CONSTANT, None, padcolor) for i in range(im.shape[0])],0)
 
 def stk_upsizexy(imstk,scale=4):
+    """resize imagestack
+
+    Parameters
+    ----------
+    imstk : np.array((T,X,Y),dtype=np.uint8) or (T,X,Y,3)
+        original image stack
+    scale : float
+        percent of original x,y dimension
+
+    Returns
+    --------
+    resized : np.array((T,X*scale,Y*scale),dtype=np.uint8) or (T,X*scale,Y*scale,3)
+        resized image stack
+        
+    """
+
     import cv2
      # percent of original size
     width = int(imstk.shape[2] * scale)
@@ -55,9 +96,32 @@ def stk_upsizexy(imstk,scale=4):
         result.append(upsized)
     return np.stack(result)
 
-def saveMP4(path,images,fps):#https://imageio.readthedocs.io/en/stable/format_ffmpeg.html
+def saveMP4(path,imtsk,fps):
+    """save imagestack as MP4 file with `imageio <https://pypi.org/project/imageio/>`_
+    
+    Parameters
+    ----------
+    path : str
+        path to save MP4
+    imtsk : np.array((T,X,Y,3),dtype=np.uint8)
+        image stack to convert
+    fps : int
+        frames per second
+
+    """
+
     import imageio
     writer = imageio.get_writer(path+'.mp4', fps=fps)
-    for im in images:
+    for im in imtsk:
         writer.append_data(im)
     writer.close()
+
+def rotate(path,stk):
+    from measure.preprocess import read_outline
+    outline = read_outline(path)
+    from visualization.rotate_crop import Rotate_Crop
+    RC = Rotate_Crop(outline)
+    stk[:,~outline] = 255
+    stk = RC.rotate_stk(stk,255)
+    return stk
+

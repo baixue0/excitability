@@ -1,0 +1,349 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document a python project &#8212; excitability 0.1.0 documentation</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/blank.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Image analysis" href="image.html" />
+    <link rel="prev" title="FileTree" href="filetree.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="index.html">
+<p class="title">excitability</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="README.html">
+  README
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="filetree.html">
+  FileTree
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="current reference internal nav-link" href="#">
+  Document a python project
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="image.html">
+  Image analysis
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="visualization.html">
+  Visualization
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="RD.html">
+  RD simulation
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup-python-virtual-environment">
+   setup python virtual environment
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#manage-python-packages">
+   manage python packages
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#add-virtual-environment-to-jupyter-notebook">
+   add virtual environment to jupyter notebook
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#write-python-modules-and-docstrings">
+   write python modules and docstrings
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generate-auto-documentation-with-sphinx">
+   generate auto documentation with sphinx
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#host-documentation-with-github-pages">
+   host documentation with github pages
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generate-filetree-automatically">
+   generate filetree automatically
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="document-a-python-project">
+<h1>Document a python project<a class="headerlink" href="#document-a-python-project" title="Permalink to this headline"></a></h1>
+<div class="section" id="setup-python-virtual-environment">
+<h2>setup python virtual environment<a class="headerlink" href="#setup-python-virtual-environment" title="Permalink to this headline"></a></h2>
+<p>create a folder containing python interpreter for the virtual environment</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd excitability</span>
+<span class="go">virtualenv -p python env</span>
+</pre></div>
+</div>
+<p>activate virtual enviroment. once activated, the prompt will start with (env).</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">source env/bin/activate</span>
+</pre></div>
+</div>
+<p>verify whether the virtual environment is activated.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">which python</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="manage-python-packages">
+<h2>manage python packages<a class="headerlink" href="#manage-python-packages" title="Permalink to this headline"></a></h2>
+<p>install packages in the virtual environment, or python will search for the same package in other python interpreters in the computer.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install sphinx</span>
+<span class="go">pip freeze</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-virtual-environment-to-jupyter-notebook">
+<h2>add virtual environment to jupyter notebook<a class="headerlink" href="#add-virtual-environment-to-jupyter-notebook" title="Permalink to this headline"></a></h2>
+<p>install jupyter using brew. uninstall existing jupyter installed with pip.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">brew install jupyter</span>
+</pre></div>
+</div>
+<p>install the kernel for this virtual environment</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python -m ipykernel install --user --name env</span>
+</pre></div>
+</div>
+<p>list installed kernels</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">jupyter kernelspec list</span>
+<span class="go">jupyter kernelspec remove kernelname</span>
+</pre></div>
+</div>
+<p>remove unwanted kernel</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">jupyter kernelspec remove kernelname</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="write-python-modules-and-docstrings">
+<h2>write python modules and docstrings<a class="headerlink" href="#write-python-modules-and-docstrings" title="Permalink to this headline"></a></h2>
+<p>A simple and popular docstring format is <a class="reference external" href="https://numpydoc.readthedocs.io/en/latest/format.html">numpydoc</a>, which describes the syntax and best practices for docstrings used with the numpydoc extension for Sphinx. <a class="reference external" href="https://numpydoc.readthedocs.io/en/latest/example.html#example">Here</a> is an example for documenting a function.</p>
+<p>write <a class="reference external" href="https://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html">rst files</a></p>
+</div>
+<div class="section" id="generate-auto-documentation-with-sphinx">
+<h2>generate auto documentation with <a class="reference external" href="https://www.sphinx-doc.org/en/master/">sphinx</a><a class="headerlink" href="#generate-auto-documentation-with-sphinx" title="Permalink to this headline"></a></h2>
+<p>Sphinx is a popular tool for creating documentation. There are many good <a class="reference external" href="http://education.molssi.org/python-package-best-practices/09-documentation/index.html">tutorials</a> available. I used <a class="reference external" href="https://www.sphinx-doc.org/en/master/man/sphinx-apidoc.html">sphinx-apidoc</a> to generate rst files, which are located at <em>project/docs/source/generated/</em>.</p>
+<p><em>index.rst</em> serve as a home page for the documentation, including references to all other pages.
+The rst files generated by previous run of <strong>sphinx-apidoc</strong> need to be deleted and re-run if the file structure is changed.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd project/docs</span>
+<span class="go">rm source/generated/*</span>
+<span class="go">sphinx-apidoc -o source/generated ../src -f --implicit-namespaces -e -H Modules -d 3</span>
+</pre></div>
+</div>
+<p>After rst files are created, run <strong>sphinx-build</strong> to create html files from rst files. Most projects packages
+<strong>sphinx-build</strong> in <em>project/docs/make.bat</em></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make clean; make html</span>
+</pre></div>
+</div>
+<p>If the build is successful, you can view the webpages by opening <em>project/docs/build/index.html</em>. There are many <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/theming.html">HTML themes</a> available and they can be <a class="reference external" href="https://pydata-sphinx-theme.readthedocs.io/en/latest/user_guide/customizing.html#">customized</a>. I used a custom version of <a class="reference external" href="https://pypi.org/project/pydata-sphinx-theme/">pydata_sphinx_theme</a>.</p>
+</div>
+<div class="section" id="host-documentation-with-github-pages">
+<h2>host documentation with <a class="reference external" href="https://pages.github.com">github pages</a><a class="headerlink" href="#host-documentation-with-github-pages" title="Permalink to this headline"></a></h2>
+<p><em>README.md</em> is a text file that introduces and explains the project, where <em>md</em> is short for the <a class="reference external" href="https://www.markdownguide.org/basic-syntax/#overview">Markdown format</a>. GitHub looks for <em>README.md</em> in <em>project/</em> or <em>project/docs/</em> and display it along with the list of files and directories in the project. I prefer to keep <em>README.md</em> in the same directory as other rst files at <em>project/docs/source/README.md</em> So I created a symbolic link <em>project/docs/README.md</em> that contains a reference to <em>project/docs/source/README.md</em></p>
+<p>To include <em>README.md</em> in <em>index.rst</em>, I installed and included <a class="reference external" href="https://myst-parser.readthedocs.io/en/latest/sphinx/intro.html">myst parser extension</a> in <em>project/docs/source/conf.py</em></p>
+</div>
+<div class="section" id="generate-filetree-automatically">
+<h2>generate filetree automatically<a class="headerlink" href="#generate-filetree-automatically" title="Permalink to this headline"></a></h2>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd excitability/docs</span>
+<span class="go">python -u source/FileTreeMaker.py -r ../../excitability -xf env -xn .pyc .ipynb_checkpoints .ipynb .DS_Store __pycache__  _static build generated .git</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="filetree.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">FileTree</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="image.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Image analysis</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright .<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

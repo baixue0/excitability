@@ -67,6 +67,32 @@ def link(blobs,threshold_xy,threshold_z):
     return blobs,edges
 
 def connected_components(blobs,link_threshold_xy=0.1,link_threshold_frames=1,example=False):
+    """divide execitation regions into connected components 
+
+    Parameters
+    ----------
+    blobs : dict
+        dictionary of a list of blobs in each frame. ``{frame0:[blob0, ...], frame1:[blob0, ...], ...}``
+    example : bool
+        whether the returned value are used as example embryo
+
+    Returns
+    --------
+    area : int
+        largest area of connected components
+
+    Note
+    --------
+    returns the following when ``example==True``
+
+    * blobs : dict
+        each blob is labeled with the rank of the connected component it belongs to
+    * graph : nx.DiGraph
+        constructed from linkage among blobs
+    * cc : ``np.array([[(pz1,j1), (pz2,j2), ...],[(pz3,j3), ...]])``
+        each element of the array is one connected component. (pz,j) is the index of one blob. ``blob=blobs[pz][j]``
+    """
+    
     blobs,edges = link(blobs,link_threshold_xy,link_threshold_frames)#unit: pixels,frames(1.2s)
     import networkx as nx
     graph = nx.DiGraph()

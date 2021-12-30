@@ -1,124 +1,206 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>src.measure.edgespeed module &mdash; Quantify spatiotemporal patterns of excitions at cell surface 0.1.0 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/clipboard.min.js"></script>
-        <script src="../_static/copybutton.js"></script>
-    <script src="../_static/js/theme.js"></script>
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>src.measure.edgespeed module &#8212; excitability 0.1.0 documentation</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/blank.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="src.measure.link module" href="src.measure.link.html" />
-    <link rel="prev" title="src.measure.contour module" href="src.measure.contour.html" /> 
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> Quantify spatiotemporal patterns of excitions at cell surface
-          </a>
-              <div class="version">
-                0.1.0
-              </div>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../README.html">Getting started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pyenv.html">Python virtual environment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sphinx.html">Sphinx autodocumentation</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Modules</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="src.html">src namespace</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="src.measure.html">src.measure namespace</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="src.measure.contour.html">src.measure.contour module</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">src.measure.edgespeed module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="src.measure.link.html">src.measure.link module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="src.measure.pixel_intensity.html">src.measure.pixel_intensity module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="src.measure.preprocess.html">src.measure.preprocess module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="src.measure.read_roi.html">src.measure.read_roi module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="src.measure.recurrence.html">src.measure.recurrence module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="src.measure.segmentation.html">src.measure.segmentation module</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="src.scripts.html">src.scripts namespace</a></li>
-<li class="toctree-l3"><a class="reference internal" href="src.simrd.html">src.simrd namespace</a></li>
-<li class="toctree-l3"><a class="reference internal" href="src.utils.html">src.utils namespace</a></li>
-<li class="toctree-l3"><a class="reference internal" href="src.visualization.html">src.visualization namespace</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
 
-        </div>
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="../index.html">
+<p class="title">excitability</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../README.html">
+  README
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../filetree.html">
+  FileTree
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../template.html">
+  Document a python project
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../image.html">
+  Image analysis
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../visualization.html">
+  Visualization
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../RD.html">
+  RD simulation
+ </a>
+</li>
+
+    
+</ul>
       </div>
-    </nav>
+      
+    </div>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Quantify spatiotemporal patterns of excitions at cell surface</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="modules.html">Modules</a> &raquo;</li>
-          <li><a href="src.html">src namespace</a> &raquo;</li>
-          <li><a href="src.measure.html">src.measure namespace</a> &raquo;</li>
-      <li>src.measure.edgespeed module</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/generated/src.measure.edgespeed.rst.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  <section id="module-src.measure.edgespeed">
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+
+<nav id="bd-toc-nav">
+    
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="module-src.measure.edgespeed">
 <span id="src-measure-edgespeed-module"></span><h1>src.measure.edgespeed module<a class="headerlink" href="#module-src.measure.edgespeed" title="Permalink to this headline"></a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="src.measure.edgespeed.count11">
-<span class="sig-prename descclassname"><span class="pre">src.measure.edgespeed.</span></span><span class="sig-name descname"><span class="pre">count11</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/edgespeed.html#count11"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.edgespeed.count11" title="Permalink to this definition"></a></dt>
-<dd><p>count the lenghth of first consecutive ‘1’s in binary sequence</p>
+<dt id="src.measure.edgespeed.point_velocity">
+<code class="sig-prename descclassname"><span class="pre">src.measure.edgespeed.</span></code><code class="sig-name descname"><span class="pre">point_velocity</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blobs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NEWEXC</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outline</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/edgespeed.html#point_velocity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.edgespeed.point_velocity" title="Permalink to this definition"></a></dt>
+<dd><p>centered cross correlation of two time series</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>seq</strong> (<em>np.array</em><em>(</em><em>(</em><em>N</em><em>,</em><em>)</em><em>,</em><em>dtype=bool</em><em>)</em>) – binary time series</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>NEWEXC</strong> (<em>np.array</em><em>(</em><em>(</em><em>T</em><em>,</em><em>X</em><em>,</em><em>Y</em><em>)</em><em>,</em><em>dtype=bool</em><em>)</em>) – new excitation mask</p></li>
+<li><p><strong>outline</strong> (<em>np.array</em><em>(</em><em>(</em><em>X</em><em>,</em><em>Y</em><em>)</em><em>,</em><em>dtype=bool</em><em>)</em>) – mask of pixels in embryo</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>length</strong> – lenghth of first consecutive ‘1’s</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>speed</strong> (<em>(# evenly spaced points along contour,)</em>) – distance from point to edge of new excitation regions</p></li>
+<li><p><strong>speedmsk</strong> (<em>np.array((T,X,Y),dtype=np.float32)</em>) – pixel value represents amplitude of edge propagation. pixels outside of embryo are labeled -1</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="src.measure.edgespeed.line_intensity">
-<span class="sig-prename descclassname"><span class="pre">src.measure.edgespeed.</span></span><span class="sig-name descname"><span class="pre">line_intensity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pointxy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointuv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">im</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlength</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/edgespeed.html#line_intensity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.edgespeed.line_intensity" title="Permalink to this definition"></a></dt>
+<dt id="src.measure.edgespeed.line_intensity">
+<code class="sig-prename descclassname"><span class="pre">src.measure.edgespeed.</span></code><code class="sig-name descname"><span class="pre">line_intensity</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pointxy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointuv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">im</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlength</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/edgespeed.html#line_intensity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.edgespeed.line_intensity" title="Permalink to this definition"></a></dt>
 <dd><p>intensity of pixels along the line that start front pointxy in the direction of pointuv</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -139,29 +221,25 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="src.measure.edgespeed.point_velocity">
-<span class="sig-prename descclassname"><span class="pre">src.measure.edgespeed.</span></span><span class="sig-name descname"><span class="pre">point_velocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blobs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NEWEXC</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outline</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/edgespeed.html#point_velocity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.edgespeed.point_velocity" title="Permalink to this definition"></a></dt>
-<dd><p>centered cross correlation of two time series</p>
+<dt id="src.measure.edgespeed.count11">
+<code class="sig-prename descclassname"><span class="pre">src.measure.edgespeed.</span></code><code class="sig-name descname"><span class="pre">count11</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/edgespeed.html#count11"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.edgespeed.count11" title="Permalink to this definition"></a></dt>
+<dd><p>count the lenghth of first consecutive ‘1’s in binary sequence</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>NEWEXC</strong> (<em>np.array</em><em>(</em><em>(</em><em>T</em><em>,</em><em>X</em><em>,</em><em>Y</em><em>)</em><em>,</em><em>dtype=bool</em><em>)</em>) – new excitation mask</p></li>
-<li><p><strong>outline</strong> (<em>np.array</em><em>(</em><em>(</em><em>X</em><em>,</em><em>Y</em><em>)</em><em>,</em><em>dtype=bool</em><em>)</em>) – mask of pixels in embryo</p></li>
-</ul>
+<dd class="field-odd"><p><strong>seq</strong> (<em>np.array</em><em>(</em><em>(</em><em>N</em><em>,</em><em>)</em><em>,</em><em>dtype=bool</em><em>)</em>) – binary time series</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p><strong>speed</strong> (<em>(# evenly spaced points along contour,)</em>) – distance from point to edge of new excitation regions</p></li>
-<li><p><strong>speedmsk</strong> (<em>np.array((T,X,Y),dtype=np.float32)</em>) – pixel value represents amplitude of edge propagation. pixels outside of embryo are labeled -1</p></li>
-</ul>
-</p>
+<dd class="field-even"><p><strong>length</strong> – lenghth of first consecutive ‘1’s</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="src.measure.edgespeed.rect_zxy">
-<span class="sig-prename descclassname"><span class="pre">src.measure.edgespeed.</span></span><span class="sig-name descname"><span class="pre">rect_zxy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imshape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">5)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">W</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/edgespeed.html#rect_zxy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.edgespeed.rect_zxy" title="Permalink to this definition"></a></dt>
+<dt id="src.measure.edgespeed.rect_zxy">
+<code class="sig-prename descclassname"><span class="pre">src.measure.edgespeed.</span></code><code class="sig-name descname"><span class="pre">rect_zxy</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imshape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">5)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">W</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/edgespeed.html#rect_zxy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.edgespeed.rect_zxy" title="Permalink to this definition"></a></dt>
 <dd><p>find pixels in the bounding rectangle of a vector</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -183,8 +261,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="src.measure.edgespeed.rectangle">
-<span class="sig-prename descclassname"><span class="pre">src.measure.edgespeed.</span></span><span class="sig-name descname"><span class="pre">rectangle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">W</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/edgespeed.html#rectangle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.edgespeed.rectangle" title="Permalink to this definition"></a></dt>
+<dt id="src.measure.edgespeed.rectangle">
+<code class="sig-prename descclassname"><span class="pre">src.measure.edgespeed.</span></code><code class="sig-name descname"><span class="pre">rectangle</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">W</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/measure/edgespeed.html#rectangle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.measure.edgespeed.rectangle" title="Permalink to this definition"></a></dt>
 <dd><p>locate the x,y coordinates of the bounding rectangle of a vector</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -202,37 +280,39 @@
 </dl>
 </dd></dl>
 
-</section>
+</div>
 
 
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="src.measure.contour.html" class="btn btn-neutral float-left" title="src.measure.contour module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="src.measure.link.html" class="btn btn-neutral float-right" title="src.measure.link module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+              
+          </main>
+          
 
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright .</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
-        </div>
       </div>
-    </section>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright .<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4.<br>
+</p>
+    </div>
+    
   </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
-
-</body>
+</footer>
+  </body>
 </html>

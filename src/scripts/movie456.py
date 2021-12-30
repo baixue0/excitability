@@ -1,9 +1,7 @@
 import sys,os
 sys.path.insert(0, os.path.abspath(os.path.join(".")))
 
-from utils.path_io import *
-from utils.decorators import iterate
-global result
+from utils import embryos,dir_data,dir_out,load_dict,pjoin,iterate,return_dict
 
 def colorbar5(fig,cbar):
     from plot import addax
@@ -84,7 +82,7 @@ def movie456(phenotype,ID):
 
 if __name__ == "__main__":
     embryos_example = embryos.loc[['20190524_7','20190803_19','20190729_12']]
-    result = iterate(movie456,embryos_example,result=result,shuffle=False)
+    result = iterate(movie456,embryos_example,shuffle=False)
     from movie import boarder
     for movieid in [4,5,6]:
         bottom = np.dstack([boarder(result[ID][0][movieid],(0,0,2,2),padcolor=(255,255,255)) for ID in embryos_example.index])

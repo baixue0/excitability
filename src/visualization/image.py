@@ -1,8 +1,26 @@
 import numpy as np
 
-def interpcolor(v,norm,cmap,rgb_only=True):
+def interpcolor(v,vminmax,cmap,rgb_only=True):
+    """convert number or array to RGB color
+
+    Parameters
+    ----------
+    v : number or ndarray with dimention 1, 2 or 3
+        value to be converted to RGB color
+    vminmax : tuple
+        (vmin,vmax) to normalize v
+    cmap : str or matplotlib.colors.Colormap
+        colormap
+
+    Returns
+    --------
+    rgb255 : same shape as v, dtype=np.uint8
+        converted value
+        
+     """
+
     from matplotlib.colors import Normalize
-    norm = Normalize(vmin=norm[0],vmax=norm[1])
+    norm = Normalize(vmin=vminmax[0],vmax=vminmax[1])
     import matplotlib
     m = matplotlib.cm.ScalarMappable(norm=norm, cmap=cmap)
     if hasattr(v,'ndim'):

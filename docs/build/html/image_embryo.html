@@ -1,0 +1,515 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analyze one embryo &#8212; excitability 0.1.0 documentation</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/blank.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Input" href="image_input.html" />
+    <link rel="prev" title="Image analysis" href="image.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="index.html">
+<p class="title">excitability</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="README.html">
+  README
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="filetree.html">
+  FileTree
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="template.html">
+  Document a python project
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="image.html">
+  Image analysis
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="visualization.html">
+  Visualization
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="RD.html">
+  RD simulation
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#segmentation-i">
+   ① segmentation I
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#segmentation-ii">
+   ② segmentation II
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary-statistics">
+   ③ summary statistics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pixel-intensity-in-binary-mask-at-a-range-of-time-offsets">
+   ④ pixel intensity in binary mask at a range of time offsets
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="analyze-one-embryo">
+<h1>Analyze one embryo<a class="headerlink" href="#analyze-one-embryo" title="Permalink to this headline"></a></h1>
+<div class="section" id="segmentation-i">
+<h2>① segmentation I<a class="headerlink" href="#segmentation-i" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt>
+<code class="sig-prename descclassname"><span class="pre">measure.segmentation.</span></code><code class="sig-name descname"><span class="pre">bleach_correction</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">videozmin</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/measure/segmentation.html#bleach_correction"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>compensate for photobleach</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stk</strong> (<cite>numpy.ndarray</cite>, (T_raw,X,Y), np.float32) – raw image stack</p></li>
+<li><p><strong>outline</strong> (<cite>numpy.ndarray</cite>, (X,Y), bool) – mask of pixels in embryo</p></li>
+<li><p><strong>window_length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – window_length for savgol_filter smoothing</p></li>
+<li><p><strong>videozmin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – mask of pixels in embryo</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>y</strong> (<em>1D array</em>) – average intensity of all pixels in embryo at each time point</p></li>
+<li><p><strong>ys</strong> (<em>1D array</em>) – smooth y with savgol_filter</p></li>
+<li><p><strong>imbc</strong> (<cite>numpy.ndarray</cite>, (T_raw,X,Y), np.float32) – image stack after compensating for photobleach</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt>
+<code class="sig-prename descclassname"><span class="pre">measure.segmentation.</span></code><code class="sig-name descname"><span class="pre">group_diff</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tRes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/measure/segmentation.html#group_diff"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>group imagestack; smooth in space and time</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stk</strong> (<cite>numpy.ndarray</cite>, (T_raw,X,Y), np.float32) – raw image stack</p></li>
+<li><p><strong>outline</strong> (<cite>numpy.ndarray</cite>, (X,Y), bool) – mask of pixels in embryo</p></li>
+<li><p><strong>tRes</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – time between consecutive frames</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>RAW</strong> (<cite>numpy.ndarray</cite>, (T,X,Y), np.uint16) – raw</p></li>
+<li><p><strong>SMOOTH</strong> (<cite>numpy.ndarray</cite>, (T,X,Y), np.float32) – smoothed</p></li>
+<li><p><strong>DIFF</strong> (<cite>numpy.ndarray</cite>, (T,X,Y), np.float32) – temporal difference</p></li>
+<li><p><strong>zgroups</strong> (<em>nested 1D array</em>) – frames that are grouped together</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="segmentation-ii">
+<h2>② segmentation II<a class="headerlink" href="#segmentation-ii" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt>
+<code class="sig-prename descclassname"><span class="pre">measure.segmentation.</span></code><code class="sig-name descname"><span class="pre">excitation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savedir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">DIFF</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">THRESH</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/measure/segmentation.html#excitation"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>pixels in DIFF above THRESH is EXC; the first frame to cross the threshold is NEWEXC</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>savedir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – path to save returned values</p></li>
+<li><p><strong>DIFF</strong> (<cite>numpy.ndarray</cite>, (T,X,Y), np.float32) – temporal difference</p></li>
+<li><p><strong>outline</strong> (<cite>numpy.ndarray</cite>, (X,Y), bool) – mask of pixels in embryo</p></li>
+<li><p><strong>THRESH</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – threshold value</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>savedir</strong> (<em>str</em>) – path to save returned values</p></li>
+<li><p><strong>EXC</strong> (<cite>numpy.ndarray</cite>, (T,X,Y), bool) – excitation mask</p></li>
+<li><p><strong>NEWEXC</strong> (<cite>numpy.ndarray</cite>, (T,X,Y), bool) – new excitation mask</p></li>
+<li><p><strong>outline</strong> (<cite>numpy.ndarray</cite>, (X,Y), bool) – mask of pixels in embryo</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="summary-statistics">
+<h2>③ summary statistics<a class="headerlink" href="#summary-statistics" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt>
+<code class="sig-prename descclassname"><span class="pre">measure.recurrence.</span></code><code class="sig-name descname"><span class="pre">frequency</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">example</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/measure/recurrence.html#frequency"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>number of new excitations for each pixel</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stk</strong> (<cite>numpy.ndarray</cite>, (T_raw,X,Y), np.float32) – raw image stack</p></li>
+<li><p><strong>outline</strong> (<cite>numpy.ndarray</cite>, (X,Y), bool) – mask of pixels in embryo</p></li>
+<li><p><strong>example</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – whether the returned value are used as example embryo</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>freq</strong> – number of new excitations for pixels in embryo</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><cite>numpy.ndarray</cite>, (# pixels in embryo), int</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>returns the following when <code class="docutils literal notranslate"><span class="pre">example==True</span></code></p>
+<ul>
+<li><dl>
+<dt>freq<span class="classifier"><cite>numpy.ndarray</cite>, (X,Y), int</span></dt><dd><p>number of new excitations for all pixels. pixels outside of embryo are -1.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt>
+<code class="sig-prename descclassname"><span class="pre">measure.recurrence.</span></code><code class="sig-name descname"><span class="pre">waittime</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">windowlength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">example</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/measure/recurrence.html#waittime"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>number of frames before next new excitation for each new excitation pixel</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stk</strong> (<cite>numpy.ndarray</cite>, (T_raw,X,Y), np.float32) – raw image stack</p></li>
+<li><p><strong>outline</strong> (<cite>numpy.ndarray</cite>, (X,Y), bool) – mask of pixels in embryo</p></li>
+<li><p><strong>windowlength</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – number of frames within which to search for the next new excitation</p></li>
+<li><p><strong>example</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – whether the returned value are used as example embryo</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>waittime</strong> – number of frames before next new excitation</p>
+<p>N = # new excitation pixels able to observe the entire window</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><cite>numpy.ndarray</cite>, (N,), int</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>returns the following when <code class="docutils literal notranslate"><span class="pre">example==True</span></code></p>
+<ul>
+<li><dl>
+<dt>zxyr<span class="classifier"><cite>numpy.ndarray</cite>, (N,3), int</span></dt><dd><p>3 column : temporal coordinate, spatial coordinate, wait time</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>imshape<span class="classifier">tuple, (T,X,Y), int</span></dt><dd><p>used to reconstruct image stack</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt>
+<code class="sig-prename descclassname"><span class="pre">measure.contour.</span></code><code class="sig-name descname"><span class="pre">findContours</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/measure/contour.html#findContours"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>detect contour of connected pixels</p>
+<p>See more at <a class="reference internal" href="generated/src.measure.contour.html#src.measure.contour.Blob" title="src.measure.contour.Blob"><code class="xref py py-class docutils literal notranslate"><span class="pre">src.measure.contour.Blob</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>stk</strong> (<cite>numpy.ndarray</cite>, (T_raw,X,Y), np.float32) – raw image stack</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>blobs</strong> – dictionary of a list of blobs in each frame. <code class="docutils literal notranslate"><span class="pre">{frame0:[blob0,</span> <span class="pre">...],</span> <span class="pre">frame1:[blob0,</span> <span class="pre">...],</span> <span class="pre">...}</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt>
+<code class="sig-prename descclassname"><span class="pre">measure.edgespeed.</span></code><code class="sig-name descname"><span class="pre">point_velocity</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blobs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NEWEXC</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outline</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/measure/edgespeed.html#point_velocity"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>centered cross correlation of two time series</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>NEWEXC</strong> (<em>np.array</em><em>(</em><em>(</em><em>T</em><em>,</em><em>X</em><em>,</em><em>Y</em><em>)</em><em>,</em><em>dtype=bool</em><em>)</em>) – new excitation mask</p></li>
+<li><p><strong>outline</strong> (<em>np.array</em><em>(</em><em>(</em><em>X</em><em>,</em><em>Y</em><em>)</em><em>,</em><em>dtype=bool</em><em>)</em>) – mask of pixels in embryo</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>speed</strong> (<em>(# evenly spaced points along contour,)</em>) – distance from point to edge of new excitation regions</p></li>
+<li><p><strong>speedmsk</strong> (<em>np.array((T,X,Y),dtype=np.float32)</em>) – pixel value represents amplitude of edge propagation. pixels outside of embryo are labeled -1</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt>
+<code class="sig-prename descclassname"><span class="pre">measure.link.</span></code><code class="sig-name descname"><span class="pre">connected_components</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blobs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">link_threshold_xy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">link_threshold_frames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">example</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/measure/link.html#connected_components"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>divide execitation regions into connected components</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>blobs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – dictionary of a list of blobs in each frame. <code class="docutils literal notranslate"><span class="pre">{frame0:[blob0,</span> <span class="pre">...],</span> <span class="pre">frame1:[blob0,</span> <span class="pre">...],</span> <span class="pre">...}</span></code></p></li>
+<li><p><strong>example</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – whether the returned value are used as example embryo</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>area</strong> – largest area of connected components</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>returns the following when <code class="docutils literal notranslate"><span class="pre">example==True</span></code></p>
+<ul>
+<li><dl class="simple">
+<dt>blobs<span class="classifier">dict</span></dt><dd><p>each blob is labeled with the rank of the connected component it belongs to</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>graph<span class="classifier">nx.DiGraph</span></dt><dd><p>constructed from linkage among blobs</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>cc<span class="classifier"><code class="docutils literal notranslate"><span class="pre">np.array([[(pz1,j1),</span> <span class="pre">(pz2,j2),</span> <span class="pre">...],[(pz3,j3),</span> <span class="pre">...]])</span></code></span></dt><dd><p>each element of the array is one connected component. (pz,j) is the index of one blob. <code class="docutils literal notranslate"><span class="pre">blob=blobs[pz][j]</span></code></p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="pixel-intensity-in-binary-mask-at-a-range-of-time-offsets">
+<h2>④ pixel intensity in binary mask at a range of time offsets<a class="headerlink" href="#pixel-intensity-in-binary-mask-at-a-range-of-time-offsets" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt>
+<code class="sig-prename descclassname"><span class="pre">measure.pixel_intensity.</span></code><code class="sig-name descname"><span class="pre">intensity_ts</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outline</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/measure/pixel_intensity.html#intensity_ts"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>read multipoint ROIs; converts to binary mask where ROI is True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msk</strong> (<cite>numpy.ndarray</cite>, (T,X,Y), bool) – pixels to measure</p></li>
+<li><p><strong>measure</strong> (<cite>numpy.ndarray</cite>, (T,X,Y)) – intensity image stack</p></li>
+<li><p><strong>dz</strong> (<cite>numpy.ndarray</cite>, (DT,), int) – time offset to measure intensity</p></li>
+<li><p><strong>outline</strong> (<cite>numpy.ndarray</cite>, (X,Y), bool) – mask of pixels in embryo</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ts</strong> – intensity at different time offsets</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><cite>numpy.ndarray</cite>, (DT,#pixels in msk)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="image.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Image analysis</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="image_input.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Input</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright .<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,7 +1,6 @@
 import sys,os
 sys.path.insert(0, os.path.abspath(os.path.join(".")))
-from utils.path_io import *
-from utils.decorators import iterate,return_dict
+from utils import embryos,dir_data,dir_out,load_dict,pjoin,iterate,return_dict
 
 """pipeline to batch measure embryo"""
 
@@ -72,8 +71,7 @@ def stepGroupDiff(phenotype,ID,run=True):
 
     from measure.segmentation import bleach_correction,group_diff
     result_read_raw = load_dict(pjoin([dir_out,'read_raw',ID]))#read raw 16-bit tif files
-    from measure.preprocess import divide
-    window_length, videozmin = divide(40,tRes)*2+1, divide(100,tRes)
+    window_length, videozmin = int(40//tRes)*2+1, int(100//tRes)
     from measure.preprocess import channel_list
     for channel in channel_list(ID,embryos):
         result[channel] = {}
@@ -178,7 +176,7 @@ def summary_exc(EXC,NEWEXC,outline,NMAX=100):
     wait = waittime(NEWEXC[:NMAX],outline,50)#wait time of new excitations
 
     from measure.contour import findContours
-    blobs = findContours(EXC[:NMAX],minarea=2**2)# dictionary of Blob instances that defines one excitation region
+    blobs = findContours(EXC[:NMAX])# dictionary of Blob instances that defines one excitation region
 
     from measure.edgespeed import point_velocity
     speed, speedmsk = point_velocity(blobs,NEWEXC[:NMAX+1],outline)#edge propagation speed of excitation regions
@@ -190,14 +188,18 @@ def summary_exc(EXC,NEWEXC,outline,NMAX=100):
     return freq,wait,speed,area,speedmsk
 
 def reorder(nesteddict):
-    '''
-    Flip the order of a nested dictionary
+    """Flip the order of a nested dictionary
 
-    :param nesteddict: ``{ID0:{'x':x,'y':y}, ID1:{'x':x,'y':y}, ...}``
-    :type nesteddict: dict
-    :return: ``{'x':{ID0:x,'ID1':x}, 'y':{ID0:y,'ID1':y}, ...}``
-    :rtype: dict
-    '''
+    Parameters
+    ----------
+    nesteddict : dict
+        ``{ID0:{'x':x,'y':y}, ID1:{'x':x,'y':y}, ...}``
+
+    Returns
+    --------
+    ``{'x':{ID0:x,'ID1':x}, 'y':{ID0:y,'ID1':y}, ...}``
+    """
+
     return pd.DataFrame(nesteddict).transpose().to_dict()
 
 if __name__ == "__main__":

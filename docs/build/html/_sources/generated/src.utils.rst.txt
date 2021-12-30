@@ -1,13 +1,7 @@
-src.utils namespace
-===================
+src.utils module
+================
 
-.. py:module:: src.utils
-
-Submodules
-----------
-
-.. toctree::
-   :maxdepth: 3
-
-   src.utils.decorators
-   src.utils.path_io
+.. automodule:: src.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,297 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>visualization.plot &#8212; excitability 0.1.0 documentation</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/blank.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="../../index.html">
+<p class="title">excitability</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../README.html">
+  README
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../filetree.html">
+  FileTree
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../template.html">
+  Document a python project
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../image.html">
+  Image analysis
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../visualization.html">
+  Visualization
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../RD.html">
+  RD simulation
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for visualization.plot</h1><div class="highlight"><pre>
+<span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">plot figures </span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<div class="viewcode-block" id="figure"><a class="viewcode-back" href="../../visualization.html#visualization.plot.figure">[docs]</a><span class="k">def</span> <span class="nf">figure</span><span class="p">(</span><span class="n">savedir</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">funcdata</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">8.25</span><span class="p">,</span><span class="mf">11.75</span><span class="p">),</span><span class="n">imformat</span><span class="o">=</span><span class="s1">&#39;.svg&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;create and plot on a figure using func and funcdata</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    savedir : str</span>
+<span class="sd">        directory to save figure</span>
+<span class="sd">    func : function</span>
+<span class="sd">        a function that takes ``phenotype`` and ``ID`` as the first two arguments with additional positional and/or keyword arguments</span>
+<span class="sd">    funcdata : iterable</span>
+<span class="sd">        data to unpack and pass to func</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        def axes_a(fig,x,y):</span>
+<span class="sd">            ax = addax(fig,L=1,W=2,T=0.5,H=2)</span>
+<span class="sd">            ...</span>
+
+<span class="sd">        figure(directory, axes_a, (x,y))</span>
+<span class="sd">        # figure is saved as &#39;directory/axes_a.svg&#39;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">,</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+    <span class="n">func</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span><span class="o">*</span><span class="n">funcdata</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">pjoin</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">pjoin</span><span class="p">([</span><span class="n">savedir</span><span class="p">,</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="o">+</span><span class="n">imformat</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">imformat</span><span class="o">==</span><span class="s1">&#39;.svg&#39;</span><span class="p">:</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="n">transparent</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">io</span>
+        <span class="k">return</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">path</span><span class="p">)[</span><span class="o">...</span><span class="p">,:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span></div>
+
+<span class="k">def</span> <span class="nf">addax</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">W</span><span class="p">,</span><span class="n">T</span><span class="p">,</span><span class="n">H</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">width_ratios</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">height_ratios</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">):</span>
+    <span class="n">FW</span><span class="p">,</span><span class="n">FH</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">get_figwidth</span><span class="p">(),</span><span class="n">fig</span><span class="o">.</span><span class="n">get_figheight</span><span class="p">()</span>
+    <span class="n">gridspec_kw</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;wspace&#39;</span><span class="p">:</span><span class="n">wspace</span><span class="p">,</span> <span class="s1">&#39;hspace&#39;</span><span class="p">:</span><span class="n">hspace</span><span class="p">,</span> 
+    <span class="s1">&#39;width_ratios&#39;</span><span class="p">:</span><span class="n">width_ratios</span><span class="p">,</span> <span class="s1">&#39;height_ratios&#39;</span><span class="p">:</span><span class="n">height_ratios</span><span class="p">,</span>
+    <span class="s1">&#39;left&#39;</span><span class="p">:</span><span class="n">L</span><span class="o">/</span><span class="n">FW</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">:(</span><span class="n">L</span><span class="o">+</span><span class="n">W</span><span class="p">)</span><span class="o">/</span><span class="n">FW</span><span class="p">,</span> 
+    <span class="s1">&#39;top&#39;</span><span class="p">:</span><span class="mi">1</span><span class="o">-</span><span class="n">T</span><span class="o">/</span><span class="n">FH</span><span class="p">,</span><span class="s1">&#39;bottom&#39;</span><span class="p">:</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="n">H</span><span class="p">)</span><span class="o">/</span><span class="n">FH</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="n">ncols</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="n">nrows</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="n">sharex</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="n">sharey</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="n">gridspec_kw</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">ax_boxplot</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="n">arr</span><span class="p">,</span><span class="n">xpositions</span><span class="p">,</span><span class="n">widths</span><span class="p">,</span><span class="n">colors</span><span class="p">):</span>
+    <span class="n">bp</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">positions</span><span class="o">=</span><span class="n">xpositions</span><span class="p">,</span><span class="n">widths</span><span class="o">=</span><span class="n">widths</span><span class="p">,</span> <span class="n">vert</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">showfliers</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="c1">#</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">color</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">colors</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">,</span><span class="s1">&#39;medians&#39;</span><span class="p">]:</span><span class="c1">#,&#39;fliers&#39;</span>
+            <span class="n">bp</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;whiskers&#39;</span><span class="p">,</span><span class="s1">&#39;caps&#39;</span><span class="p">]:</span> 
+            <span class="n">bp</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+            <span class="n">bp</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+
+<div class="viewcode-block" id="step"><a class="viewcode-back" href="../../visualization.html#visualization.plot.step">[docs]</a><span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span><span class="c1">#xedges.shape is (N+1,); y.shape is (N,)</span>
+    <span class="sd">&quot;&quot;&quot;helper function for plotting histograms</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : np.array((N+1,),dtype=float)</span>
+<span class="sd">        x value of histogram</span>
+<span class="sd">    y : np.array((N,),dtype=float)</span>
+<span class="sd">        y value of histogram</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        ax.fill_between(*step(x,y))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="p">[(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]),(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span>
+    <span class="n">result</span> <span class="o">+=</span> <span class="p">[(</span><span class="n">x</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">]),(</span><span class="n">x</span><span class="p">[</span><span class="n">N</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">])]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">.</span><span class="n">T</span></div>
+
+<span class="n">legends</span> <span class="o">=</span> <span class="p">{</span>
+<span class="s1">&#39;spd&#39;</span><span class="p">:(</span><span class="s1">&#39;   control&#39;</span><span class="p">,</span><span class="s1">&#39;dimgray&#39;</span><span class="p">),</span>
+<span class="s1">&#39;cyk&#39;</span><span class="p">:(</span><span class="s1">&#39;CYK-1 (RNAi)&#39;</span><span class="p">,</span><span class="s1">&#39;mediumturquoise&#39;</span><span class="p">),</span>
+<span class="s1">&#39;ani&#39;</span><span class="p">:(</span><span class="s1">&#39;ANI-1 (RNAi)&#39;</span><span class="p">,</span><span class="s1">&#39;hotpink&#39;</span><span class="p">),</span>
+<span class="s1">&#39;pfn&#39;</span><span class="p">:(</span><span class="s1">&#39;PFN (RNAi)&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">),</span>
+<span class="s1">&#39;nmy&#39;</span><span class="p">:(</span><span class="s1">&#39;NMY-2 (ts)&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">),</span>
+<span class="s1">&#39;mel11&#39;</span><span class="p">:(</span><span class="s1">&#39;MEL-11 (RNAi)&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">),</span>
+<span class="s1">&#39;plst&#39;</span><span class="p">:(</span><span class="s1">&#39;PLST-1 (TM2455)&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">),</span>
+<span class="s1">&#39;unc60&#39;</span><span class="p">:(</span><span class="s1">&#39;UNC-60 (RNAi)&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">),</span>
+<span class="p">}</span>
+
+</pre></div>
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright .<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

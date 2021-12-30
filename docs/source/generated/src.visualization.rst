@@ -1,8 +1,6 @@
 src.visualization namespace
 ===========================
 
-.. py:module:: src.visualization
-
 Submodules
 ----------
 

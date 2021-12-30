@@ -1,129 +1,185 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>src.scripts.quant module &mdash; Quantify spatiotemporal patterns of excitions at cell surface 0.1.0 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/clipboard.min.js"></script>
-        <script src="../_static/copybutton.js"></script>
-    <script src="../_static/js/theme.js"></script>
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>src.scripts.quant module &#8212; excitability 0.1.0 documentation</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/blank.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="src.scripts.quant_plots module" href="src.scripts.quant_plots.html" />
-    <link rel="prev" title="src.scripts.movie456 module" href="src.scripts.movie456.html" /> 
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> Quantify spatiotemporal patterns of excitions at cell surface
-          </a>
-              <div class="version">
-                0.1.0
-              </div>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../README.html">Getting started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pyenv.html">Python virtual environment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sphinx.html">Sphinx autodocumentation</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Modules</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="src.html">src namespace</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="src.measure.html">src.measure namespace</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="src.scripts.html">src.scripts namespace</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="src.scripts.movie123.html">src.scripts.movie123 module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="src.scripts.movie456.html">src.scripts.movie456 module</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">src.scripts.quant module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="src.scripts.quant_plots.html">src.scripts.quant_plots module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="src.scripts.sim.html">src.scripts.sim module</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="src.simrd.html">src.simrd namespace</a></li>
-<li class="toctree-l3"><a class="reference internal" href="src.utils.html">src.utils namespace</a></li>
-<li class="toctree-l3"><a class="reference internal" href="src.visualization.html">src.visualization namespace</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
 
-        </div>
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="../index.html">
+<p class="title">excitability</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../README.html">
+  README
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../filetree.html">
+  FileTree
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../template.html">
+  Document a python project
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../image.html">
+  Image analysis
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../visualization.html">
+  Visualization
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../RD.html">
+  RD simulation
+ </a>
+</li>
+
+    
+</ul>
       </div>
-    </nav>
+      
+    </div>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Quantify spatiotemporal patterns of excitions at cell surface</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="modules.html">Modules</a> &raquo;</li>
-          <li><a href="src.html">src namespace</a> &raquo;</li>
-          <li><a href="src.scripts.html">src.scripts namespace</a> &raquo;</li>
-      <li>src.scripts.quant module</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/generated/src.scripts.quant.rst.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  <section id="module-src.scripts.quant">
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+
+<nav id="bd-toc-nav">
+    
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="module-src.scripts.quant">
 <span id="src-scripts-quant-module"></span><h1>src.scripts.quant module<a class="headerlink" href="#module-src.scripts.quant" title="Permalink to this headline"></a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="src.scripts.quant.readThreshold">
-<span class="sig-prename descclassname"><span class="pre">src.scripts.quant.</span></span><span class="sig-name descname"><span class="pre">readThreshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embryosquant</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">THRESHOLD</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/scripts/quant.html#readThreshold"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.scripts.quant.readThreshold" title="Permalink to this definition"></a></dt>
-<dd><p>read intensity of maunally labeled pulsing pixels</p>
-<p>calculate threshold value for each phenotype</p>
-<p>assign threshold value to each embryo based on its phenotype</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.scripts.quant.reorder">
-<span class="sig-prename descclassname"><span class="pre">src.scripts.quant.</span></span><span class="sig-name descname"><span class="pre">reorder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nesteddict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/scripts/quant.html#reorder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.scripts.quant.reorder" title="Permalink to this definition"></a></dt>
-<dd><p>Flip the order of a nested dictionary</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>nesteddict</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – <code class="docutils literal notranslate"><span class="pre">{ID0:{'x':x,'y':y},</span> <span class="pre">ID1:{'x':x,'y':y},</span> <span class="pre">...}</span></code></p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">{'x':{ID0:x,'ID1':x},</span> <span class="pre">'y':{ID0:y,'ID1':y},</span> <span class="pre">...}</span></code></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.scripts.quant.selectEmbryo">
-<span class="sig-prename descclassname"><span class="pre">src.scripts.quant.</span></span><span class="sig-name descname"><span class="pre">selectEmbryo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">embryos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/scripts/quant.html#selectEmbryo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.scripts.quant.selectEmbryo" title="Permalink to this definition"></a></dt>
+<dt id="src.scripts.quant.selectEmbryo">
+<code class="sig-prename descclassname"><span class="pre">src.scripts.quant.</span></code><code class="sig-name descname"><span class="pre">selectEmbryo</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">embryos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/scripts/quant.html#selectEmbryo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.scripts.quant.selectEmbryo" title="Permalink to this definition"></a></dt>
 <dd><p>Select embryos to quantify</p>
 <p>embryos to quantify should satisfy the following conditions</p>
 <ul class="simple">
@@ -145,24 +201,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="src.scripts.quant.stepExcitation">
-<span class="sig-prename descclassname"><span class="pre">src.scripts.quant.</span></span><span class="sig-name descname"><span class="pre">stepExcitation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phenotype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">THRESHOLD</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/scripts/quant.html#stepExcitation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.scripts.quant.stepExcitation" title="Permalink to this definition"></a></dt>
-<dd><p>read binary mask of the outline of the embryo</p>
-<p>use temporal derivative and threshold value to calculate binary mask of excitation and new excitation</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.scripts.quant.stepGroupDiff">
-<span class="sig-prename descclassname"><span class="pre">src.scripts.quant.</span></span><span class="sig-name descname"><span class="pre">stepGroupDiff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phenotype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/scripts/quant.html#stepGroupDiff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.scripts.quant.stepGroupDiff" title="Permalink to this definition"></a></dt>
-<dd><p>read binary mask of the outline of the embryo</p>
-<p>read raw 16-bit tif files</p>
-<p>subtract photobleach trend in time for all pixels in each frame</p>
-<p>calculate grouped average and derivative in time</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.scripts.quant.stepRaw">
-<span class="sig-prename descclassname"><span class="pre">src.scripts.quant.</span></span><span class="sig-name descname"><span class="pre">stepRaw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phenotype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/scripts/quant.html#stepRaw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.scripts.quant.stepRaw" title="Permalink to this definition"></a></dt>
+<dt id="src.scripts.quant.stepRaw">
+<code class="sig-prename descclassname"><span class="pre">src.scripts.quant.</span></code><code class="sig-name descname"><span class="pre">stepRaw</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phenotype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/scripts/quant.html#stepRaw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.scripts.quant.stepRaw" title="Permalink to this definition"></a></dt>
 <dd><p>read raw 16-bit tif files</p>
 <p>save as python dictionary for each embryo</p>
 <p>export mean projection of green channel as tiff files</p>
@@ -170,16 +210,46 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="src.scripts.quant.stepSummary">
-<span class="sig-prename descclassname"><span class="pre">src.scripts.quant.</span></span><span class="sig-name descname"><span class="pre">stepSummary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phenotype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">THRESHOLD</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/scripts/quant.html#stepSummary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.scripts.quant.stepSummary" title="Permalink to this definition"></a></dt>
+<dt id="src.scripts.quant.stepGroupDiff">
+<code class="sig-prename descclassname"><span class="pre">src.scripts.quant.</span></code><code class="sig-name descname"><span class="pre">stepGroupDiff</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phenotype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/scripts/quant.html#stepGroupDiff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.scripts.quant.stepGroupDiff" title="Permalink to this definition"></a></dt>
+<dd><p>read binary mask of the outline of the embryo</p>
+<p>read raw 16-bit tif files</p>
+<p>subtract photobleach trend in time for all pixels in each frame</p>
+<p>calculate grouped average and derivative in time</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.scripts.quant.writeThreshold">
+<code class="sig-prename descclassname"><span class="pre">src.scripts.quant.</span></code><code class="sig-name descname"><span class="pre">writeThreshold</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embryosquant</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_grouped</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/scripts/quant.html#writeThreshold"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.scripts.quant.writeThreshold" title="Permalink to this definition"></a></dt>
+<dd><p>calculate and write intensity of maunally labeled pulsing pixels</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.scripts.quant.readThreshold">
+<code class="sig-prename descclassname"><span class="pre">src.scripts.quant.</span></code><code class="sig-name descname"><span class="pre">readThreshold</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embryosquant</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">THRESHOLD</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/scripts/quant.html#readThreshold"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.scripts.quant.readThreshold" title="Permalink to this definition"></a></dt>
+<dd><p>read intensity of maunally labeled pulsing pixels</p>
+<p>calculate threshold value for each phenotype</p>
+<p>assign threshold value to each embryo based on its phenotype</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.scripts.quant.stepExcitation">
+<code class="sig-prename descclassname"><span class="pre">src.scripts.quant.</span></code><code class="sig-name descname"><span class="pre">stepExcitation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phenotype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">THRESHOLD</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/scripts/quant.html#stepExcitation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.scripts.quant.stepExcitation" title="Permalink to this definition"></a></dt>
+<dd><p>read binary mask of the outline of the embryo</p>
+<p>use temporal derivative and threshold value to calculate binary mask of excitation and new excitation</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.scripts.quant.stepSummary">
+<code class="sig-prename descclassname"><span class="pre">src.scripts.quant.</span></code><code class="sig-name descname"><span class="pre">stepSummary</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phenotype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">THRESHOLD</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/scripts/quant.html#stepSummary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.scripts.quant.stepSummary" title="Permalink to this definition"></a></dt>
 <dd><p>calculate summary statistics from binary masks of excitations and newexcitations</p>
 <p>calculate average F-actin level in newexcitation pixels</p>
 <p>calculate average autocorrelation of ROK level in all pixels in the embryo</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="src.scripts.quant.summary_exc">
-<span class="sig-prename descclassname"><span class="pre">src.scripts.quant.</span></span><span class="sig-name descname"><span class="pre">summary_exc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">EXC</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NEWEXC</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NMAX</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/scripts/quant.html#summary_exc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.scripts.quant.summary_exc" title="Permalink to this definition"></a></dt>
+<dt id="src.scripts.quant.summary_exc">
+<code class="sig-prename descclassname"><span class="pre">src.scripts.quant.</span></code><code class="sig-name descname"><span class="pre">summary_exc</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">EXC</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NEWEXC</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NMAX</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/scripts/quant.html#summary_exc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.scripts.quant.summary_exc" title="Permalink to this definition"></a></dt>
 <dd><p>calculate summary statistics from binary masks of excitations and newexcitations</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -203,42 +273,55 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="src.scripts.quant.writeThreshold">
-<span class="sig-prename descclassname"><span class="pre">src.scripts.quant.</span></span><span class="sig-name descname"><span class="pre">writeThreshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embryosquant</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_grouped</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/scripts/quant.html#writeThreshold"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.scripts.quant.writeThreshold" title="Permalink to this definition"></a></dt>
-<dd><p>calculate and write intensity of maunally labeled pulsing pixels</p>
+<dt id="src.scripts.quant.reorder">
+<code class="sig-prename descclassname"><span class="pre">src.scripts.quant.</span></code><code class="sig-name descname"><span class="pre">reorder</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nesteddict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/scripts/quant.html#reorder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.scripts.quant.reorder" title="Permalink to this definition"></a></dt>
+<dd><p>Flip the order of a nested dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nesteddict</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – <code class="docutils literal notranslate"><span class="pre">{ID0:{'x':x,'y':y},</span> <span class="pre">ID1:{'x':x,'y':y},</span> <span class="pre">...}</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">{'x':{ID0:x,'ID1':x},</span> <span class="pre">'y':{ID0:y,'ID1':y},</span> <span class="pre">...}</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
-</section>
+</div>
 
 
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="src.scripts.movie456.html" class="btn btn-neutral float-left" title="src.scripts.movie456 module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="src.scripts.quant_plots.html" class="btn btn-neutral float-right" title="src.scripts.quant_plots module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+              
+          </main>
+          
 
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright .</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
-        </div>
       </div>
-    </section>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright .<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4.<br>
+</p>
+    </div>
+    
   </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
-
-</body>
+</footer>
+  </body>
 </html>

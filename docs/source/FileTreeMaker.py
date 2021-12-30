@@ -1,13 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""FileTreeMaker.py: ..."""
+"""FileTreeMaker.py: ...
+
+modified by Baixue Yao to print MarkDown with internal links
+"""
 
 __author__  = "legendmohe"
 
 import os
 import argparse
 import time
+
+def full_path_to_rst_path(full_path):
+    lst = full_path.split('/')
+    lst[-1] = lst[-1].split('.')[0]
+    rst_path = '.'.join(lst[lst.index('src'):])
+    return "generated/%s"%rst_path, lst[-1]
 
 class FileTreeMaker(object):
 
@@ -28,14 +37,22 @@ class FileTreeMaker(object):
                     idc = "└──"
 
                 if os.path.isdir(full_path) and sub_path not in self.exf:
-                    output_buf.append("   %s%s[%s]" % (prefix, idc, sub_path))
+
+                    if "/src/" in full_path and "__int__" not in full_path:
+                        output_buf.append('%s%s<a href="%s.html">%s</a>' % (prefix, idc, *full_path_to_rst_path(full_path)))
+                    else:
+                        output_buf.append("%s%s%s" % (prefix, idc, sub_path))
+
                     if len(file_list) > 1 and idx != len(file_list) - 1:
                         tmp_prefix = prefix + "│   "
                     else:
                         tmp_prefix = prefix + "    "
                     self._recurse(full_path, sorted(os.listdir(full_path)), tmp_prefix, output_buf, level + 1)
                 elif os.path.isfile(full_path):
-                    output_buf.append("   %s%s%s" % (prefix, idc, sub_path))
+                    if "/src/" in full_path and "__int__" not in full_path:
+                        output_buf.append('%s%s<a href="%s.html">%s</a>' % (prefix, idc, *full_path_to_rst_path(full_path)))
+                    else:
+                        output_buf.append("%s%s%s" % (prefix, idc, sub_path))
 
     def make(self, args):
         self.root = args.root
@@ -47,7 +64,7 @@ class FileTreeMaker(object):
 
         buf = []
         path_parts = self.root.rsplit(os.path.sep, 1)
-        buf.append("   [%s]" % (path_parts[-1],))
+        buf.append("%s" % (path_parts[-1],))
         self._recurse(self.root, sorted(os.listdir(self.root)), "", buf, 0)
 
         output_str = "\n".join(buf)

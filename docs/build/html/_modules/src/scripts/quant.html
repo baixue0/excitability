@@ -1,81 +1,170 @@
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>src.scripts.quant &mdash; Quantify spatiotemporal patterns of excitions at cell surface 0.1.0 documentation</title>
-      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/clipboard.min.js"></script>
-        <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/js/theme.js"></script>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>src.scripts.quant &#8212; excitability 0.1.0 documentation</title>
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/css/blank.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" /> 
-</head>
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> Quantify spatiotemporal patterns of excitions at cell surface
-          </a>
-              <div class="version">
-                0.1.0
-              </div>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../README.html">Getting started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../pyenv.html">Python virtual environment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../sphinx.html">Sphinx autodocumentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../generated/modules.html">Modules</a></li>
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="../../../index.html">
+<p class="title">excitability</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../README.html">
+  README
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../filetree.html">
+  FileTree
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../template.html">
+  Document a python project
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../image.html">
+  Image analysis
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../visualization.html">
+  Visualization
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../RD.html">
+  RD simulation
+ </a>
+</li>
+
+    
 </ul>
-
-        </div>
       </div>
-    </nav>
+      
+    </div>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../index.html">Quantify spatiotemporal patterns of excitions at cell surface</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../../index.html">Module code</a> &raquo;</li>
-      <li>src.scripts.quant</li>
-      <li class="wy-breadcrumbs-aside">
-      </li>
-  </ul>
-  <hr/>
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
   <h1>Source code for src.scripts.quant</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">os</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)))</span>
-<span class="kn">from</span> <span class="nn">utils.path_io</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">utils.decorators</span> <span class="kn">import</span> <span class="n">iterate</span><span class="p">,</span><span class="n">return_dict</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">embryos</span><span class="p">,</span><span class="n">dir_data</span><span class="p">,</span><span class="n">dir_out</span><span class="p">,</span><span class="n">load_dict</span><span class="p">,</span><span class="n">pjoin</span><span class="p">,</span><span class="n">iterate</span><span class="p">,</span><span class="n">return_dict</span>
 
 <span class="sd">&quot;&quot;&quot;pipeline to batch measure embryo&quot;&quot;&quot;</span>
 
@@ -146,8 +235,7 @@
 
     <span class="kn">from</span> <span class="nn">measure.segmentation</span> <span class="kn">import</span> <span class="n">bleach_correction</span><span class="p">,</span><span class="n">group_diff</span>
     <span class="n">result_read_raw</span> <span class="o">=</span> <span class="n">load_dict</span><span class="p">(</span><span class="n">pjoin</span><span class="p">([</span><span class="n">dir_out</span><span class="p">,</span><span class="s1">&#39;read_raw&#39;</span><span class="p">,</span><span class="n">ID</span><span class="p">]))</span><span class="c1">#read raw 16-bit tif files</span>
-    <span class="kn">from</span> <span class="nn">measure.preprocess</span> <span class="kn">import</span> <span class="n">divide</span>
-    <span class="n">window_length</span><span class="p">,</span> <span class="n">videozmin</span> <span class="o">=</span> <span class="n">divide</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span><span class="n">tRes</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">divide</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="n">tRes</span><span class="p">)</span>
+    <span class="n">window_length</span><span class="p">,</span> <span class="n">videozmin</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">40</span><span class="o">//</span><span class="n">tRes</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mi">100</span><span class="o">//</span><span class="n">tRes</span><span class="p">)</span>
     <span class="kn">from</span> <span class="nn">measure.preprocess</span> <span class="kn">import</span> <span class="n">channel_list</span>
     <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">channel_list</span><span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="n">embryos</span><span class="p">):</span>
         <span class="n">result</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
@@ -252,7 +340,7 @@
     <span class="n">wait</span> <span class="o">=</span> <span class="n">waittime</span><span class="p">(</span><span class="n">NEWEXC</span><span class="p">[:</span><span class="n">NMAX</span><span class="p">],</span><span class="n">outline</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span><span class="c1">#wait time of new excitations</span>
 
     <span class="kn">from</span> <span class="nn">measure.contour</span> <span class="kn">import</span> <span class="n">findContours</span>
-    <span class="n">blobs</span> <span class="o">=</span> <span class="n">findContours</span><span class="p">(</span><span class="n">EXC</span><span class="p">[:</span><span class="n">NMAX</span><span class="p">],</span><span class="n">minarea</span><span class="o">=</span><span class="mi">2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="c1"># dictionary of Blob instances that defines one excitation region</span>
+    <span class="n">blobs</span> <span class="o">=</span> <span class="n">findContours</span><span class="p">(</span><span class="n">EXC</span><span class="p">[:</span><span class="n">NMAX</span><span class="p">])</span><span class="c1"># dictionary of Blob instances that defines one excitation region</span>
 
     <span class="kn">from</span> <span class="nn">measure.edgespeed</span> <span class="kn">import</span> <span class="n">point_velocity</span>
     <span class="n">speed</span><span class="p">,</span> <span class="n">speedmsk</span> <span class="o">=</span> <span class="n">point_velocity</span><span class="p">(</span><span class="n">blobs</span><span class="p">,</span><span class="n">NEWEXC</span><span class="p">[:</span><span class="n">NMAX</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">outline</span><span class="p">)</span><span class="c1">#edge propagation speed of excitation regions</span>
@@ -264,14 +352,18 @@
     <span class="k">return</span> <span class="n">freq</span><span class="p">,</span><span class="n">wait</span><span class="p">,</span><span class="n">speed</span><span class="p">,</span><span class="n">area</span><span class="p">,</span><span class="n">speedmsk</span></div>
 
 <div class="viewcode-block" id="reorder"><a class="viewcode-back" href="../../../generated/src.scripts.quant.html#src.scripts.quant.reorder">[docs]</a><span class="k">def</span> <span class="nf">reorder</span><span class="p">(</span><span class="n">nesteddict</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Flip the order of a nested dictionary</span>
+    <span class="sd">&quot;&quot;&quot;Flip the order of a nested dictionary</span>
 
-<span class="sd">    :param nesteddict: ``{ID0:{&#39;x&#39;:x,&#39;y&#39;:y}, ID1:{&#39;x&#39;:x,&#39;y&#39;:y}, ...}``</span>
-<span class="sd">    :type nesteddict: dict</span>
-<span class="sd">    :return: ``{&#39;x&#39;:{ID0:x,&#39;ID1&#39;:x}, &#39;y&#39;:{ID0:y,&#39;ID1&#39;:y}, ...}``</span>
-<span class="sd">    :rtype: dict</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    nesteddict : dict</span>
+<span class="sd">        ``{ID0:{&#39;x&#39;:x,&#39;y&#39;:y}, ID1:{&#39;x&#39;:x,&#39;y&#39;:y}, ...}``</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    --------</span>
+<span class="sd">    ``{&#39;x&#39;:{ID0:x,&#39;ID1&#39;:x}, &#39;y&#39;:{ID0:y,&#39;ID1&#39;:y}, ...}``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">nesteddict</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span></div>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -293,31 +385,36 @@
 
 </pre></div>
 
-           </div>
-          </div>
-          <footer>
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+              
+          </main>
+          
 
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright .</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
-        </div>
       </div>
-    </section>
+    </div>
+  
+  <script src="../../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright .<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4.<br>
+</p>
+    </div>
+    
   </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
-
-</body>
+</footer>
+  </body>
 </html>

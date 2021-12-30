@@ -77,8 +77,6 @@ def line_intensity(pointxy,pointuv,im,maxlength=20):
     if m.sum()<2:# ignore lines drawn near xy bounds
         return
     lineim = im[linex[m],liney[m]]# intensity of pixels along the line
-    if not lineim[1]:#no new excitation neighboring the point
-        return 0
     return lineim
         
 def count11(seq):
@@ -94,6 +92,9 @@ def count11(seq):
     length : int
         lenghth of first consecutive '1's
     """
+
+    if not seq[1]:#no new excitation neighboring the point
+        return 0
 
     start = 0
     while not seq[start]:

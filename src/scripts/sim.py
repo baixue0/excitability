@@ -38,7 +38,7 @@ def solve_params(a_lst):
         ode = FitzhughNagumo(a, b, I, tau)#set parameters
         eq = SRD(noisearr,ode=ode)# set perturbations
         arrtx = eq.solvetx()# solve partial differential equation
-        from utils.path_io import dir_out,pjoin
+        from utils import dir_out,pjoin
         path = pjoin([dir_out,'simrd',str(round(a,3))+'.tif'])
         import tifffile
         tifffile.imsave(path,arrtx)
@@ -59,7 +59,7 @@ def freq_wait(a_lst):
         number of frames before next new excitation
     """
 
-    from utils.path_io import dir_out,pjoin
+    from utils import dir_out,pjoin
     from skimage import io
     freq,wait = {},{}
     for a in a_lst:
@@ -136,7 +136,7 @@ if __name__ == "__main__":
 
     freq,wait = freq_wait([0.95,0.9,0.85,0.65])
 
-    from utils.path_io import dir_out,pjoin
+    from utils import dir_out,pjoin
     from visualization.plot import figure,addax,step
 
     freq_bins = np.arange(12)

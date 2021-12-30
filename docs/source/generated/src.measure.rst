@@ -1,8 +1,6 @@
 src.measure namespace
 =====================
 
-.. py:module:: src.measure
-
 Submodules
 ----------
 

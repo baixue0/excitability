@@ -1,8 +1,7 @@
 import sys,os
 sys.path.insert(0, os.path.abspath(os.path.join(".")))
 
-from utils.path_io import *
-from utils.decorators import iterate
+from utils import embryos,dir_data,dir_out,load_dict,pjoin,iterate,return_dict
 
 def read(phenotype,ID):
     from measure.preprocess import read_raw

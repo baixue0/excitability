@@ -1,8 +1,6 @@
 src.simrd namespace
 ===================
 
-.. py:module:: src.simrd
-
 Submodules
 ----------
 

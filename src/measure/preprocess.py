@@ -1,5 +1,4 @@
-from utils.path_io import pjoin,pexists
-from utils.decorators import return_dict
+from utils import pjoin,pexists,return_dict
 
 @return_dict
 def read_raw(savedir, dir_raw, ID, LabelR, tRes, nEnd):
@@ -7,7 +6,7 @@ def read_raw(savedir, dir_raw, ID, LabelR, tRes, nEnd):
 
     raw tif files are located in ``dir_raw``, start with ``ID``, and end with ``G`` or ``R``.
 
-    refer to :func:`src.utils.decorators.return_dict` for how to use the decorator ``@return_dict``
+    refer to :func:`src.utils.return_dict` for how to use the decorator ``@return_dict``
 
     Parameters
     ----------
@@ -37,7 +36,7 @@ def read_raw(savedir, dir_raw, ID, LabelR, tRes, nEnd):
     rawfname = lambda channel: [pjoin([dir_raw,fname]) for fname in os.listdir(dir_raw) if fname.startswith(ID) and fname.endswith(channel+'.tif')]
     
     # determine number of frames for 1.2 seconds
-    groupsize = 1.2 // tRes
+    groupsize = int(1.2 // tRes)
 
     # read
     img = io.imread(rawfname('G')[0])[2*groupsize:nEnd]# skip the first 2.4 seconds

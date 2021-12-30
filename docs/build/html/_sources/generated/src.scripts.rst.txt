@@ -1,8 +1,6 @@
 src.scripts namespace
 =====================
 
-.. py:module:: src.scripts
-
 Submodules
 ----------
 

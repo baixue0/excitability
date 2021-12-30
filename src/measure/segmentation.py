@@ -1,4 +1,4 @@
-from utils.decorators import return_dict
+from utils import return_dict
 import numpy as np
 
 @return_dict
@@ -67,8 +67,7 @@ def group_diff(stk,outline,tRes):
     """
 
     N = len(stk)
-    from measure.preprocess import divide
-    groupsize = 1.2 // tRes# group consecutive frames so that each group is 1.2 sconds
+    groupsize = int(1.2 // tRes)# group consecutive frames so that each group is 1.2 sconds
     RAW,zgroups = grouped_avg(stk,groupsize)
     RAW = RAW.astype(np.uint16)
 
