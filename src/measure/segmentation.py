@@ -71,9 +71,9 @@ def group_diff(stk,outline,tRes):
     RAW,zgroups = grouped_avg(stk,groupsize)
     RAW = RAW.astype(np.uint16)
 
-    smooth = np.stack([smoothxy(stk[z].copy().astype(np.float32)) for z in range(N)],0)
-    smooth = moving_avg(smooth,groupsize).astype(np.float32)
-    SMOOTH,zgroups = grouped_avg(smooth,groupsize)
+    smooth = np.stack([smoothxy(stk[z].copy().astype(np.float32)) for z in range(N)],0)# smoothxy
+    smooth = moving_avg(smooth,groupsize).astype(np.float32)# time: moving average
+    SMOOTH,zgroups = grouped_avg(smooth,groupsize)# time: grouped average
     DIFF = diff(SMOOTH,outline).astype(np.float32)
     return RAW,SMOOTH,DIFF,zgroups
 

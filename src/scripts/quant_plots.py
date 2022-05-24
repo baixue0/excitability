@@ -121,7 +121,7 @@ def axes_area(fig,x):
     for ax in axes:
         ax.set(xticks=[])
 
-def axes_actin(fig,x):
+def axes_actin(fig,x,dz,dzlong):
     '''
     Plot average F-actin level in new excitation pixels
 
@@ -129,21 +129,31 @@ def axes_actin(fig,x):
 
         figure(pjoin([dir_out,'images']),func=axes_actin,funcdata=[meandict])
     '''
-    dz=np.arange(-15,6)
-    m = np.logical_and(dz>=-5,dz<=5)
-    t = dz[m]*1.2
-    axes = addax(fig,L=1,W=5.5,T=1,H=4,ncols=4,nrows=3,wspace=0.5,hspace=1,sharey='row')
+
+    print(dz)
+    axes = addax(fig,L=1,W=5,T=1,H=5,ncols=3,nrows=3,wspace=0.5,hspace=1,sharey='row')
+    ax2 = addax(fig,L=1,W=1,T=8,H=2)
+    ax2.set(ylim=[200,700])
     for ax in [*axes[1],*axes[2]]:
         ax.set(xlabel='time offset (s)',ylim=[-1.5,1.5])
     for ax in axes[:,0]:
         ax.set(ylabel='F-actin\ntemporal derivative')
     for i,phenotype in enumerate(['spd','cyk','ani']):
         color = legends[phenotype][1]
-        axes[0,i].plot(t,x['newexc_imr_raw'][phenotype][m],color=color)
-        axes[0,-1].plot(t,x['newexc_imr_raw'][phenotype][m],color=color)
-        axes[1,i].plot(t,x['newexc_imr_diff'][phenotype][m],color=color)
-        axes[2,i].plot(t,x['fast_imr_diff'][phenotype][m],color='darkorange')
-        axes[2,i].plot(t,x['slow_imr_diff'][phenotype][m],color='dodgerblue')
+        axes[0,i].plot(dz*1.2,x['newexc_imr_raw'][phenotype],color=color)
+        axes[1,i].plot(dz*1.2,x['newexc_imr_diff'][phenotype],color=color)
+        axes[2,i].plot(dz*1.2,x['fast_imr_diff'][phenotype],color='darkorange')
+        axes[2,i].plot(dz*1.2,x['slow_imr_diff'][phenotype],color='dodgerblue')
+
+        mean,std = x['newexc_imr_raw_long_mean'][phenotype],x['newexc_imr_raw_long_std'][phenotype]
+        for j in range(len(mean)):
+            if j==0:
+                color='k'
+            else:
+                color=None
+            axes[3,i].plot(dzlong*1.2,mean[j],color=color)
+            if j==0:
+                axes[3,i].fill_between(dzlong*1.2,mean[j]-std[j],mean[j]+std[j],lw=0,alpha=0.5,color=color)
 
 def axes_acf(fig,x):
     '''
@@ -171,7 +181,6 @@ def axes_acf(fig,x):
 
     ax2.set(xlabel='timelag (s)',xticks=np.arange(-40,41,20),xlim=[dz[m][0]*1.2,dz[m][-1]*1.2],
     ylim=[-0.5,1])#ylabel='correlation',
-
 
 if __name__ == "__main__":
     direxc = '0.4'
@@ -205,15 +214,26 @@ if __name__ == "__main__":
     figure(pjoin([dir_out,'images']),func=axes_area,funcdata=[area])
     '''
 
+    vstack_std = lambda datadict,IDs: np.vstack([datadict[ID] for ID in IDs]).std(0)
     vstack_mean = lambda datadict,IDs: np.vstack([datadict[ID] for ID in IDs]).mean(0)
     meandict = {}
     for name in [
-    #'newexc_imr_raw','newexc_imr_diff','fast_imr_diff','slow_imr_diff',
-    'acfrect_smooth','ccf_smooth','acf_smooth',
+    'newexc_imr_diff','fast_imr_diff','slow_imr_diff','newexc_imr_raw','newexc_imr_raw_long',#'newexc_imr_smooth',
+    #'acfrect_smooth','ccf_smooth','acf_smooth',
     ]:
         datadict = load_dict(pjoin([dir_out,direxc,'summary',name]))
         print(name,next(iter(datadict.values())).shape)
         meandict[name] = groups.apply(lambda groupdf: vstack_mean(datadict,groupdf.index))
-    #figure(pjoin([dir_out,'images']),func=axes_actin,funcdata=[meandict])
-    figure(pjoin([dir_out,'images']),func=axes_acf,funcdata=[meandict])
 
+    datadict = load_dict(pjoin([dir_out,direxc,'summary','newexc_imr_raw_long']))
+    std_vstack = lambda datadict,IDs: np.vstack([datadict[ID].std(0) for ID in IDs])
+    mean_vstack = lambda datadict,IDs: np.vstack([datadict[ID].mean(0) for ID in IDs])
+
+    meandict['newexc_imr_raw_long_std'] = groupsR.apply(lambda groupdf: std_vstack(datadict,groupdf.index))
+    meandict['newexc_imr_raw_long_mean'] = groupsR.apply(lambda groupdf: mean_vstack(datadict,groupdf.index))
+    figure(pjoin([dir_out,'images']),func=axes_actin,funcdata=[meandict,
+        next(iter(load_dict(pjoin([dir_out,direxc,'summary','dz'])).values())),
+        next(iter(load_dict(pjoin([dir_out,direxc,'summary','dzlong'])).values())),
+        ])
+    #figure(pjoin([dir_out,'images']),func=axes_acf,funcdata=[meandict])
+    

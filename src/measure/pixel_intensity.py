@@ -33,10 +33,10 @@ def ts_embryo(imstkgr,NEWEXC,speedmsk,NMAX=100):
     cx,cy = np.stack(np.where(outline),-1).mean(0).astype(int)
     dxy = 40
     grect = imstkgr[channel]['SMOOTH'][1:NMAX-1,cx-dxy:cx+dxy,cy-dxy:cy+dxy].mean(-1).mean(-1)[:,np.newaxis]
-    result['_'.join(['acfrect','smooth'])] = ccf_col(grect,grect)
+    result['_'.join(['acfrect','smooth'])] = ccf_col(grect,grect)# autocorrelation function of ROK in rectangle for the entire time window
 
     g = imstkgr[channel]['SMOOTH'][1:NMAX-1,outline]
-    result['_'.join(['acf','smooth'])] = ccf_col(g,g)
+    result['_'.join(['acf','smooth'])] = ccf_col(g,g)# autocorrelation of all embryo pixels for the entire time window
     
     channel = 'imr'
     if channel not in imstkgr.keys():
@@ -46,6 +46,11 @@ def ts_embryo(imstkgr,NEWEXC,speedmsk,NMAX=100):
     result['_'.join(['newexc',channel,'diff'])] = intensity_ts(NEWEXC[:NMAX],imstkgr[channel]['DIFF'][:NMAX],dz,outline)
     result['_'.join(['fast',channel,'diff'])] = intensity_ts((speedmsk>2)[:NMAX],imstkgr[channel]['DIFF'][:NMAX],dz,outline)
     result['_'.join(['slow',channel,'diff'])] = intensity_ts(np.logical_and(speedmsk>=0, speedmsk<=2)[:NMAX],imstkgr[channel]['DIFF'][:NMAX],dz,outline)
+
+
+    dzlong = np.arange(-5,30)
+    result['dzlong'] = dzlong
+    result['_'.join(['newexc',channel,'raw','long'])] = intensity_ts(NEWEXC[:NMAX],imstkgr[channel]['RAW'][:NMAX],dzlong,outline)
 
     r = imstkgr[channel]['SMOOTH'][1:NMAX-1,outline]
     result['_'.join(['ccf','smooth'])] = ccf_col(g,r)

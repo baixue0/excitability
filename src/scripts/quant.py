@@ -1,6 +1,6 @@
 import sys,os
 sys.path.insert(0, os.path.abspath(os.path.join(".")))
-from utils import embryos,dir_data,dir_out,load_dict,pjoin,iterate,return_dict
+from utils import embryos,dir_data,dir_out,load_dict,pjoin,iterate,return_dict,pd,np,directories
 
 """pipeline to batch measure embryo"""
 
@@ -135,11 +135,13 @@ def stepSummary(phenotype,ID,THRESHOLD):
     result = {}
     result_excitation = load_dict(pjoin([dir_out,str(THRESHOLD),'excitation',ID]))
     EXC,NEWEXC,outline = result_excitation['EXC'],result_excitation['NEWEXC'],result_excitation['outline']
-    result.update(summary_exc(EXC,NEWEXC,outline))
+    resultsummary = summary_exc(EXC,NEWEXC,outline)
+    result.update(resultsummary)
 
     data_GroupDiff = load_dict(pjoin([dir_out,'stepGroupDiff',ID]))
     from measure.pixel_intensity import ts_embryo
-    result.update(ts_embryo(data_GroupDiff,NEWEXC,result['speedmsk'],NMAX=100))
+    resultintensity = ts_embryo(data_GroupDiff,NEWEXC,result['speedmsk'],NMAX=100)
+    result.update(resultintensity)
 
     result.pop('speedmsk', None)
     return result
@@ -207,14 +209,21 @@ if __name__ == "__main__":
     #iterate(stepRaw,embryosquant)
     #result_grouped = iterate(stepGroupDiff,embryosquant)
     #result_grouped = iterate(stepGroupDiff,embryosquant,run=False)
-    path_threshold_diffts = pjoin([dir_out,'threshold_diffts'])
+    #path_threshold_diffts = pjoin([dir_out,'threshold_diffts'])
     #writeThreshold(path_threshold_diffts,embryosquant,result_grouped)
-    for THRESHOLD in [0.4,]:#0.4,0.36,0.44
-        embryosquant = readThreshold(path_threshold_diffts,embryosquant,THRESHOLD)
+    #for THRESHOLD in [0.4,]:#0.4,0.36,0.44
+        #embryosquant = readThreshold(path_threshold_diffts,embryosquant,THRESHOLD)
         #result_excitation = iterate(stepExcitation,embryosquant,THRESHOLD)
-        result_summary = iterate(stepSummary,embryosquant,THRESHOLD, shuffle=False)
-        for name,value in reorder(result_summary).items():
-            np.save(pjoin([dir_out,str(THRESHOLD),'summary',name]),value)
+        #result_summary = iterate(stepSummary,embryosquant,THRESHOLD, shuffle=False)
+        #for name,value in reorder(result_summary).items():
+        #    np.save(pjoin([dir_out,str(THRESHOLD),'summary',name]),value)
+
+
+
+
+
+
+
 
 
 

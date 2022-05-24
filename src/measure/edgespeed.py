@@ -28,7 +28,7 @@ def point_velocity(blobs,NEWEXC,outline):
         if pz not in blobs.keys() or pz+1 not in blobs.keys():
             continue
         for b in blobs[pz][::5]:
-            b.sparseContour()
+            b.sparseContour()# add ['xy'] field
             for point in b.points:
                 x,y = point['xy']                
                 if not outline[x,y]:
@@ -132,8 +132,7 @@ def rect_zxy(p,imshape,L=(0,5),W=3):
         y coordinate of pixels in rectangle
     """
 
-    vec = [p['xy']+p['uv']*L[0],p['xy']+p['uv']*L[1]]
-    poly = rectangle(*vec,W)
+    poly = rectangle(p['xy']+p['uv']*L[0],p['xy']+p['uv']*L[1],W)
     from skimage.draw import polygon
     rectx,recty = polygon(*poly.T, shape=imshape)
     return rectx,recty

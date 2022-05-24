@@ -149,3 +149,4 @@ if __name__ == "__main__":
     figure(pjoin([dir_out,'images']),func=axes_sim,funcdata=[freq_bins/240,freq_hist,wait_bins,wait_hist])
     
 
+

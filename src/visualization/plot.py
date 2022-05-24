@@ -5,7 +5,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 
-def figure(savedir,func,funcdata,figsize=(8.25,11.75),imformat='.svg'):
+def figure(savedir,func,funcdata,figsize=(8.25,11.75),imformat='.svg',transparent=True):
     """create and plot on a figure using func and funcdata
 
     Parameters

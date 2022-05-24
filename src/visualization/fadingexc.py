@@ -14,11 +14,11 @@ def fade(colors,blobs,imshape,N=5):
                 znew = z+dz
                 if znew<0:
                     continue
-                stk[znew,x,y] = linearinterpcolor(dz,(-N,1),saturated,gray)
+                stk[znew,x,y] = linearinterpcolor(dz,(-N,1),(saturated,gray))
     cbar = np.array([[linearinterpcolor(dz,(-N,1),(indexcolor(label),gray)) for dz in np.flip(np.arange(-N,1))] for label in range(10)])
     return stk,cbar
 
-def linearinterpcolor(v,vminmax,colorminmax,reverse=False):
+def linearinterpcolor(v,vminmax,colorminmax):
     """convert number or array to RGB color given the colors at extremes of LinearSegmentedColormap
 
     Parameters
@@ -38,9 +38,9 @@ def linearinterpcolor(v,vminmax,colorminmax,reverse=False):
      """
 
     from matplotlib.colors import LinearSegmentedColormap
-    cmap = LinearSegmentedColormap.from_list('', [(i,c) for i,c in enumerate([colormin,colormax])])
+    cmap = LinearSegmentedColormap.from_list('', [(i,c) for i,c in enumerate(colorminmax)])
     from visualization.image import interpcolor
-    return interpcolor(v,(vmin,vmax),cmap)
+    return interpcolor(v,vminmax,cmap)
 
 def dark_unique_colors():
     import colorcet as cc#https://colorcet.holoviz.org/

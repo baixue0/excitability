@@ -1,8 +1,12 @@
-# FileTree
+# API
+
+Oraganization of python modules. 
 
 ``docs`` contains MarkDown or reStructuredText code
 
 ``src`` contains python source code
+
+``scripts`` module contains scripts that call functions from other modules to generate figures and tables.
 
 Click any python module to view its documentation and source code
 

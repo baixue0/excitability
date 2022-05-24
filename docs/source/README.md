@@ -1,5 +1,7 @@
 # README
 
+This repository contains the code and documentation for the paper published at [Eighth Annual Special Issue on Quantitative Cell Biology](https://www.molbiolcell.org/doi/abs/10.1091/mbc.E21-11-0542)
+
 [view documentation](https://baixue0.github.io/excitability/)
 
 [github repository](https://github.com/baixue0/excitability)
